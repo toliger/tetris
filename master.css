@@ -1,0 +1,25 @@
+header {
+    text-align: center;
+}
+
+#game {
+    display: flex;
+    text-align: center;
+}
+
+#sideBoard {
+    flex: 1 1 auto;
+}
+
+#mainBoard {
+    flex: 3 1 auto;
+}
+
+#chat {
+    flex: 1 1 auto;
+}
+
+.game-item {
+    border: 1px solid black;
+    margin: 10px;
+}
