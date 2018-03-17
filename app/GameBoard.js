@@ -1,6 +1,6 @@
 import p1 from './js/pieces/p1.js';
 
-export default class Map {
+export default class GameBoard {
   constructor(height = 700, width = 400) {
     this._piece = {};
     this.size = {
@@ -12,8 +12,14 @@ export default class Map {
     };
     console.log('plop', this.size);
     this.generate();
+    this.position = {
+      x: $("#map").position().top,
+      y: $("#map").position().left,
+    };
+    console.log('pos', this.position);
     this.new_piece();
     this.draw_piece();
+    //this.clearBoard();
   }
 
   new_piece() {
@@ -56,8 +62,22 @@ export default class Map {
 
   }
 
-  move_piece() {
+  clearBoard() {
+    this.ctx.clearRect(
+      0,
+      0,
+      this.size.real.width,
+      this.size.real.height
+    );
+  }
 
+  update() {
+    this.clearBoard();
+    this.draw_piece();
+  }
+
+  move_piece() {
+    
   }
 
   draw_piece() {
@@ -65,7 +85,7 @@ export default class Map {
     console.log(p.form);
     this.ctx.fillStyle = "#FF0000";
     // this.ctx.fillRect(0,0,50,50);
-    const f = 0;
+    const f = p.offset;
     const Case = this.size.real.width / this.size.abstract.width;
     for (let i in p.form[f]) {
       console.log(p.form[f][i])
