@@ -23,13 +23,7 @@ export default class GameBoard {
   }
 
   new_piece() {
-    this._piece = {
-      form: new p1(),
-      position: {
-        x: 8,
-        y: 0,
-      },
-    };
+    this._piece = new p1(8,0);
   }
 
   set Piece(value) {
@@ -76,20 +70,27 @@ export default class GameBoard {
     this.draw_piece();
   }
 
-  move_piece() {
-    
+  mvLeft() {
+    if (this._piece.x > (0 - this._piece.form[this._piece.offset][0][0]))
+      this._piece.moveLeft();
+  }
+
+  mvRight() {
+    if (this._piece.x < (this.size.abstract.width - this._piece.form[this._piece.offset][3][0] - 1))
+      this._piece.moveRight();
   }
 
   draw_piece() {
-    let p = this._piece.form;
-    console.log(p.form);
+    let p = this._piece;
+    //console.log(p.form);
     this.ctx.fillStyle = "#FF0000";
     // this.ctx.fillRect(0,0,50,50);
     const f = p.offset;
     const Case = this.size.real.width / this.size.abstract.width;
     for (let i in p.form[f]) {
-      console.log(p.form[f][i])
-      this.ctx.fillRect((p.form[f][i][0] + this._piece.position.x) * Case,(p.form[f][i][1] + this._piece.position.y) * Case, Case, Case);
+      //console.log(p.form[f][i])
+      //console.log(this._piece.x);
+      this.ctx.fillRect((p.form[f][i][0] + this._piece.x) * Case,(p.form[f][i][1] + this._piece.y) * Case, Case, Case);
     }
   }
 }
