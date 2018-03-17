@@ -3,20 +3,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="master.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Le bon Tetris</title>
 </head>
 <body>
     <header>
-        <h1>Le bon TETRIS des familles</h1>
+        <h1>W A L L G R I N D</h1>
     </header>
     <section id="game">
         <div id="sideBoard" class="game-item">
-            foo
+            <h3>Tableau de bord</h3>
+            <h4 id="settings">Paramètres <i class="fa fa-angle-down"></i></h4>
+            <div class="settings">
+                <label for="user">Pseudo : </label>
+                <input type="text" name="user"> <br>
+                <label for="difficulty">Difficulté : </label>
+                <select name="difficulty" id="diffSelect">
+                    <option value="easy">Facile</option>
+                    <option value="medium">Normal</option>
+                    <option value="hard">Difficile</option>
+                </select>
+                <div id="options">
+                    Options supplémentaires : <br>
+                    <input type="checkbox" name="bonus" value="blind">
+                    <label for="bonus">Mode Aveugle</label> <br>
+                    <input type="checkbox" name="bonus" value="bmode">
+                    <label for="bonus">Mode B</label>
+                </div>
+
+                <input type="button" value="Start">
+            </div>
         </div>
         <div id="mainBoard" class="game-item">
         </div>
         <div id="chat" class="game-item">
-            bar
+            <h3>Chatroom</h3>
+            <div id="textBox"></div>
+            <div id="messageBox"></div>
         </div>
     </section>
     <script
