@@ -6,7 +6,7 @@ export default class GameBoard {
     this.size = {
       real: { height, width },
       abstract: {
-        height: 60,
+        height: 33,
         width: 20,
       },
     };

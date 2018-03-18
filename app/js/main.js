@@ -26,8 +26,8 @@ $(document).ready(() => {
         break;
 
       case "ArrowDown" :
-        console.log(board._piece.form[board._piece.offset][0],board._piece.form[board._piece.offset][3]);
-        console.log(board._piece.x, board._piece.y);
+        board.mvDown();
+        board.update();
         e.preventDefault();
         break;
 
