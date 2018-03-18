@@ -1,3 +1,5 @@
+import GameBoard from './GameBoard.js';
+
 export default class Game {
   constructor() {
     this.tick();

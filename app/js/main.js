@@ -1,5 +1,5 @@
 import GameBoard from './GameBoard.js';
-import Game from './js/Game.js';
+import Game from './Game.js';
 $(document).ready(() => {
   const board = new GameBoard();
   //new Game();
@@ -13,13 +13,13 @@ $(document).ready(() => {
         board.update();
         e.preventDefault();
         break;
-      
+
       case "ArrowLeft" :
         board.mvLeft();
         board.update();
         e.preventDefault();
         break;
-      
+
       case "ArrowRight" :
         board.mvRight();
         board.update();
@@ -31,7 +31,7 @@ $(document).ready(() => {
         console.log(board._piece.x, board._piece.y);
         e.preventDefault();
         break;
-      
+
     }
   });
 
@@ -40,7 +40,7 @@ $(document).ready(() => {
     $("#settings i")
       .toggleClass("fa-angle-down")
       .toggleClass("fa-angle-up");
-    
+
   });
 
 });

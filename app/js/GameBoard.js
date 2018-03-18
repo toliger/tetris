@@ -1,4 +1,4 @@
-import { T, L, J, Z, S, I, O } from './js/pieces/Piece.js';
+import { T, L, J, Z, S, I, O } from './Piece.js';
 
 export default class GameBoard {
   constructor(height = 700, width = 400) {
