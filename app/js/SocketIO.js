@@ -13,7 +13,9 @@ export default class SocketIO {
     //================  CHAT
     this.socket.on('message', function(message) {
       console.log(' waza message');
-      $('#textBox').append(`<p>${ message }</p>`)
+      let chatbox = $("#textBox");
+      $('#textBox').append(`<p><span class="username">Bonobo : </span>${ message }</p>`);
+      chatbox.scrollTop(chatbox.prop('scrollHeight'));
     });
   }
 
@@ -26,6 +28,10 @@ export default class SocketIO {
         this.socket.emit('message', $('#chatinput').val());
         $('#chatinput').val('');
       }
+    });
+    $('#chatbutton').on('click', () => {
+      this.socket.emit('message', $('#chatinput').val());
+      $('#chatinput').val('');
     });
   }
 }
