@@ -1,4 +1,4 @@
-import p1 from './js/pieces/p1.js';
+import { T, L, J, Z } from './js/pieces/Piece.js';
 
 export default class GameBoard {
   constructor(height = 700, width = 400) {
@@ -23,7 +23,7 @@ export default class GameBoard {
   }
 
   new_piece() {
-    this._piece = new p1(8,0);
+    this._piece = new Z(8,0);
   }
 
   set Piece(value) {
@@ -56,6 +56,18 @@ export default class GameBoard {
 
   }
 
+  checkLeftSide() {
+    return (this._piece.x > (0 - this._piece.form[this._piece.offset][0][0]));
+  }
+
+  checkRightSide() {
+    return (this._piece.x < (this.size.abstract.width - this._piece.form[this._piece.offset][3][0] - 1));
+  }
+
+  checkRotate() {
+
+  }
+
   clearBoard() {
     this.ctx.clearRect(
       0,
@@ -71,13 +83,18 @@ export default class GameBoard {
   }
 
   mvLeft() {
-    if (this._piece.x > (0 - this._piece.form[this._piece.offset][0][0]))
+    if (this.checkLeftSide())
       this._piece.moveLeft();
   }
 
   mvRight() {
-    if (this._piece.x < (this.size.abstract.width - this._piece.form[this._piece.offset][3][0] - 1))
+    if (this.checkRightSide())
       this._piece.moveRight();
+  }
+
+  rotate() {
+    if(this._piece.x != -1 && this._piece.x != 18) //temporaire
+      this._piece.rotate();
   }
 
   draw_piece() {

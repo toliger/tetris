@@ -9,7 +9,7 @@ $(document).ready(() => {
     switch(e.key) {
 
       case "ArrowUp" :
-        board._piece.rotate();
+        board.rotate();
         board.update();
         e.preventDefault();
         break;
@@ -27,7 +27,8 @@ $(document).ready(() => {
         break;
 
       case "ArrowDown" :
-        console.log(board._piece.form[board._piece.offset][0]);
+        console.log(board._piece.form[board._piece.offset][0],board._piece.form[board._piece.offset][3]);
+        console.log(board._piece.x, board._piece.y);
         e.preventDefault();
         break;
       
