@@ -14,7 +14,8 @@ header {
 }
 
 #sideBoard {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
+    width: 10%;
 }
 
 #mainBoard {
@@ -23,7 +24,9 @@ header {
 }
 
 #chat {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
+    width: 10%;
+    height: 500px;
 }
 
 #textBox {
@@ -46,4 +49,52 @@ header {
     padding: 5px;
     display: none;
     text-align: left;
+}
+
+.username {
+    font-weight: bold;
+}
+
+#chat #textBox {
+    text-align: left;
+    background-color: white;
+    height: 50%;
+    max-height: 50%;
+}
+
+#chat #textBox p {
+    padding: 5px 5px 5px 15px;
+    border-bottom: 1px solid grey;
+    margin: 0;
+}
+
+#messageBox {
+    text-align: left;
+    padding: 5px;
+}
+
+#chatinput {
+    height: 50px;
+}
+
+#chatbutton {
+    height: 50px;
+}
+#nextPiece {
+    width: 80%;
+    border: 2px solid red;
+    margin: auto;
+    height: 100px;
+}
+#scoringTable {
+    width: 100%;
+    margin: 10px;
+}
+
+#scoringTable th {
+    text-align: right;
+}
+
+#scoringTable td {
+    width: 50%;
 }
