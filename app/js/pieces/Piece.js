@@ -11,6 +11,11 @@ class Piece {
       this.offset = 0;
   }
 
+  undoRotate() {
+    if (--this.offset < 0)
+      this.offset = 3;
+  }
+
   moveLeft() {
     this.x--;
   }
@@ -82,4 +87,46 @@ class Z extends Piece {
   }
 }
 
-export { T, L, J, Z }
+class S extends Piece {
+  constructor(x,y) {
+    super(x,y);
+    this.addform();
+  }
+
+  addform() {
+    this.form.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
+    this.form.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
+    this.form.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
+    this.form.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
+  }
+}
+
+class I extends Piece {
+  constructor(x,y) {
+    super(x,y);
+    this.addform();
+  }
+
+  addform() {
+    this.form.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
+    this.form.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
+    this.form.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
+    this.form.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
+  }
+}
+
+class O extends Piece {
+  constructor(x,y) {
+    super(x,y);
+    this.addform();
+  }
+
+  addform() {
+    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //haut
+    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //droite
+    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //bas
+    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //gauche
+  }
+}
+
+export { T, L, J, Z, S, I, O }
