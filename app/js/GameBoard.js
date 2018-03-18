@@ -18,8 +18,12 @@ export default class GameBoard {
     };
     console.log('pos', this.position);
     this.new_piece();
+    this.update();
+  }
+
+  update() {
+    this.clearBoard();
     this.draw_piece();
-    //this.clearBoard();
   }
 
   new_piece() {
@@ -63,6 +67,9 @@ export default class GameBoard {
   checkRightSide() {
     return (this._piece.x < (this.size.abstract.width - this._piece.form[this._piece.offset][3][0] - 1));
   }
+  checkBottomSide() {
+    return (this._piece.y < this.size.abstract.height);
+  }
 
 
   clearBoard() {
@@ -87,6 +94,11 @@ export default class GameBoard {
   mvRight() {
     if (this.checkRightSide())
       this._piece.moveRight();
+  }
+
+  mvDown() {
+    if (this.checkBottomSide())
+      this._piece.moveDown();
   }
 
   rotate() {

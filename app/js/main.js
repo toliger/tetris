@@ -1,8 +1,7 @@
-import GameBoard from './GameBoard.js';
 import Game from './Game.js';
 $(document).ready(() => {
-  const board = new GameBoard();
-  //new Game();
+  const game = new Game();
+  const board = game.gameBoard;
 
 
   $(document).keydown((e) => {

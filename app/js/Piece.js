@@ -23,7 +23,11 @@ class Piece {
   moveRight() {
     this.x++;
   }
-  
+
+  moveDown() {
+    this.y += 1;
+  }
+
 }
 
 class T extends Piece {
@@ -50,7 +54,7 @@ class L extends Piece {
     super(x,y);
     this.addform();
   }
- 
+
   addform() {
     this.form.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
     this.form.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
