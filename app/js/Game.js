@@ -5,7 +5,7 @@ import SocketIO from './SocketIO.js';
 export default class Game {
   constructor() {
     this.gameBoard = new GameBoard();
-    this.tick();
+    //this.tick();
     this.startMusic();
     this.socket = new SocketIO();
   }

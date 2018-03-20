@@ -15,24 +15,42 @@
             <h3>Tableau de bord</h3>
             <h4 id="settings">Paramètres <i class="fa fa-angle-down"></i></h4>
             <div class="settings">
-                <label for="user">Pseudo : </label>
-                <input type="text" name="user"> <br>
-                <label for="difficulty">Difficulté : </label>
-                <select name="difficulty" id="diffSelect">
-                    <option value="easy">Facile</option>
-                    <option value="medium">Normal</option>
-                    <option value="hard">Difficile</option>
-                </select>
+                <div class="stfield">
+                    <label for="user">Pseudo : </label>
+                    <input id="usrinput" type="text" name="user"> <br>           
+                </div>
+                <div class="stfield">
+                    <label for="difficulty">Difficulté : </label>
+                    <select name="difficulty" id="diffSelect">
+                        <option value="easy">Facile</option>
+                        <option value="medium">Normal</option>
+                        <option value="hard">Difficile</option>
+                    </select>
+                </div>
                 <div id="options">
                     Options supplémentaires : <br>
-                    <input type="checkbox" name="bonus" value="blind">
-                    <label for="bonus">Mode Aveugle</label> <br>
-                    <input type="checkbox" name="bonus" value="bmode">
-                    <label for="bonus">Mode B</label>
+                    <div class="stfield">
+                        <input type="checkbox" name="bonus" value="blind">
+                        <label for="bonus">Mode Aveugle</label> <br>
+                    </div>
+                    <div class="stfield">
+                        <input type="checkbox" name="bonus" value="bmode">
+                        <label for="bonus">Mode B</label>
+                    </div>
                 </div>
-
                 <input type="button" value="Start">
             </div>
+
+            <table id="#gameInfo">
+                <tr>
+                    <th>Score : </th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>Lignes : </th>
+                    <td>0</td>
+                </tr>
+            </table>
         </div>
         <div id="mainBoard" class="game-item">
         </div>
