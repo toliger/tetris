@@ -60,16 +60,32 @@ export default class GameBoard {
 
   }
 
+
   checkLeftSide() {
     return (this._piece.x > (0 - this._piece.form[this._piece.offset][0][0]));
   }
 
+
   checkRightSide() {
     return (this._piece.x < (this.size.abstract.width - this._piece.form[this._piece.offset][3][0] - 1));
   }
+
+  getNextCoords() {
+    let res = [];
+    let forme = this._piece.form[this._piece.offset];
+    for (let i = 0; i < forme.length; i++) {
+      res.push([this._piece.x + forme[i][0], this._piece.y + forme[i][1]])
+    }
+    return res;
+  }
+
   checkBottomSide() {
+    console.log("next", this.getNextCoords());
+    //check colision avec ces coords
     return (this._piece.y < this.size.abstract.height);
   }
+
+
 
 
   clearBoard() {
