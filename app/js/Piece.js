@@ -125,6 +125,17 @@ class Piece {
     }
   }
 
+  getCollisionBlocks(d) {
+    return new Promise((resolve, reject) => {
+      switch(d) {
+        case 'L': resolve(this.lcol[this.offset]);
+        case 'R': resolve(this.rcol[this.offset]);
+        case 'D': resolve(this.dcol[this.offset]);
+        default: reject("BUGGG");
+      }
+    });
+  }  
+
 }
 
 class T extends Piece {
