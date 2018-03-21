@@ -31,6 +31,7 @@ class Piece {
     this.y += 1;
   }
 
+  //Return the maximal value of x from an array of coordinates
   getMaxXFromArray(a) {
     let m = 0;
     for(let i  =0; i < a.length; i++) {
@@ -40,6 +41,7 @@ class Piece {
     return m;
   }
 
+  //Return the maximal value of y from an array of coordinates
   getMaxYFromArray(a) {
     let m = 0;
     for(let i = 0; i < a.length; i++) {
@@ -49,6 +51,7 @@ class Piece {
     return m;
   }
 
+  //Return the couple of coordinates where x is maximal
   getMaxXPos(a) {
     let m = 0;
     let ind = 0;
@@ -61,6 +64,7 @@ class Piece {
     return a[ind];
   }
 
+  //Return the couple of coordinates where x is minimal
   getMinXPos(a) {
     let m = a[0][0];
     let ind = 0;
@@ -73,6 +77,7 @@ class Piece {
     return a[ind];
   }
 
+  //Return the couple of coordinates where y is maximal
   getMaxYPos(a) {
     let m = 0;
     let ind = 0;
@@ -85,6 +90,7 @@ class Piece {
     return a[ind];
   }
   
+  //Return the couple of coordinates where y is minimal
   getMinYPos(a) {
     let m = a[0][0];
     let ind = 0;
@@ -97,12 +103,17 @@ class Piece {
     return a[ind];
   }
 
+  /*
+   * Set the arrays lcol, rcol and dcol with the coordinates
+   * of the blocks that need to be checked when moving
+   * for each position (offset)
+   */
   getCollideElements() {
     for(let i = 0; i < 4; i++) {
       let rarr = [], larr = [], darr = [];
       let mX = this.getMaxXFromArray(this.form[i]);
       let mY = this.getMaxYFromArray(this.form[i]);
-      //Gauche - Droite
+      //Left - Right
       for(let j = 0; j <= mY; j++) {
         let tmp = this.form[i].filter((elt) => {
           return elt[1] == j;
@@ -114,7 +125,7 @@ class Piece {
       this.lcol.push(larr);
       this.rcol.push(rarr);
 
-      //Bas
+      //Down
       for(let j = 0; j <= mX; j++) {
         let tmp = this.form[i].filter((elt) => {
           return elt[0] == j;
@@ -125,6 +136,11 @@ class Piece {
     }
   }
 
+  /*
+   * Return a promise with the array of coordinates of blocks
+   * that need to be checked for the corresponding direction
+   * and based on the current offset of the piece
+   */
   getCollisionBlocks(d) {
     return new Promise((resolve, reject) => {
       switch(d) {

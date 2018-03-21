@@ -86,8 +86,6 @@ export default class GameBoard {
   }
 
 
-
-
   clearBoard() {
     this.ctx.clearRect(
       0,
