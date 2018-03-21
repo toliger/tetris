@@ -10,13 +10,13 @@ export default class GameBoard {
         width: 20,
       },
     };
-    console.log('plop', this.size);
+    //console.log('plop', this.size);
     this.generate();
     this.position = {
       x: $("#map").position().top,
       y: $("#map").position().left,
     };
-    console.log('pos', this.position);
+    //console.log('pos', this.position);
     this.new_piece();
     this.update();
   }
@@ -27,7 +27,7 @@ export default class GameBoard {
   }
 
   new_piece() {
-    this._piece = new O(8,0);
+    this._piece = new T(8,0);
   }
 
   set Piece(value) {
