@@ -1,6 +1,6 @@
 class Piece {
   constructor(x, y) {
-    this.form = [];
+    this.shape = [];
     this.offset = 0;
     this.lcol = [];
     this.rcol = [];
@@ -109,13 +109,15 @@ class Piece {
    * for each position (offset)
    */
   getCollideElements() {
+    //iterate on each offset
     for(let i = 0; i < 4; i++) {
       let rarr = [], larr = [], darr = [];
-      let mX = this.getMaxXFromArray(this.form[i]);
-      let mY = this.getMaxYFromArray(this.form[i]);
+      let mX = this.getMaxXFromArray(this.shape[i]);
+      let mY = this.getMaxYFromArray(this.shape[i]);
+      
       //Left - Right
       for(let j = 0; j <= mY; j++) {
-        let tmp = this.form[i].filter((elt) => {
+        let tmp = this.shape[i].filter((elt) => {
           return elt[1] == j;
         });
         larr.push(this.getMinXPos(tmp));
@@ -127,7 +129,7 @@ class Piece {
 
       //Down
       for(let j = 0; j <= mX; j++) {
-        let tmp = this.form[i].filter((elt) => {
+        let tmp = this.shape[i].filter((elt) => {
           return elt[0] == j;
         });
         darr.push(this.getMaxYPos(tmp)); 
@@ -157,7 +159,7 @@ class Piece {
 class T extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
@@ -166,11 +168,11 @@ class T extends Piece {
    * x le + haut en dernier
    * pour les tests de coordonnées
    */
-  addform() {
-    this.form.push([[0, 0], [1, 0], [1, 1], [2, 0]]); //haut
-    this.form.push([[0, 1], [1, 0], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 1], [1, 1], [1, 0], [2, 1]]); //bas
-    this.form.push([[1, 0], [1, 1], [1, 2], [2, 1]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 0]]); //haut
+    this.shape.push([[0, 1], [1, 0], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 1]]); //bas
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 1]]); //gauche
   }
 
   
@@ -179,15 +181,15 @@ class T extends Piece {
 class L extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
-    this.form.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 1], [1, 1], [2, 1], [2, 0]]); //bas
-    this.form.push([[0, 0], [0, 1], [0, 2], [1, 2]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
+    this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]); //bas
+    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 2]]); //gauche
   }
 
   
@@ -196,15 +198,15 @@ class L extends Piece {
 class J extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [1, 0], [2, 0], [2, 1]]); //haut
-    this.form.push([[0, 2], [1, 0], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 0], [0, 1], [1, 1], [2, 1]]); //bas
-    this.form.push([[0, 0], [0, 1], [0, 2], [1, 0]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [2, 0], [2, 1]]); //haut
+    this.shape.push([[0, 2], [1, 0], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 0], [0, 1], [1, 1], [2, 1]]); //bas
+    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 0]]); //gauche
   }
 
   
@@ -213,15 +215,15 @@ class J extends Piece {
 class Z extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //haut
-    this.form.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //droite
-    this.form.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //bas
-    this.form.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //haut
+    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //droite
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //bas
+    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //gauche
   }
 
   
@@ -230,15 +232,15 @@ class Z extends Piece {
 class S extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
-    this.form.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
-    this.form.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
+    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
+    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
   }
 
   
@@ -247,15 +249,15 @@ class S extends Piece {
 class I extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
-    this.form.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
-    this.form.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
-    this.form.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
+    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
+    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
+    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
   }
 
   
@@ -264,15 +266,15 @@ class I extends Piece {
 class O extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
     this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //haut
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //droite
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //bas
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //haut
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //droite
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //bas
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //gauche
   }
 
   

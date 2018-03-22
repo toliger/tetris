@@ -62,17 +62,17 @@ export default class GameBoard {
 
 
   checkLeftSide() {
-    return (this._piece.x > (0 - this._piece.form[this._piece.offset][0][0]));
+    return (this._piece.x > (0 - this._piece.shape[this._piece.offset][0][0]));
   }
 
 
   checkRightSide() {
-    return (this._piece.x < (this.size.abstract.width - this._piece.form[this._piece.offset][3][0] - 1));
+    return (this._piece.x < (this.size.abstract.width - this._piece.shape[this._piece.offset][3][0] - 1));
   }
 
   getNextCoords() {
     let res = [];
-    let forme = this._piece.form[this._piece.offset];
+    let forme = this._piece.shape[this._piece.offset];
     for (let i = 0; i < forme.length; i++) {
       res.push([this._piece.x + forme[i][0], this._piece.y + forme[i][1]])
     }
@@ -117,21 +117,21 @@ export default class GameBoard {
 
   rotate() {
       this._piece.rotate();
-    if(this._piece.x < 0 || (this._piece.x + this._piece.form[this._piece.offset][3][0] >= this.size.abstract.width)) //temporaire
+    if(this._piece.x < 0 || (this._piece.x + this._piece.shape[this._piece.offset][3][0] >= this.size.abstract.width)) //temporaire
       this._piece.undoRotate();
   }
 
   draw_piece() {
     let p = this._piece;
-    //console.log(p.form);
+    //console.log(p.shape);
     this.ctx.fillStyle = "#FF0000";
     // this.ctx.fillRect(0,0,50,50);
     const f = p.offset;
     const Case = this.size.real.width / this.size.abstract.width;
-    for (let i in p.form[f]) {
-      //console.log(p.form[f][i])
+    for (let i in p.shape[f]) {
+      //console.log(p.shape[f][i])
       //console.log(this._piece.x);
-      this.ctx.fillRect((p.form[f][i][0] + this._piece.x) * Case,(p.form[f][i][1] + this._piece.y) * Case, Case, Case);
+      this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * Case,(p.shape[f][i][1] + this._piece.y) * Case, Case, Case);
     }
   }
 }
