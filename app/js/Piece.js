@@ -1,7 +1,10 @@
 class Piece {
   constructor(x, y) {
-    this.form = [];
+    this.shape = [];
     this.offset = 0;
+    this.lcol = [];
+    this.rcol = [];
+    this.dcol = [];
     this.x = x;
     this.y = y;
   }
@@ -16,6 +19,14 @@ class Piece {
       this.offset = 3;
   }
 
+  getRotated() {
+    if (this.offset == 3) {
+      return this.shape[0];
+    } else {
+      return this.shape[this.offset + 1];
+    }
+  }
+
   moveLeft() {
     this.x--;
   }
@@ -28,12 +39,134 @@ class Piece {
     this.y += 1;
   }
 
+  //Return the maximal value of x from an array of coordinates
+  getMaxXFromArray(a) {
+    let m = 0;
+    for(let i  =0; i < a.length; i++) {
+      if (a[i][0] > m)
+        m = a[i][0];
+    }
+    return m;
+  }
+
+  //Return the maximal value of y from an array of coordinates
+  getMaxYFromArray(a) {
+    let m = 0;
+    for(let i = 0; i < a.length; i++) {
+      if (a[i][1] > m)
+        m = a[i][1];
+    }
+    return m;
+  }
+
+  //Return the couple of coordinates where x is maximal
+  getMaxXPos(a) {
+    let m = 0;
+    let ind = 0;
+    for(var i = 0; i < a.length; i++) {
+      if (a[i][0] > m) {
+        m = a[i][0];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+
+  //Return the couple of coordinates where x is minimal
+  getMinXPos(a) {
+    let m = a[0][0];
+    let ind = 0;
+    for(var i = 0; i < a.length; i++) {
+      if (a[i][0] < m) {
+        m = a[i][0];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+
+  //Return the couple of coordinates where y is maximal
+  getMaxYPos(a) {
+    let m = 0;
+    let ind = 0;
+    for(let i = 0; i < a.length; i++) {
+      if (a[i][1] > m) {
+        m = a[i][1];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+  
+  //Return the couple of coordinates where y is minimal
+  getMinYPos(a) {
+    let m = a[0][0];
+    let ind = 0;
+    for(let i = 0; i < a.length; i++) {
+      if (a[i][1] < m) {
+        m = a[i][1];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+
+  /*
+   * Set the arrays lcol, rcol and dcol with the coordinates
+   * of the blocks that need to be checked when moving
+   * for each position (offset)
+   */
+  getCollideElements() {
+    //iterate on each offset
+    for(let i = 0; i < 4; i++) {
+      let rarr = [], larr = [], darr = [];
+      let mX = this.getMaxXFromArray(this.shape[i]);
+      let mY = this.getMaxYFromArray(this.shape[i]);
+      
+      //Left - Right
+      for(let j = 0; j <= mY; j++) {
+        let tmp = this.shape[i].filter((elt) => {
+          return elt[1] == j;
+        });
+        larr.push(this.getMinXPos(tmp));
+        rarr.push(this.getMaxXPos(tmp)); 
+
+      }
+      this.lcol.push(larr);
+      this.rcol.push(rarr);
+
+      //Down
+      for(let j = 0; j <= mX; j++) {
+        let tmp = this.shape[i].filter((elt) => {
+          return elt[0] == j;
+        });
+        darr.push(this.getMaxYPos(tmp)); 
+      }
+      this.dcol.push(darr);
+    }
+  }
+
+  /*
+   * Return a promise with the array of coordinates of blocks
+   * that need to be checked for the corresponding direction
+   * and based on the current offset of the piece
+   */
+  getCollisionBlocks(d) {
+    switch(d) {
+      case 'L': return(this.lcol[this.offset]);
+      case 'R': return(this.rcol[this.offset]);
+      case 'D': return(this.dcol[this.offset]);
+      default: return("BUGGG");
+    }
+  }  
+
 }
 
 class T extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
   /*
@@ -41,495 +174,116 @@ class T extends Piece {
    * x le + haut en dernier
    * pour les tests de coordonnées
    */
-  addform() {
-    this.form.push([[0, 0], [1, 0], [1, 1], [2, 0]]); //haut
-    this.form.push([[0, 1], [1, 0], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 1], [1, 1], [1, 0], [2, 1]]); //bas
-    this.form.push([[1, 0], [1, 1], [1, 2], [2, 1]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 0]]); //haut
+    this.shape.push([[0, 1], [1, 0], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 1]]); //bas
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 1]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0],this.form[2]]);
-            case 'D':
-              resolve([this.form[3], this.form[2]]);
-            case 'B':
-              resolve([this.form[0],this.form[2],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0],this.form[2],this.form[3]]);
-            case 'D':
-              resolve([this.form[1], this.form[2],this.form[3]]);
-            case 'B':
-              resolve([this.form[0],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0],this.form[2]]);
-            case 'D':
-              resolve([this.form[3], this.form[2]]);
-            case 'B':
-              resolve([this.form[0],this.form[1],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[0], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[2],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 class L extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
-    this.form.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 1], [1, 1], [2, 1], [2, 0]]); //bas
-    this.form.push([[0, 0], [0, 1], [0, 2], [1, 2]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
+    this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]); //bas
+    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 2]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0],this.form[1]]);
-            case 'D':
-              resolve([this.form[0], this.form[3]]);
-            case 'B':
-              resolve([this.form[0],this.form[2],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0],this.form[2],this.form[3]]);
-            case 'D':
-              resolve([this.form[1], this.form[2],this.form[3]]);
-            case 'B':
-              resolve([this.form[0],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0],this.form[3]]);
-            case 'D':
-              resolve([this.form[3], this.form[2]]);
-            case 'B':
-              resolve([this.form[0],this.form[1],this.form[2]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[0], this.form[1], this.form[3]]);
-            case 'B':
-              resolve([this.form[2],this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 class J extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [1, 0], [2, 0], [2, 1]]); //haut
-    this.form.push([[0, 2], [1, 0], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 0], [0, 1], [1, 1], [2, 1]]); //bas
-    this.form.push([[0, 0], [0, 1], [0, 2], [1, 0]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [2, 0], [2, 1]]); //haut
+    this.shape.push([[0, 2], [1, 0], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 0], [0, 1], [1, 1], [2, 1]]); //bas
+    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 0]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[3]]);
-            case 'D':
-              resolve([this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1]]);
-            case 'D':
-              resolve([this.form[0], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[2], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[2],this.form[3]]);
-            default:
-              resolve('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 class Z extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //haut
-    this.form.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //droite
-    this.form.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //bas
-    this.form.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //haut
+    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //droite
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //bas
+    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[2], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[2], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1],this.form[3]]);
-            default:
-              resolve('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 class S extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
-    this.form.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
-    this.form.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
-    this.form.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
+    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
+    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[3]]);
-            case 'D':
-              resolve([this.form[0], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[3]]);
-            case 'D':
-              resolve([this.form[0], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1],this.form[3]]);
-            default:
-              resolve('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 class I extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
-    this.form.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
-    this.form.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
-    this.form.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
+    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
+    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
+    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0]]);
-            case 'D':
-              resolve([this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[1], this.form[2], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2], this.form[3]]);
-            case 'D':
-              resolve([this.form[0], this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2]]);
-            case 'D':
-              resolve([this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[0], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1], this.form[2], this.form[3]]);
-            case 'D':
-              resolve([this.form[0], this.form[1], this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 class O extends Piece {
   constructor(x,y) {
     super(x,y);
-    this.addform();
+    this.initShapes();
+    this.getCollideElements();
   }
 
-  addform() {
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //haut
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //droite
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //bas
-    this.form.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //gauche
+  initShapes() {
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //haut
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //droite
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //bas
+    this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //gauche
   }
 
-  getCollideVectors(d) {
-    switch (this.offset) {
-      case 0:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1]]);
-            case 'D':
-              resolve([this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 1:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1]]);
-            case 'D':
-              resolve([this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 2:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1]]);
-            case 'D':
-              resolve([this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-      case 3:
-        return new Promise((resolve, reject) => {
-          switch (d) {
-            case 'G':
-              resolve([this.form[0], this.form[1]]);
-            case 'D':
-              resolve([this.form[2], this.form[3]]);
-            case 'B':
-              resolve([this.form[1], this.form[3]]);
-            default:
-              reject('Echec critique');
-          }
-        });
-    }
-  }
+  
 }
 
 export { T, L, J, Z, S, I, O }
