@@ -33,7 +33,24 @@ export default class GameBoard {
     this.update();
   }
 
+
+  drawWall() {
+    console.log('plop', this.map);
+    for (let i = 1; i < this.size.abstract.height + 1; i++) {
+      for (let j = 1; j < this.size.abstract.width + 1; j++) {
+        let pixel = this.map[i][j];
+        if (pixel != 0) {
+          this.ctx.fillStyle = pixel[1];
+          const CaseX = this.size.real.width / this.size.abstract.width;
+          const CaseY = this.size.real.height / this.size.abstract.height;
+          this.ctx.fillRect((j-1) * CaseX, (i-1) * CaseY, CaseX, CaseY);
+        }
+      }
+    }
+  }
+
   update() {
+    console.log('plopes');
     this.clearBoard();
     this.drawWall();
     this.drawPiece();
@@ -154,7 +171,7 @@ export default class GameBoard {
 
   addPieceToMap(blocks) {
     for (let i in blocks) {
-      this.map[blocks[i][1]+1][blocks[i][0]+1] = 1;
+      this.map[blocks[i][1]+1][blocks[i][0]+1] = [1, this._piece.color];
     }
   }
 
@@ -166,11 +183,6 @@ export default class GameBoard {
       this.size.real.width,
       this.size.real.height
     );
-  }
-
-  update() {
-    this.clearBoard();
-    this.drawPiece();
   }
 
   mvLeft() {
@@ -200,6 +212,7 @@ export default class GameBoard {
   printInfo() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
   }
+
 
   drawPiece() {
     let p = this._piece;
