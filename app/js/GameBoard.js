@@ -76,7 +76,7 @@ export default class GameBoard {
 
   }
 
-  
+
   generateMapArray() {
     let res = [];
       res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
@@ -87,7 +87,7 @@ export default class GameBoard {
     res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
     return res;
   }
-  
+
 
 
   checkLeftSide() {

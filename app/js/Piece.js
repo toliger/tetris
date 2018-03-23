@@ -97,7 +97,7 @@ class Piece {
     }
     return a[ind];
   }
-  
+
   //Return the couple of coordinates where y is minimal
   getMinYPos(a) {
     let m = a[0][0];
@@ -122,14 +122,14 @@ class Piece {
       let rarr = [], larr = [], darr = [];
       let mX = this.getMaxXFromArray(this.shape[i]);
       let mY = this.getMaxYFromArray(this.shape[i]);
-      
+
       //Left - Right
       for(let j = 0; j <= mY; j++) {
         let tmp = this.shape[i].filter((elt) => {
           return elt[1] == j;
         });
         larr.push(this.getMinXPos(tmp));
-        rarr.push(this.getMaxXPos(tmp)); 
+        rarr.push(this.getMaxXPos(tmp));
 
       }
       this.lcol.push(larr);
@@ -140,7 +140,7 @@ class Piece {
         let tmp = this.shape[i].filter((elt) => {
           return elt[0] == j;
         });
-        darr.push(this.getMaxYPos(tmp)); 
+        darr.push(this.getMaxYPos(tmp));
       }
       this.dcol.push(darr);
     }
@@ -158,7 +158,7 @@ class Piece {
       case 'D': return(this.dcol[this.offset]);
       default: return("BUGGG");
     }
-  }  
+  }
 
 }
 
@@ -175,13 +175,13 @@ class T extends Piece {
    * pour les tests de coordonnées
    */
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 0]]); //haut
-    this.shape.push([[0, 1], [1, 0], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 1]]); //bas
-    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 1]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 1]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 1]]);
+    this.shape.push([[0, 1], [1, 1], [1, 2], [2, 1]]);
+    this.shape.push([[0, 1], [1, 0], [1, 1], [1, 2]]);
   }
 
-  
+
 }
 
 class L extends Piece {
@@ -192,13 +192,13 @@ class L extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
-    this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]); //bas
-    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 2]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 0]]);
+    this.shape.push([[0, 1], [1, 1], [2, 1], [0, 2]]);
+    this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]);
   }
 
-  
+
 }
 
 class J extends Piece {
@@ -209,13 +209,13 @@ class J extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [2, 0], [2, 1]]); //haut
-    this.shape.push([[0, 2], [1, 0], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 0], [0, 1], [1, 1], [2, 1]]); //bas
-    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 0]]); //gauche
+    this.shape.push([[0, 0], [0, 1], [1, 1], [2, 1]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 0]]);
+    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 2]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [0, 2]]);
   }
 
-  
+
 }
 
 class Z extends Piece {
@@ -226,13 +226,13 @@ class Z extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //haut
-    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //droite
-    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //bas
-    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //gauche
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]);
+    this.shape.push([[1, 1], [1, 2], [2, 0], [2, 1]]);
+    this.shape.push([[0, 1], [1, 1], [1, 2], [2, 2]]);
+    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]);
   }
 
-  
+
 }
 
 class S extends Piece {
@@ -243,13 +243,13 @@ class S extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
-    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
-    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]);
+    this.shape.push([[1, 0], [1, 1], [2, 1], [2, 2]]);
+    this.shape.push([[0, 2], [1, 2], [1, 1], [2, 1]]);
+    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]);
   }
 
-  
+
 }
 
 class I extends Piece {
@@ -260,13 +260,13 @@ class I extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
-    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
-    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
-    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [2, 1], [3, 1]]);
+    this.shape.push([[2, 0], [2, 1], [2, 2], [2, 3]]);
+    this.shape.push([[0, 2], [1, 2], [2, 2], [3, 2]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [1, 3]]);
   }
 
-  
+
 }
 
 class O extends Piece {
@@ -283,7 +283,7 @@ class O extends Piece {
     this.shape.push([[0, 0], [0, 1], [1, 0], [1, 1]]); //gauche
   }
 
-  
+
 }
 
 export { T, L, J, Z, S, I, O }
