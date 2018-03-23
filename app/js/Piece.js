@@ -176,10 +176,10 @@ class T extends Piece {
    * pour les tests de coordonnées
    */
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 0]]); //haut
-    this.shape.push([[0, 1], [1, 0], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 1]]); //bas
-    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 1]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 1]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 1]]);
+    this.shape.push([[0, 1], [1, 1], [1, 2], [2, 1]]);
+    this.shape.push([[0, 1], [1, 0], [1, 1], [1, 2]]);
   }
 
 
@@ -193,10 +193,10 @@ class L extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 1], [0, 0], [1, 0], [2, 0]]); //haut
-    this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]); //bas
-    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 2]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 0]]);
+    this.shape.push([[0, 1], [1, 1], [2, 1], [0, 2]]);
+    this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]);
   }
 
 
@@ -210,10 +210,10 @@ class J extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [2, 0], [2, 1]]); //haut
-    this.shape.push([[0, 2], [1, 0], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 0], [0, 1], [1, 1], [2, 1]]); //bas
-    this.shape.push([[0, 0], [0, 1], [0, 2], [1, 0]]); //gauche
+    this.shape.push([[0, 0], [0, 1], [1, 1], [2, 1]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 0]]);
+    this.shape.push([[0, 1], [1, 1], [2, 1], [2, 2]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [0, 2]]);
   }
 
 
@@ -227,10 +227,10 @@ class Z extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //haut
-    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //droite
-    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]); //bas
-    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]); //gauche
+    this.shape.push([[0, 0], [1, 0], [1, 1], [2, 1]]);
+    this.shape.push([[1, 1], [1, 2], [2, 0], [2, 1]]);
+    this.shape.push([[0, 1], [1, 1], [1, 2], [2, 2]]);
+    this.shape.push([[0, 1], [0, 2], [1, 0], [1, 1]]);
   }
 
 
@@ -244,10 +244,10 @@ class S extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //haut
-    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //droite
-    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]); //bas
-    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [1, 0], [2, 0]]);
+    this.shape.push([[1, 0], [1, 1], [2, 1], [2, 2]]);
+    this.shape.push([[0, 2], [1, 2], [1, 1], [2, 1]]);
+    this.shape.push([[0, 0], [0, 1], [1, 1], [1, 2]]);
   }
 
 
@@ -261,10 +261,10 @@ class I extends Piece {
   }
 
   initShapes() {
-    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //haut
-    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //droite
-    this.shape.push([[0, 0], [1, 0], [2, 0], [3, 0]]); //bas
-    this.shape.push([[0, 0], [0, 1], [0, 2], [0, 3]]); //gauche
+    this.shape.push([[0, 1], [1, 1], [2, 1], [3, 1]]);
+    this.shape.push([[2, 0], [2, 1], [2, 2], [2, 3]]);
+    this.shape.push([[0, 2], [1, 2], [2, 2], [3, 2]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [1, 3]]);
   }
 
 
