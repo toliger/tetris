@@ -35,7 +35,7 @@ $(document).ready(() => {
         break;
       }
 
-
+      case "s":
       case "ArrowDown" : {
         board.mvDown();
         board.update();

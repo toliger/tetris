@@ -35,7 +35,6 @@ export default class GameBoard {
 
 
   drawWall() {
-    console.log('plop', this.map);
     for (let i = 1; i < this.size.abstract.height + 1; i++) {
       for (let j = 1; j < this.size.abstract.width + 1; j++) {
         let pixel = this.map[i][j];
