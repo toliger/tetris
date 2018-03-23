@@ -49,7 +49,6 @@ export default class GameBoard {
   }
 
   update() {
-    console.log('plopes');
     this.clearBoard();
     this.drawWall();
     this.drawPiece();
