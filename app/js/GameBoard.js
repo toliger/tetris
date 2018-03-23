@@ -115,7 +115,7 @@ export default class GameBoard {
   checkLeftSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('L'));
     for (let i in blocks) {
-      if (this.map[blocks[i][1]+1][blocks[i][0]] == 1) {
+      if (this.map[blocks[i][1]+1][blocks[i][0]][0] == 1) {
         return false;
       }
     }
@@ -126,7 +126,7 @@ export default class GameBoard {
   checkRightSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('R'));
     for (let i in blocks) {
-      if (this.map[blocks[i][1]+1][blocks[i][0] + 2] == 1) {
+      if (this.map[blocks[i][1]+1][blocks[i][0] + 2][0] == 1) {
         return false;
       }
     }
