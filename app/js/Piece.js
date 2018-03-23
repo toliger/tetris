@@ -50,11 +50,31 @@ class Piece {
     return m;
   }
 
+  //Return the minimal value of x from an array of coordinates
+  getMinXFromArray(a) {
+    let m = a[0][0];
+    for(let i  =0; i < a.length; i++) {
+      if (a[i][0] < m)
+        m = a[i][0];
+    }
+    return m;
+  }
+
   //Return the maximal value of y from an array of coordinates
   getMaxYFromArray(a) {
     let m = 0;
     for(let i = 0; i < a.length; i++) {
       if (a[i][1] > m)
+        m = a[i][1];
+    }
+    return m;
+  }
+
+  //Return the minimal value of y from an array of coordinates
+  getMinYFromArray(a) {
+    let m = a[0][1];
+    for(let i = 0; i < a.length; i++) {
+      if (a[i][1] < m)
         m = a[i][1];
     }
     return m;
@@ -101,7 +121,7 @@ class Piece {
 
   //Return the couple of coordinates where y is minimal
   getMinYPos(a) {
-    let m = a[0][0];
+    let m = a[0][1];
     let ind = 0;
     for(let i = 0; i < a.length; i++) {
       if (a[i][1] < m) {
@@ -123,9 +143,11 @@ class Piece {
       let rarr = [], larr = [], darr = [];
       let mX = this.getMaxXFromArray(this.shape[i]);
       let mY = this.getMaxYFromArray(this.shape[i]);
+      let minX = this.getMinXFromArray(this.shape[i]);
+      let minY = this.getMinYFromArray(this.shape[i]);
 
       //Left - Right
-      for(let j = 0; j <= mY; j++) {
+      for(let j = minY; j <= mY; j++) {
         let tmp = this.shape[i].filter((elt) => {
           return elt[1] == j;
         });
@@ -137,10 +159,11 @@ class Piece {
       this.rcol.push(rarr);
 
       //Down
-      for(let j = 0; j <= mX; j++) {
+      for(let j = minX; j <= mX; j++) {
         let tmp = this.shape[i].filter((elt) => {
           return elt[0] == j;
         });
+
         darr.push(this.getMaxYPos(tmp));
       }
       this.dcol.push(darr);
