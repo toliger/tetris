@@ -5,31 +5,44 @@ $(document).ready(() => {
 
 
   $(document).keydown((e) => {
+
     switch(e.key) {
 
-      case "ArrowUp" :
+      case "z":
+      case "ArrowUp" : {
         board.rotate();
         board.update();
         e.preventDefault();
         break;
+      }
 
-      case "ArrowLeft" :
+
+      case "q":
+      case "ArrowLeft" : {
         board.mvLeft();
         board.update();
         e.preventDefault();
         break;
+      }
 
-      case "ArrowRight" :
+
+      case "d":
+      case "ArrowRight" : {
+        console.log('droite');
         board.mvRight();
         board.update();
         e.preventDefault();
         break;
+      }
 
-      case "ArrowDown" :
+
+      case "ArrowDown" : {
         board.mvDown();
         board.update();
         e.preventDefault();
         break;
+      }
+
 
       case "h":
         board.printInfo();
