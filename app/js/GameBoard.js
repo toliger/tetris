@@ -153,7 +153,7 @@ export default class GameBoard {
   checkBottomSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
     for (let i in blocks) {
-      if (this.map[blocks[i][1]+2][blocks[i][0]+1] == 1) {
+      if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] != 0) {
         this.addPieceToMap(blocks);
         this.new_piece();
         return false;
