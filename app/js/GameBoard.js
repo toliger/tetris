@@ -152,9 +152,10 @@ export default class GameBoard {
 
   checkBottomSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
+    //console.log(blocks);
     for (let i in blocks) {
       if (this.map[blocks[i][1]+2][blocks[i][0]+1] == 1) {
-        this.addPieceToMap(blocks);
+        this.addPieceToMap(this.getPos(this._piece.shape[this._piece.offset]));
         this.new_piece();
         return false;
       }
@@ -203,7 +204,7 @@ export default class GameBoard {
    * Debug function tied to the 'h' key
    */
   printInfo() {
-    const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
+    console.log(this.map);
   }
 
 
