@@ -11,6 +11,7 @@ export default class GameBoard {
       },
     };
 
+    this.pieces = [];
     this.map = this.generateMapArray();
     //console.log('plop', this.size);
     this.generate();
@@ -29,7 +30,20 @@ export default class GameBoard {
   }
 
   new_piece() {
-    this._piece = new L(8,0);
+    this.pieces.push(new L(8,0));
+    this.pieces.push(new S(8,0));
+    this.pieces.push(new Z(8,0));
+    this.pieces.push(new T(8,0));
+    this.pieces.push(new I(8,0));
+    this.pieces.push(new O(8,0));
+    this.pieces.push(new J(8,0));
+    this._piece = this.pieces[2];
+  }
+
+  reset_piece() {
+    this._piece.x = 8;
+    this._piece.y = 0;
+    this.update();
   }
 
   set Piece(value) {
@@ -79,7 +93,7 @@ export default class GameBoard {
   checkLeftSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('L'));
     for (let i in blocks) {
-      if (this.map[blocks[i][1]][blocks[i][0]] == 1) {
+      if (this.map[blocks[i][1]+1][blocks[i][0]] == 1) {
         return false;
       }
     }
@@ -90,7 +104,7 @@ export default class GameBoard {
   checkRightSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('R'));
     for (let i in blocks) {
-      if (this.map[blocks[i][1]][blocks[i][0] + 2] == 1) {
+      if (this.map[blocks[i][1]+1][blocks[i][0] + 2] == 1) {
         return false;
       }
     }
@@ -122,11 +136,19 @@ export default class GameBoard {
     //console.log(blocks);
     for (let i in blocks) {
       //console.log(this.map[blocks[i][1] +1]);
-      if (this.map[blocks[i][1]+2][blocks[i][0]] == 1) {
+      if (this.map[blocks[i][1]+2][blocks[i][0]+1] == 1) {
+        this.addPieceToMap(blocks);
+        this.reset_piece();
         return false;
       }
     }
     return true;
+  }
+
+  addPieceToMap(blocks) {
+    for (let i in blocks) {
+      this.map[blocks[i][1]+1][blocks[i][0]+1] = 1;
+    }
   }
 
 
@@ -169,7 +191,12 @@ export default class GameBoard {
    * Debug function tied to the 'h' key
    */
   printInfo() {
-    console.log('test');
+    console.log(this._piece.y);
+    const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
+    //console.log(blocks);
+    console.log(this.map[blocks[0][1]+2]);
+
+    //console.table(this.map);
   }
 
   draw_piece() {
