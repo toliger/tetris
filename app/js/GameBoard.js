@@ -1,4 +1,6 @@
 import { T, L, J, Z, S, I, O } from './Piece.js';
+import Random from './Random.js';
+import DecToHex from './DecToHex.js';
 
 export default class GameBoard {
   constructor(height = 700, width = 400) {
@@ -13,23 +15,12 @@ export default class GameBoard {
 
     this.pieces = [];
     this.map = this.generateMapArray();
-    //console.log('plop', this.size);
     this.generate();
     this.position = {
       x: $("#map").position().top,
       y: $("#map").position().left,
     };
-    //console.log('pos', this.position);
-    this.new_piece();
-    this.update();
-  }
 
-  update() {
-    this.clearBoard();
-    this.draw_piece();
-  }
-
-  new_piece() {
     this.pieces.push(new L(8,0));
     this.pieces.push(new S(8,0));
     this.pieces.push(new Z(8,0));
@@ -37,7 +28,28 @@ export default class GameBoard {
     this.pieces.push(new I(8,0));
     this.pieces.push(new O(8,0));
     this.pieces.push(new J(8,0));
+
+    this.new_piece();
+    this.update();
+  }
+
+  update() {
+    this.clearBoard();
+    this.drawWall();
+    this.drawPiece();
+  }
+
+  color_generator(){
+    let color = "";
+    for (let i = 0; i < 6; i += 1) {
+      color += DecToHex(Random(1, 16));
+    }
+    return color;
+  }
+  new_piece() {
     this._piece = this.pieces[2];
+    this._piece.color = `#${this.color_generator()}`;
+
   }
 
   reset_piece() {
@@ -112,10 +124,7 @@ export default class GameBoard {
   }
 
   checkRotate() {
-    const next = this.getPos(this._piece.getRotated());
-    //console.log(next);
     for (let i in next) {
-      //console.log(this.map[next[i][1]+2][next[i][0]]);
       if (this.map[next[i][1]+2][next[i][0] +2] == 1) {
         return false;
       }
@@ -133,9 +142,7 @@ export default class GameBoard {
 
   checkBottomSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
-    //console.log(blocks);
     for (let i in blocks) {
-      //console.log(this.map[blocks[i][1] +1]);
       if (this.map[blocks[i][1]+2][blocks[i][0]+1] == 1) {
         this.addPieceToMap(blocks);
         this.reset_piece();
@@ -163,7 +170,7 @@ export default class GameBoard {
 
   update() {
     this.clearBoard();
-    this.draw_piece();
+    this.drawPiece();
   }
 
   mvLeft() {
@@ -191,25 +198,18 @@ export default class GameBoard {
    * Debug function tied to the 'h' key
    */
   printInfo() {
-    console.log(this._piece.y);
     const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
-    //console.log(blocks);
-    console.log(this.map[blocks[0][1]+2]);
-
-    //console.table(this.map);
   }
 
-  draw_piece() {
+  drawPiece() {
     let p = this._piece;
-    //console.log(p.shape);
-    this.ctx.fillStyle = "#FF0000";
-    // this.ctx.fillRect(0,0,50,50);
+
+    this.ctx.fillStyle = this._piece.color;
+
     const f = p.offset;
     const CaseX = this.size.real.width / this.size.abstract.width;
     const CaseY = this.size.real.height / this.size.abstract.height;
     for (let i in p.shape[f]) {
-      //console.log(p.shape[f][i])
-      //console.log(this._piece.x);
       this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * CaseX,(p.shape[f][i][1] + this._piece.y) * CaseY, CaseX, CaseY);
     }
   }

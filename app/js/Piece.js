@@ -1,5 +1,5 @@
 class Piece {
-  constructor(x, y) {
+  constructor(x, y, color = "#d4f442") {
     this.shape = [];
     this.offset = 0;
     this.lcol = [];
@@ -7,6 +7,7 @@ class Piece {
     this.dcol = [];
     this.x = x;
     this.y = y;
+    this.color = color;
   }
 
   rotate() {
