@@ -19,6 +19,14 @@ class Piece {
       this.offset = 3;
   }
 
+  getRotated() {
+    if (this.offset == 3) {
+      return this.shape[0];
+    } else {
+      return this.shape[this.offset + 1];
+    }
+  }
+
   moveLeft() {
     this.x--;
   }
@@ -144,14 +152,12 @@ class Piece {
    * and based on the current offset of the piece
    */
   getCollisionBlocks(d) {
-    return new Promise((resolve, reject) => {
-      switch(d) {
-        case 'L': resolve(this.lcol[this.offset]);
-        case 'R': resolve(this.rcol[this.offset]);
-        case 'D': resolve(this.dcol[this.offset]);
-        default: reject("BUGGG");
-      }
-    });
+    switch(d) {
+      case 'L': return(this.lcol[this.offset]);
+      case 'R': return(this.rcol[this.offset]);
+      case 'D': return(this.dcol[this.offset]);
+      default: return("BUGGG");
+    }
   }  
 
 }

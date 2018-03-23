@@ -31,6 +31,11 @@ $(document).ready(() => {
         e.preventDefault();
         break;
 
+      case "h":
+        board.printInfo();
+        e.preventDefault();
+        break;
+
     }
   });
 

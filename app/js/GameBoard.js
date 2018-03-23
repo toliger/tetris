@@ -10,6 +10,8 @@ export default class GameBoard {
         width: 20,
       },
     };
+
+    this.map = this.generateMapArray();
     //console.log('plop', this.size);
     this.generate();
     this.position = {
@@ -27,7 +29,7 @@ export default class GameBoard {
   }
 
   new_piece() {
-    this._piece = new T(8,0);
+    this._piece = new L(8,0);
   }
 
   set Piece(value) {
@@ -60,29 +62,71 @@ export default class GameBoard {
 
   }
 
+  
+  generateMapArray() {
+    let res = [];
+      res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+    for(let i = 0; i < this.size.abstract.height; i++) {
+      // size = abstract.width + 2
+      res.push([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]);
+    }
+    res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+    return res;
+  }
+  
+
 
   checkLeftSide() {
-    return (this._piece.x > (0 - this._piece.shape[this._piece.offset][0][0]));
+    const blocks = this.getPos(this._piece.getCollisionBlocks('L'));
+    for (let i in blocks) {
+      if (this.map[blocks[i][1]][blocks[i][0]] == 1) {
+        return false;
+      }
+    }
+    return true;
   }
 
 
   checkRightSide() {
-    return (this._piece.x < (this.size.abstract.width - this._piece.shape[this._piece.offset][3][0] - 1));
+    const blocks = this.getPos(this._piece.getCollisionBlocks('R'));
+    for (let i in blocks) {
+      if (this.map[blocks[i][1]][blocks[i][0] + 2] == 1) {
+        return false;
+      }
+    }
+    return true;
   }
 
-  getNextCoords() {
+  checkRotate() {
+    const next = this.getPos(this._piece.getRotated());
+    //console.log(next);
+    for (let i in next) {
+      //console.log(this.map[next[i][1]+2][next[i][0]]);
+      if (this.map[next[i][1]+2][next[i][0] +2] == 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  getPos(a) {
     let res = [];
-    let forme = this._piece.shape[this._piece.offset];
-    for (let i = 0; i < forme.length; i++) {
-      res.push([this._piece.x + forme[i][0], this._piece.y + forme[i][1]])
+    for (let i = 0; i < a.length; i++) {
+      res.push([this._piece.x + a[i][0], this._piece.y + a[i][1]])
     }
     return res;
   }
 
   checkBottomSide() {
-    console.log("next", this.getNextCoords());
-    //check colision avec ces coords
-    return (this._piece.y < this.size.abstract.height);
+    const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
+    //console.log(blocks);
+    for (let i in blocks) {
+      //console.log(this.map[blocks[i][1] +1]);
+      if (this.map[blocks[i][1]+2][blocks[i][0]] == 1) {
+        return false;
+      }
+    }
+    return true;
   }
 
 
@@ -116,9 +160,16 @@ export default class GameBoard {
   }
 
   rotate() {
-      this._piece.rotate();
-    if(this._piece.x < 0 || (this._piece.x + this._piece.shape[this._piece.offset][3][0] >= this.size.abstract.width)) //temporaire
-      this._piece.undoRotate();
+      if(this.checkRotate()) {
+        this._piece.rotate();
+      }
+  }
+
+  /*
+   * Debug function tied to the 'h' key
+   */
+  printInfo() {
+    console.log('test');
   }
 
   draw_piece() {
@@ -127,11 +178,12 @@ export default class GameBoard {
     this.ctx.fillStyle = "#FF0000";
     // this.ctx.fillRect(0,0,50,50);
     const f = p.offset;
-    const Case = this.size.real.width / this.size.abstract.width;
+    const CaseX = this.size.real.width / this.size.abstract.width;
+    const CaseY = this.size.real.height / this.size.abstract.height;
     for (let i in p.shape[f]) {
       //console.log(p.shape[f][i])
       //console.log(this._piece.x);
-      this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * Case,(p.shape[f][i][1] + this._piece.y) * Case, Case, Case);
+      this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * CaseX,(p.shape[f][i][1] + this._piece.y) * CaseY, CaseX, CaseY);
     }
   }
 }
