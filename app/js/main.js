@@ -28,7 +28,6 @@ $(document).ready(() => {
 
       case "d":
       case "ArrowRight" : {
-        console.log('droite');
         board.mvRight();
         board.update();
         e.preventDefault();

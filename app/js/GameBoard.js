@@ -62,15 +62,10 @@ export default class GameBoard {
     return color;
   }
   new_piece() {
-    this._piece = this.pieces[2];
-    this._piece.color = `#${this.color_generator()}`;
-
-  }
-
-  reset_piece() {
     this._piece.x = 8;
     this._piece.y = 0;
-    this.update();
+    this._piece = this.pieces[Random(0,6)];
+    this._piece.color = `#${this.color_generator()}`;
   }
 
   set Piece(value) {
@@ -160,7 +155,7 @@ export default class GameBoard {
     for (let i in blocks) {
       if (this.map[blocks[i][1]+2][blocks[i][0]+1] == 1) {
         this.addPieceToMap(blocks);
-        this.reset_piece();
+        this.new_piece();
         return false;
       }
     }
