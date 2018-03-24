@@ -1,26 +1,34 @@
 export default class Score {
   constructor() {
-    this.plignes = 0;
+    // lines
+    this.lscore = 0;
+    // points
+    this.pscore = 0;
   }
 
   updateDisplay() {
-    $('#score').val(this.value);
+    $('#score').html(this.pscore);
+    console.log(this.lscore, this.pscore);
+    $('#lines').html(this.lscore);
   }
 
-  set lignes(value) {
-    this.plignes = value;
+  set score(value) {
+    this.pscore = value * 20;
     this.updateDisplay();
   }
 
-  get lignes() {
-    return this.plignes;
+  get score() {
+    return this.pscore;
   }
 
-  get value() {
-    return this.lignes * 2;
+  set lines(value) {
+    this.lscore = value;
+    this.pscore += 100;
+    this.updateDisplay();
   }
 
-  set value(value) {
-
+  get lines() {
+    return this.lscore;
   }
+
 }

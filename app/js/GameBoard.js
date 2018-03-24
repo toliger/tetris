@@ -22,7 +22,7 @@ export default class GameBoard extends Canvas {
 
     //= ========= Shapes Array
     this.pieces = [];
-    this.map = this.generateMapArray();
+    this.map = this.generateMapArrayDebug();
 
     this.pieces.push(new L(8, 0));
     this.pieces.push(new S(8, 0));
@@ -57,6 +57,19 @@ export default class GameBoard extends Canvas {
     for (let i = 0; i < this.size.abstract.height; i += 1) {
       res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
     }
+    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    return res;
+  }
+
+  // Debug function : create an almost completed line
+  generateMapArrayDebug() {
+    // width + 2 -> Border of GameBoard
+    const res = [];
+    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    for (let i = 0; i < this.size.abstract.height-1 ; i += 1) {
+      res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    }
+    res.push([1, [1, "#000000"], 0, 0, 0, [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], 1]);
     res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
     return res;
   }
@@ -138,7 +151,7 @@ export default class GameBoard extends Canvas {
   }
 
 
-  // Add the piece in the Wall Array
+  // Add the piece to the Wall Array
   addPieceToMap(blocks) {
     for (const i in blocks) {
       this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
@@ -186,10 +199,11 @@ export default class GameBoard extends Canvas {
 
 
   // Remove a line
-  removeLine(i) {
-    for (let j in this.map[i]) {
-      this.map[i][j] = 0;
-    }
+  removeLine(l) {
+    // remove the line l
+    this.map.splice(l,1);
+    // add a new "empty" line to the array
+    this.map.splice(1,0,[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
   }
 
 
@@ -203,6 +217,8 @@ export default class GameBoard extends Canvas {
     }
 
     this.removeLine(i);
+    this.score.lines += 1;
+
   }
 
 
@@ -214,7 +230,7 @@ export default class GameBoard extends Canvas {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
         this.checkLines(blocks[i][1] + 1);
-        this.score.lignes += 1;
+        this.score.score += 1;
         this.NewPiece();
         return false;
       }
