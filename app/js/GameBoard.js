@@ -1,9 +1,13 @@
 import { T, L, J, Z, S, I, O } from './Piece.js';
-import Random from './Random.js';
-import DecToHex from './DecToHex.js';
+import Random from './utils/Random.js';
+import ColorGeneration from './utils/ColorGeneration.js';
+import Canvas from './Canvas.js';
 
-export default class GameBoard {
+
+export default class GameBoard  extends Canvas{
   constructor(height = 700, width = 400) {
+    super(height, width);
+    //========== Current piece
     this._piece = {};
     this.size = {
       real: { height, width },
@@ -12,14 +16,9 @@ export default class GameBoard {
         width: 20,
       },
     };
-
+    //========== Shapes Array
     this.pieces = [];
     this.map = this.generateMapArray();
-    this.generate();
-    this.position = {
-      x: $("#map").position().top,
-      y: $("#map").position().left,
-    };
 
     this.pieces.push(new L(8,0));
     this.pieces.push(new S(8,0));
@@ -29,11 +28,51 @@ export default class GameBoard {
     this.pieces.push(new O(8,0));
     this.pieces.push(new J(8,0));
 
-    this.new_piece();
+    //========== Canvas creation
+    this.position = {
+      x: $("#map").position().top,
+      y: $("#map").position().left,
+    };
+
+    //========== New piece
+    this.NewPiece();
+
+    //========== Display updating
     this.update();
   }
 
 
+  //========== Initialisation ==========
+
+
+  // Generate map array
+  generateMapArray() {
+    let res = [];
+      res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+    for(let i = 0; i < this.size.abstract.height; i++) {
+      // size = abstract.width + 2
+      res.push([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]);
+    }
+    res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+    return res;
+  }
+
+
+  //========== Canvas painting ==========
+
+
+  // Clear the GameBoard
+  clearBoard() {
+    this.ctx.clearRect(
+      0,
+      0,
+      this.size.real.width,
+      this.size.real.height
+    );
+  }
+
+
+  // Draw the wall
   drawWall() {
     for (let i = 1; i < this.size.abstract.height + 1; i++) {
       for (let j = 1; j < this.size.abstract.width + 1; j++) {
@@ -48,166 +87,8 @@ export default class GameBoard {
     }
   }
 
-  update() {
-    this.clearBoard();
-    this.drawWall();
-    this.drawPiece();
-  }
 
-  color_generator(){
-    let color = "";
-    for (let i = 0; i < 6; i += 1) {
-      color += DecToHex(Random(1, 16));
-    }
-    return color;
-  }
-  new_piece() {
-    this._piece.x = 8;
-    this._piece.y = 0;
-    this._piece = this.pieces[Random(0,6)];
-    this._piece.color = `#${this.color_generator()}`;
-  }
-
-  set Piece(value) {
-    this.__piece = value;
-  }
-
-  get Piece() {
-    return this.__piece;
-  }
-
-
-  generate() {
-    $('#mainBoard').css({
-      width: this.size.real.width + 'px',
-      height: this.size.real.height + 'px',
-    })
-
-    $('<canvas>').attr({
-      id: 'map'
-    }).css({
-      width: this.size.real.width + 'px',
-      height: this.size.real.height + 'px',
-      border: `1px gray double`,
-    }).appendTo('#mainBoard');
-
-    let c = document.getElementById("map");
-    c.width  = this.size.real.width;
-    c.height = this.size.real.height;
-    this.ctx = c.getContext("2d");
-
-  }
-
-
-  generateMapArray() {
-    let res = [];
-      res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
-    for(let i = 0; i < this.size.abstract.height; i++) {
-      // size = abstract.width + 2
-      res.push([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]);
-    }
-    res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
-    return res;
-  }
-
-
-
-  checkLeftSide() {
-    const blocks = this.getPos(this._piece.getCollisionBlocks('L'));
-    for (let i in blocks) {
-      if (this.map[blocks[i][1]+1][blocks[i][0]][0] == 1) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-
-  checkRightSide() {
-    const blocks = this.getPos(this._piece.getCollisionBlocks('R'));
-    for (let i in blocks) {
-      if (this.map[blocks[i][1]+1][blocks[i][0] + 2][0] == 1) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  checkRotate() {
-    for (let i in next) {
-      if (this.map[next[i][1]+2][next[i][0] +2] == 1) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  getPos(a) {
-    let res = [];
-    for (let i = 0; i < a.length; i++) {
-      res.push([this._piece.x + a[i][0], this._piece.y + a[i][1]])
-    }
-    return res;
-  }
-
-  checkBottomSide() {
-    const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
-    //console.log(blocks);
-    for (let i in blocks) {
-      if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] != 0) {
-        this.addPieceToMap(this.getPos(this._piece.shape[this._piece.offset]));
-        this.new_piece();
-        return false;
-      }
-    }
-    return true;
-  }
-
-  addPieceToMap(blocks) {
-    for (let i in blocks) {
-      this.map[blocks[i][1]+1][blocks[i][0]+1] = [1, this._piece.color];
-    }
-  }
-
-
-  clearBoard() {
-    this.ctx.clearRect(
-      0,
-      0,
-      this.size.real.width,
-      this.size.real.height
-    );
-  }
-
-  mvLeft() {
-    if (this.checkLeftSide())
-      this._piece.moveLeft();
-  }
-
-  mvRight() {
-    if (this.checkRightSide())
-      this._piece.moveRight();
-  }
-
-  mvDown() {
-    if (this.checkBottomSide())
-      this._piece.moveDown();
-  }
-
-  rotate() {
-      if(this.checkRotate()) {
-        this._piece.rotate();
-      }
-  }
-
-  /*
-   * Debug function tied to the 'h' key
-   */
-  printInfo() {
-    console.log(this.map);
-  }
-
-
+  // Draw the Piece
   drawPiece() {
     let p = this._piece;
 
@@ -219,5 +100,124 @@ export default class GameBoard {
     for (let i in p.shape[f]) {
       this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * CaseX,(p.shape[f][i][1] + this._piece.y) * CaseY, CaseX, CaseY);
     }
+  }
+
+
+  // Update display
+  update() {
+    this.clearBoard();
+    this.drawWall();
+    this.drawPiece();
+  }
+
+
+  //========== Piece ==========
+
+
+  // Generate new Piece
+  NewPiece() {
+    this._piece.x = 8;
+    this._piece.y = 0;
+    this._piece = this.pieces[Random(0,6)];
+    this._piece.color = ColorGeneration();
+  }
+
+
+  // Get the coords of the piece from the GameBoard root
+  getPos(a) {
+    let res = [];
+    for (let i = 0; i < a.length; i++) {
+      res.push([this._piece.x + a[i][0], this._piece.y + a[i][1]])
+    }
+    return res;
+  }
+
+
+  // Add the piece in the Wall Array
+  addPieceToMap(blocks) {
+    for (let i in blocks) {
+      this.map[blocks[i][1]+1][blocks[i][0]+1] = [1, this._piece.color];
+    }
+  }
+
+
+  //========== Moves ==========
+
+
+  // Check if the piece can move to the left
+  checkLeftSide() {
+    const blocks = this.getPos(this._piece.getCollisionBlocks('L'));
+    for (let i in blocks) {
+      if (this.map[blocks[i][1]+1][blocks[i][0]][0] == 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  // Check if the piece can move to the right
+  checkRightSide() {
+    const blocks = this.getPos(this._piece.getCollisionBlocks('R'));
+    for (let i in blocks) {
+      if (this.map[blocks[i][1]+1][blocks[i][0] + 2][0] == 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  // Check rotation
+  checkRotate() {
+    for (let i in next) {
+      if (this.map[next[i][1]+2][next[i][0] +2] == 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  // Check if the piece can move to the bottom
+  checkBottomSide() {
+    const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
+
+    for (let i in blocks) {
+      if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] != 0) {
+        this.addPieceToMap(this.getPos(this._piece.shape[this._piece.offset]));
+        this.NewPiece();
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  // Move the piece to the Left
+  mvLeft() {
+    if (this.checkLeftSide())
+      this._piece.moveLeft();
+  }
+
+
+  // Move the piece to the Right
+  mvRight() {
+    if (this.checkRightSide())
+      this._piece.moveRight();
+  }
+
+
+  // Move the piece to the Down
+  mvDown() {
+    if (this.checkBottomSide())
+      this._piece.moveDown();
+  }
+
+  // Rotate the piece
+  rotate() {
+      if(this.checkRotate()) {
+        this._piece.rotate();
+      }
   }
 }
