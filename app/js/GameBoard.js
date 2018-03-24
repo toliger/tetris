@@ -183,6 +183,27 @@ export default class GameBoard extends Canvas {
   }
 
 
+  // Remove a line
+  removeLine(i) {
+    for (let j in this.map[i]) {
+      this.map[i][j] = 0;
+    }
+  }
+
+
+  // Check if the line is full
+  checkLines(i) {
+    for (let j in this.map[i]) {
+      console.log(this.map[i][j]);
+      if(this.map[i][j] == 0) {
+        return;
+      }
+    }
+
+    this.removeLine(i);
+  }
+
+
   // Check if the piece can move to the bottom
   checkBottomSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('D'));
@@ -190,6 +211,7 @@ export default class GameBoard extends Canvas {
     for (const i in blocks) {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
+        this.checkLines(blocks[i][1] + 1);
         this.NewPiece();
         return false;
       }
