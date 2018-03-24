@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, no-console */
 
 export default class SocketIO {
   constructor() {
@@ -28,13 +28,13 @@ export default class SocketIO {
 
     //= ===============  CHAT
     $('#chatinput').keypress((e) => {
-      if (e.key == 'Enter' && !e.shiftKey) {
+      if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         this.socket.emit('message', $('#chatinput').val());
         $('#chatinput').val('');
       }
     });
-    $('#chatbutton').on('click', () => {
+    $('#chatbutton').on('click', () => {
       this.socket.emit('message', $('#chatinput').val());
       $('#chatinput').val('');
     });

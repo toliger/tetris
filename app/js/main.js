@@ -46,6 +46,8 @@ $(document).ready(() => {
         board.printInfo();
         e.preventDefault();
         break;
+
+      default:
     }
   });
 

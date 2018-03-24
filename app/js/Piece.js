@@ -11,26 +11,26 @@ class Piece {
   }
 
   rotate() {
-    if (++this.offset > 3) { this.offset = 0; }
+    if (this.offset + 1 > 3) { this.offset = 0; }
   }
 
   undoRotate() {
-    if (--this.offset < 0) { this.offset = 3; }
+    if (this.offset - 1 < 0) { this.offset = 3; }
   }
 
   getRotated() {
-    if (this.offset == 3) {
+    if (this.offset === 3) {
       return this.shape[0];
     }
     return this.shape[this.offset + 1];
   }
 
   moveLeft() {
-    this.x--;
+    this.x -= 1;
   }
 
   moveRight() {
-    this.x++;
+    this.x += 1;
   }
 
   moveDown() {
@@ -40,7 +40,7 @@ class Piece {
   // Return the maximal value of x from an array of coordinates
   getMaxXFromArray(a) {
     let m = 0;
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][0] > m) { m = a[i][0]; }
     }
     return m;
@@ -49,7 +49,7 @@ class Piece {
   // Return the minimal value of x from an array of coordinates
   getMinXFromArray(a) {
     let m = a[0][0];
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][0] < m) { m = a[i][0]; }
     }
     return m;
@@ -58,7 +58,7 @@ class Piece {
   // Return the maximal value of y from an array of coordinates
   getMaxYFromArray(a) {
     let m = 0;
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][1] > m) { m = a[i][1]; }
     }
     return m;
@@ -67,7 +67,7 @@ class Piece {
   // Return the minimal value of y from an array of coordinates
   getMinYFromArray(a) {
     let m = a[0][1];
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][1] < m) { m = a[i][1]; }
     }
     return m;
@@ -77,7 +77,7 @@ class Piece {
   getMaxXPos(a) {
     let m = 0;
     let ind = 0;
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][0] > m) {
         m = a[i][0];
         ind = i;
@@ -90,7 +90,7 @@ class Piece {
   getMinXPos(a) {
     let m = a[0][0];
     let ind = 0;
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][0] < m) {
         m = a[i][0];
         ind = i;
@@ -103,7 +103,7 @@ class Piece {
   getMaxYPos(a) {
     let m = 0;
     let ind = 0;
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][1] > m) {
         m = a[i][1];
         ind = i;
@@ -116,7 +116,7 @@ class Piece {
   getMinYPos(a) {
     let m = a[0][1];
     let ind = 0;
-    for (let i = 0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i += 1) {
       if (a[i][1] < m) {
         m = a[i][1];
         ind = i;
@@ -132,18 +132,18 @@ class Piece {
    */
   getCollideElements() {
     // iterate on each offset
-    for (let i = 0; i < 4; i++) {
-      let rarr = [],
-        larr = [],
-        darr = [];
+    for (let i = 0; i < 4; i += 1) {
+      const rarr = [];
+      const larr = [];
+      const darr = [];
       const mX = this.getMaxXFromArray(this.shape[i]);
       const mY = this.getMaxYFromArray(this.shape[i]);
       const minX = this.getMinXFromArray(this.shape[i]);
       const minY = this.getMinYFromArray(this.shape[i]);
 
       // Left - Right
-      for (let j = minY; j <= mY; j++) {
-        const tmp = this.shape[i].filter(elt => elt[1] == j);
+      for (let j = minY; j <= mY; j += 1) {
+        const tmp = this.shape[i].filter(elt => elt[1] === j);
         larr.push(this.getMinXPos(tmp));
         rarr.push(this.getMaxXPos(tmp));
       }
@@ -151,8 +151,8 @@ class Piece {
       this.rcol.push(rarr);
 
       // Down
-      for (let j = minX; j <= mX; j++) {
-        const tmp = this.shape[i].filter(elt => elt[0] == j);
+      for (let j = minX; j <= mX; j += 1) {
+        const tmp = this.shape[i].filter(elt => elt[0] === j);
 
         darr.push(this.getMaxYPos(tmp));
       }

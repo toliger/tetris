@@ -11,7 +11,8 @@ export default class Game {
   }
 
   startMusic() {
-    new Music();
+    const music = new Music();
+    music.play();
   }
 
 
@@ -21,9 +22,9 @@ export default class Game {
   }
 
   tick() {
-    const _this = this;
+    const vthis = this;
     (function t() {
-      _this.pieceController();
+      vthis.pieceController();
       setTimeout(t, 1000);
     }());
   }
