@@ -2,12 +2,14 @@ import { T, L, J, Z, S, I, O } from './Piece.js';
 import Random from './utils/Random.js';
 import ColorGeneration from './utils/ColorGeneration.js';
 import Canvas from './Canvas.js';
+import Score from './Score.js';
 
 
 export default class GameBoard extends Canvas {
   constructor(height = 700, width = 400) {
     super(height, width);
 
+    this.score = new Score();
     //= ========= Current piece
     this.piece = {};
     this.size = {
@@ -212,6 +214,7 @@ export default class GameBoard extends Canvas {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
         this.checkLines(blocks[i][1] + 1);
+        this.score.lignes += 1;
         this.NewPiece();
         return false;
       }
