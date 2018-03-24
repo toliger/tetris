@@ -151,7 +151,7 @@ export default class GameBoard extends Canvas {
   checkLeftSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('L'));
     for (const i in blocks) {
-      if (this.map[blocks[i][1] + 1][blocks[i][0]][0] !==0) {
+      if (this.map[blocks[i][1] + 1][blocks[i][0]][0] !== 0) {
         return false;
       }
     }
@@ -163,7 +163,7 @@ export default class GameBoard extends Canvas {
   checkRightSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('R'));
     for (const i in blocks) {
-      if (this.map[blocks[i][1] + 1][blocks[i][0] + 2][0] !==0) {
+      if (this.map[blocks[i][1] + 1][blocks[i][0] + 2][0] !== 0) {
         return false;
       }
     }
@@ -174,7 +174,7 @@ export default class GameBoard extends Canvas {
   // Check rotation
   checkRotate() {
     for (const i in next) {
-      if (this.map[next[i][1] + 2][next[i][0] + 2] !==0) {
+      if (this.map[next[i][1] + 2][next[i][0] + 2] !== 0) {
         return false;
       }
     }
@@ -187,7 +187,7 @@ export default class GameBoard extends Canvas {
     const blocks = this.getPos(this.piece.getCollisionBlocks('D'));
 
     for (const i in blocks) {
-      if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !==0) {
+      if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
         this.NewPiece();
         return false;

@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "./node_modules/.bin/eslint js/** || exit 0"
+    "lint": "./node_modules/.bin/eslint js/** || exit 0",
+    "gitadd": "./node_modules/.bin/eslint js/** --fix && git add -A"
   },
   "author": "",
   "license": "ISC",
