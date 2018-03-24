@@ -21,11 +21,10 @@ export default class Game {
   }
 
   tick() {
-    let _this = this;
+    const _this = this;
     (function t() {
-     _this.pieceController();
+      _this.pieceController();
       setTimeout(t, 1000);
-    })();
+    }());
   }
-
 }

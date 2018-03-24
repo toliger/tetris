@@ -4,10 +4,11 @@ import ColorGeneration from './utils/ColorGeneration.js';
 import Canvas from './Canvas.js';
 
 
-export default class GameBoard  extends Canvas{
+export default class GameBoard extends Canvas {
   constructor(height = 700, width = 400) {
     super(height, width);
-    //========== Current piece
+
+    //= ========= Current piece
     this._piece = {};
     this.size = {
       real: { height, width },
@@ -16,49 +17,50 @@ export default class GameBoard  extends Canvas{
         width: 20,
       },
     };
-    //========== Shapes Array
+
+    //= ========= Shapes Array
     this.pieces = [];
     this.map = this.generateMapArray();
 
-    this.pieces.push(new L(8,0));
-    this.pieces.push(new S(8,0));
-    this.pieces.push(new Z(8,0));
-    this.pieces.push(new T(8,0));
-    this.pieces.push(new I(8,0));
-    this.pieces.push(new O(8,0));
-    this.pieces.push(new J(8,0));
+    this.pieces.push(new L(8, 0));
+    this.pieces.push(new S(8, 0));
+    this.pieces.push(new Z(8, 0));
+    this.pieces.push(new T(8, 0));
+    this.pieces.push(new I(8, 0));
+    this.pieces.push(new O(8, 0));
+    this.pieces.push(new J(8, 0));
 
-    //========== Canvas creation
+    //= ========= Canvas creation
     this.position = {
-      x: $("#map").position().top,
-      y: $("#map").position().left,
+      x: $('#map').position().top,
+      y: $('#map').position().left,
     };
 
-    //========== New piece
+    //= ========= New piece
     this.NewPiece();
 
-    //========== Display updating
+    //= ========= Display updating
     this.update();
   }
 
 
-  //========== Initialisation ==========
+  //= ========= Initialisation ==========
 
 
   // Generate map array
   generateMapArray() {
-    let res = [];
-      res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
-    for(let i = 0; i < this.size.abstract.height; i++) {
-      // size = abstract.width + 2
-      res.push([1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]);
+    // width + 2 -> Border of GameBoard
+    const res = [];
+    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    for (let i = 0; i < this.size.abstract.height; i++) {
+      res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
     }
-    res.push([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);
+    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
     return res;
   }
 
 
-  //========== Canvas painting ==========
+  //= ========= Canvas painting ==========
 
 
   // Clear the GameBoard
@@ -67,7 +69,7 @@ export default class GameBoard  extends Canvas{
       0,
       0,
       this.size.real.width,
-      this.size.real.height
+      this.size.real.height,
     );
   }
 
@@ -76,12 +78,12 @@ export default class GameBoard  extends Canvas{
   drawWall() {
     for (let i = 1; i < this.size.abstract.height + 1; i++) {
       for (let j = 1; j < this.size.abstract.width + 1; j++) {
-        let pixel = this.map[i][j];
+        const pixel = this.map[i][j];
         if (pixel != 0) {
           this.ctx.fillStyle = pixel[1];
           const CaseX = this.size.real.width / this.size.abstract.width;
           const CaseY = this.size.real.height / this.size.abstract.height;
-          this.ctx.fillRect((j-1) * CaseX, (i-1) * CaseY, CaseX, CaseY);
+          this.ctx.fillRect((j - 1) * CaseX, (i - 1) * CaseY, CaseX, CaseY);
         }
       }
     }
@@ -90,15 +92,16 @@ export default class GameBoard  extends Canvas{
 
   // Draw the Piece
   drawPiece() {
-    let p = this._piece;
+    const p = this._piece;
 
     this.ctx.fillStyle = this._piece.color;
 
     const f = p.offset;
     const CaseX = this.size.real.width / this.size.abstract.width;
     const CaseY = this.size.real.height / this.size.abstract.height;
-    for (let i in p.shape[f]) {
-      this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * CaseX,(p.shape[f][i][1] + this._piece.y) * CaseY, CaseX, CaseY);
+
+    for (const i in p.shape[f]) {
+      this.ctx.fillRect((p.shape[f][i][0] + this._piece.x) * CaseX, (p.shape[f][i][1] + this._piece.y) * CaseY, CaseX, CaseY);
     }
   }
 
@@ -111,23 +114,23 @@ export default class GameBoard  extends Canvas{
   }
 
 
-  //========== Piece ==========
+  //= ========= Piece ==========
 
 
   // Generate new Piece
   NewPiece() {
     this._piece.x = 8;
     this._piece.y = 0;
-    this._piece = this.pieces[Random(0,6)];
+    this._piece = this.pieces[Random(0, 6)];
     this._piece.color = ColorGeneration();
   }
 
 
   // Get the coords of the piece from the GameBoard root
   getPos(a) {
-    let res = [];
+    const res = [];
     for (let i = 0; i < a.length; i++) {
-      res.push([this._piece.x + a[i][0], this._piece.y + a[i][1]])
+      res.push([this._piece.x + a[i][0], this._piece.y + a[i][1]]);
     }
     return res;
   }
@@ -135,20 +138,20 @@ export default class GameBoard  extends Canvas{
 
   // Add the piece in the Wall Array
   addPieceToMap(blocks) {
-    for (let i in blocks) {
-      this.map[blocks[i][1]+1][blocks[i][0]+1] = [1, this._piece.color];
+    for (const i in blocks) {
+      this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this._piece.color];
     }
   }
 
 
-  //========== Moves ==========
+  //= ========= Moves ==========
 
 
   // Check if the piece can move to the left
   checkLeftSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('L'));
-    for (let i in blocks) {
-      if (this.map[blocks[i][1]+1][blocks[i][0]][0] == 1) {
+    for (const i in blocks) {
+      if (this.map[blocks[i][1] + 1][blocks[i][0]][0] != 0) {
         return false;
       }
     }
@@ -159,8 +162,8 @@ export default class GameBoard  extends Canvas{
   // Check if the piece can move to the right
   checkRightSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('R'));
-    for (let i in blocks) {
-      if (this.map[blocks[i][1]+1][blocks[i][0] + 2][0] == 1) {
+    for (const i in blocks) {
+      if (this.map[blocks[i][1] + 1][blocks[i][0] + 2][0] != 0) {
         return false;
       }
     }
@@ -170,8 +173,8 @@ export default class GameBoard  extends Canvas{
 
   // Check rotation
   checkRotate() {
-    for (let i in next) {
-      if (this.map[next[i][1]+2][next[i][0] +2] == 1) {
+    for (const i in next) {
+      if (this.map[next[i][1] + 2][next[i][0] + 2] != 0) {
         return false;
       }
     }
@@ -183,7 +186,7 @@ export default class GameBoard  extends Canvas{
   checkBottomSide() {
     const blocks = this.getPos(this._piece.getCollisionBlocks('D'));
 
-    for (let i in blocks) {
+    for (const i in blocks) {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] != 0) {
         this.addPieceToMap(this.getPos(this._piece.shape[this._piece.offset]));
         this.NewPiece();
@@ -196,28 +199,31 @@ export default class GameBoard  extends Canvas{
 
   // Move the piece to the Left
   mvLeft() {
-    if (this.checkLeftSide())
+    if (this.checkLeftSide()) {
       this._piece.moveLeft();
+    }
   }
 
 
   // Move the piece to the Right
   mvRight() {
-    if (this.checkRightSide())
+    if (this.checkRightSide()) {
       this._piece.moveRight();
+    }
   }
 
 
   // Move the piece to the Down
   mvDown() {
-    if (this.checkBottomSide())
+    if (this.checkBottomSide()) {
       this._piece.moveDown();
+    }
   }
 
   // Rotate the piece
   rotate() {
-      if(this.checkRotate()) {
-        this._piece.rotate();
-      }
+    if (this.checkRotate()) {
+      this._piece.rotate();
+    }
   }
 }

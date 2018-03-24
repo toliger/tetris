@@ -3,7 +3,7 @@ export default (dec) => {
     return `${dec}`;
   }
 
-  switch(dec) {
+  switch (dec) {
     case 11: {
       return 'a';
     }
@@ -28,4 +28,4 @@ export default (dec) => {
       return 'f';
     }
   }
-}
+};
