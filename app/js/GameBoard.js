@@ -151,7 +151,7 @@ export default class GameBoard extends Canvas {
   checkLeftSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('L'));
     for (const i in blocks) {
-      if (this.map[blocks[i][1] + 1][blocks[i][0]][0] !== 0) {
+      if (this.map[blocks[i][1] + 1][blocks[i][0]] !== 0) {
         return false;
       }
     }
@@ -163,7 +163,8 @@ export default class GameBoard extends Canvas {
   checkRightSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('R'));
     for (const i in blocks) {
-      if (this.map[blocks[i][1] + 1][blocks[i][0] + 2][0] !== 0) {
+      console.log(this.map[blocks[i][1] + 1][blocks[i][0] + 2]);
+      if (this.map[blocks[i][1] + 1][blocks[i][0] + 2] !== 0) {
         return false;
       }
     }
