@@ -27,5 +27,9 @@ export default (dec) => {
     case 16: {
       return 'f';
     }
+
+    default: {
+      return '0';
+    }
   }
 };

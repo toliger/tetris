@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 export default class SocketIO {
   constructor() {
     this.socket = io('https://api.wallgrind.fr');
