@@ -51,6 +51,10 @@ $(document).ready(() => {
     }
   });
 
+  $('#diffSelect').change(() => {
+    game.difficulty = $('#diffSelect').val();
+  });
+
   $('#settings').on('click', () => {
     $('.settings').slideToggle();
     $('#settings i')
