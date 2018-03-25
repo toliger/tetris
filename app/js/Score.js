@@ -13,7 +13,7 @@ export default class Score {
   }
 
   set score(value) {
-    this.pscore = value * 20;
+    this.pscore += value * 20;
     this.updateDisplay();
   }
 
@@ -30,5 +30,4 @@ export default class Score {
   get lines() {
     return this.lscore;
   }
-
 }

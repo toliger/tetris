@@ -69,7 +69,7 @@ export default class GameBoard extends Canvas {
     for (let i = 0; i < this.size.abstract.height-1 ; i += 1) {
       res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
     }
-    res.push([1, [1, "#000000"], 0, 0, 0, [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], [1, "#000000"], 1]);
+    res.push([1, [1, '#000000'], 0, 0, 0, [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], 1]);
     res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
     return res;
   }
@@ -201,24 +201,23 @@ export default class GameBoard extends Canvas {
   // Remove a line
   removeLine(l) {
     // remove the line l
-    this.map.splice(l,1);
+    this.map.splice(l, 1);
     // add a new "empty" line to the array
-    this.map.splice(1,0,[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    this.map.splice(1, 0, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
   }
 
 
   // Check if the line is full
   checkLines(i) {
-    for (let j in this.map[i]) {
+    for (const j in this.map[i]) {
       console.log(this.map[i][j]);
-      if(this.map[i][j] == 0) {
+      if (this.map[i][j] === 0) {
         return;
       }
     }
 
     this.removeLine(i);
     this.score.lines += 1;
-
   }
 
 
@@ -230,7 +229,7 @@ export default class GameBoard extends Canvas {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
         this.checkLines(blocks[i][1] + 1);
-        this.score.score += 1;
+        this.score.score = 1;
         this.NewPiece();
         return false;
       }
