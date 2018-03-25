@@ -8,7 +8,7 @@ export default class Game {
     this.tick();
     this.startMusic();
     this.socket = new SocketIO();
-    this.difficulte = 4;
+    this.difficulty = 0;
   }
 
   startMusic() {
@@ -26,7 +26,7 @@ export default class Game {
     const vthis = this;
     (function t() {
       vthis.pieceController();
-      setTimeout(t, 1000 / (1 + vthis.difficulte * 2));
+      setTimeout(t, 1000 / (1 + vthis.difficulty * 2));
     }());
   }
 }
