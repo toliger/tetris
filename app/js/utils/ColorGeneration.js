@@ -10,3 +10,14 @@ export default () => {
 
   return color;
 };
+
+export function rgbaToHex(c) {
+  let res = "#";
+  let re = /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i;
+  c = c.match(re);
+  for(let i = 1; i <= 3; i++) {
+    res += ("0" + parseInt(c[i],10).toString(16)).slice(-2);
+  }
+
+  return res;
+}

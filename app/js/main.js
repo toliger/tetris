@@ -43,7 +43,7 @@ $(document).ready(() => {
 
 
       case 'h':
-        board.printInfo();
+        console.log(board.map);
         e.preventDefault();
         break;
 
