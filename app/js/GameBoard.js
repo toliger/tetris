@@ -1,6 +1,6 @@
 import { T, L, J, Z, S, I, O } from './Piece.js';
 import Random from './utils/Random.js';
-import ColorGeneration from './utils/ColorGeneration.js';
+import { generateRandomHex, generateRandomRgba, rgbaToHex, decreaseOpacity } from './utils/ColorGeneration.js';
 import Canvas from './Canvas.js';
 import Score from './Score.js';
 
@@ -21,16 +21,16 @@ export default class GameBoard extends Canvas {
     };
 
     //= ========= Shapes Array
-    this.pieces = [];
+    this.pieces = [
+      new L(8, 0),
+      new S(8, 0),
+      new Z(8, 0),
+      new T(8, 0),
+      new I(8, 0),
+      new O(8, 0),
+      new J(8, 0)
+    ];
     this.map = this.generateMapArrayDebug();
-
-    this.pieces.push(new L(8, 0));
-    this.pieces.push(new S(8, 0));
-    this.pieces.push(new Z(8, 0));
-    this.pieces.push(new T(8, 0));
-    this.pieces.push(new I(8, 0));
-    this.pieces.push(new O(8, 0));
-    this.pieces.push(new J(8, 0));
 
     //= ========= Canvas creation
     this.position = {
@@ -39,11 +39,17 @@ export default class GameBoard extends Canvas {
     };
 
     //= ========= New piece
-    this.NewPiece();
+    this.newPiece();
 
     //= ========= Display updating
     this.update();
+
+    //= ========= Game options
+    this.blindmode = false; // blind mode
+    this.bmode = false; // B mode
+    this.level = 0; // difficulty
   }
+
 
 
   //= ========= Initialisation ==========
@@ -109,7 +115,7 @@ export default class GameBoard extends Canvas {
   drawPiece() {
     const p = this.piece;
 
-    this.ctx.fillStyle = this.piece.color;
+    this.ctx.fillStyle = this.blindmode ? decreaseOpacity(this.piece.color) : this.piece.color;
 
     const f = p.offset;
     const CaseX = this.size.real.width / this.size.abstract.width;
@@ -133,11 +139,11 @@ export default class GameBoard extends Canvas {
 
 
   // Generate new Piece
-  NewPiece() {
+  newPiece() {
     this.piece.x = 8;
     this.piece.y = 0;
     this.piece = this.pieces[Random(0, 6)];
-    this.piece.color = ColorGeneration();
+    this.piece.color = this.blindmode ? generateRandomRgba() : generateRandomHex();
   }
 
 
@@ -154,7 +160,11 @@ export default class GameBoard extends Canvas {
   // Add the piece to the Wall Array
   addPieceToMap(blocks) {
     for (const i in blocks) {
-      this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
+      if (this.blindmode) {
+        this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, rgbaToHex(this.piece.color)];
+      } else {
+        this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
+      }
     }
   }
 
@@ -230,7 +240,7 @@ export default class GameBoard extends Canvas {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
         this.checkLines(blocks[i][1] + 1);
         this.score.score = 1;
-        this.NewPiece();
+        this.newPiece();
         return false;
       }
     }

@@ -1,30 +1,30 @@
 export default (dec) => {
-  if (dec < 11) {
+  if (dec < 10) {
     return `${dec}`;
   }
 
   switch (dec) {
-    case 11: {
+    case 10: {
       return 'a';
     }
 
-    case 12: {
+    case 11: {
       return 'b';
     }
 
-    case 13: {
+    case 12: {
       return 'c';
     }
 
-    case 14: {
+    case 13: {
       return 'd';
     }
 
-    case 15: {
+    case 14: {
       return 'e';
     }
 
-    case 16: {
+    case 15: {
       return 'f';
     }
 
