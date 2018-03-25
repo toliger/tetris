@@ -61,4 +61,10 @@ $(document).ready(() => {
       .toggleClass('fa-angle-down')
       .toggleClass('fa-angle-up');
   });
+
+
+  $('#start').on('click', () => {
+    game.startgame();
+  });
+
 });

@@ -5,10 +5,24 @@ import SocketIO from './SocketIO.js';
 export default class Game {
   constructor() {
     this.gameBoard = new GameBoard();
-    this.tick();
-    this.startMusic();
+    this.drawLogo();
     this.socket = new SocketIO();
     this.difficulty = 0;
+  }
+
+  drawLogo() {
+    this.gameBoard.clearBoard();
+    this.gameBoard.drawWallGrind();
+  }
+
+  startgame() {
+    this.gameBoard.clearBoard();
+    this.gameBoard.newPiece();
+
+    //========== Display updating
+    this.gameBoard.update();
+    this.tick();
+    this.startMusic();
   }
 
   startMusic() {

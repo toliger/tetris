@@ -38,12 +38,6 @@ export default class GameBoard extends Canvas {
       y: $('#map').position().left,
     };
 
-    //= ========= New piece
-    this.newPiece();
-
-    //= ========= Display updating
-    this.update();
-
     //= ========= Game options
     this.blindmode = false; // blind mode
     this.bmode = false; // B mode
@@ -92,6 +86,17 @@ export default class GameBoard extends Canvas {
       this.size.real.width,
       this.size.real.height,
     );
+  }
+
+  // Draw Wallgrind
+  drawWallGrind() {
+    this.ctx.fillStyle = '#f4c842';
+    this.ctx.fillRect(0,0, this.size.real.width, this.size.real.height);
+
+    this.ctx.fillStyle = '#8c701c';
+    this.ctx.font = "80px Arial";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("Wall Grind",this.size.real.width / 2, this.size.real.height / 2);
   }
 
 
