@@ -204,11 +204,15 @@ export default class GameBoard extends Canvas {
 
   // Check rotation
   checkRotate() {
-    for (const i in next) {
-      if (this.map[next[i][1] + 2][next[i][0] + 2] !== 0) {
+    const next = this.getPos(this.piece.getRotated());
+
+    for (let i in next) {
+      if (this.map[next[i][1] + 1][next[i][0] + 1] !== 0) {
+        console.log("false");
         return false;
       }
     }
+    console.log("pas false");
     return true;
   }
 

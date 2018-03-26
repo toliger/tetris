@@ -11,11 +11,7 @@ class Piece {
   }
 
   rotate() {
-    if (this.offset + 1 > 3) { this.offset = 0; }
-  }
-
-  undoRotate() {
-    if (this.offset - 1 < 0) { this.offset = 3; }
+    this.offset = (this.offset + 1 > 3) ? 0 : this.offset + 1;
   }
 
   getRotated() {
@@ -160,11 +156,7 @@ class Piece {
     }
   }
 
-  /*
-   * Return a promise with the array of coordinates of blocks
-   * that need to be checked for the corresponding direction
-   * and based on the current offset of the piece
-   */
+
   getCollisionBlocks(d) {
     switch (d) {
       case 'L': return (this.lcol[this.offset]);

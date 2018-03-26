@@ -13,23 +13,23 @@ export function generateRandomHex() {
 
 export function rgbaToHex(c) {
   let res = '#';
-  let re = /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i;
+  const re = /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i;
   c = c.match(re);
   for(let i = 1; i <= 3; i++) {
-    res += ('0' + parseInt(c[i],10).toString(16)).slice(-2);
+    res += ('0' + parseInt(c[i], 10).toString(16)).slice(-2);
   }
 
   return res;
 }
 
 export function generateRandomRgba() {
-  let r, g, b;
-  [r, g, b] = [Random(0,255), Random(0,255), Random(0,255)];
-  return `rgba(${ r }, ${ g }, ${ b }, 255)`;
+  const r, g, b;
+  [r, g, b] = [Random(0, 255), Random(0, 255), Random(0, 255)];
+  return `rgba(${r}, ${g}, ${b}, 255)`;
 }
 
 export function decreaseOpacity(rgba) {
-  let re = /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i;
+  const re = /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i;
   rgba = rgba.match(re);
   let alpha = parseInt(rgba[4]) - 20;
   if (alpha < 0) {
