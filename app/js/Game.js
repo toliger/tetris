@@ -16,6 +16,8 @@ export default class Game {
   }
 
   startgame() {
+    if ($("#checkBlind").is(":checked")) { this.gameBoard.blindmode = true; }
+    if ($("#checkBmode").is(":checked")) { this.gameBoard.bmode = true; }
     this.gameBoard.clearBoard();
     this.gameBoard.newPiece();
 

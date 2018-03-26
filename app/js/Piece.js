@@ -8,6 +8,7 @@ class Piece {
     this.x = x;
     this.y = y;
     this.color = color;
+    this.alpha = 1;
   }
 
   rotate() {
@@ -33,6 +34,9 @@ class Piece {
     this.y += 1;
   }
 
+  decreaseAlpha(blindmode) {
+    this.alpha = (this.alpha - 0.1 >= 0 && blindmode) ? this.alpha - 0.1 : this.alpha;
+  }
   // Return the maximal value of x from an array of coordinates
   getMaxXFromArray(a) {
     let m = 0;

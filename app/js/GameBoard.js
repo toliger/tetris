@@ -102,6 +102,7 @@ export default class GameBoard extends Canvas {
 
   // Draw the wall
   drawWall() {
+    this.ctx.globalAlpha = 1;
     for (let i = 1; i < this.size.abstract.height + 1; i += 1) {
       for (let j = 1; j < this.size.abstract.width + 1; j += 1) {
         const pixel = this.map[i][j];
@@ -119,8 +120,9 @@ export default class GameBoard extends Canvas {
   // Draw the Piece
   drawPiece() {
     const p = this.piece;
-
-    this.ctx.fillStyle = this.blindmode ? decreaseOpacity(this.piece.color) : this.piece.color;
+    this.piece.decreaseAlpha(this.blindmode);
+    this.ctx.fillStyle = this.piece.color;
+    this.ctx.globalAlpha = this.piece.alpha;
 
     const f = p.offset;
     const CaseX = this.size.real.width / this.size.abstract.width;
@@ -148,7 +150,8 @@ export default class GameBoard extends Canvas {
     this.piece.x = 8;
     this.piece.y = 0;
     this.piece = this.pieces[Random(0, 6)];
-    this.piece.color = this.blindmode ? generateRandomRgba() : generateRandomHex();
+    this.piece.color = generateRandomHex();
+    this.piece.alpha = 1;
   }
 
 
@@ -165,11 +168,7 @@ export default class GameBoard extends Canvas {
   // Add the piece to the Wall Array
   addPieceToMap(blocks) {
     for (const i in blocks) {
-      if (this.blindmode) {
-        this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, rgbaToHex(this.piece.color)];
-      } else {
-        this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
-      }
+      this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
     }
   }
 
@@ -193,7 +192,6 @@ export default class GameBoard extends Canvas {
   checkRightSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('R'));
     for (const i in blocks) {
-      console.log(this.map[blocks[i][1] + 1][blocks[i][0] + 2]);
       if (this.map[blocks[i][1] + 1][blocks[i][0] + 2] !== 0) {
         return false;
       }
@@ -208,11 +206,9 @@ export default class GameBoard extends Canvas {
 
     for (let i in next) {
       if (this.map[next[i][1] + 1][next[i][0] + 1] !== 0) {
-        console.log("false");
         return false;
       }
     }
-    console.log("pas false");
     return true;
   }
 
