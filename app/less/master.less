@@ -3,11 +3,44 @@
 body {
     background-color: @backgroundcolor;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 
     header {
-        text-align: center;
-        padding: 30px;
+        margin: 0 0 10px 0;
+        background-color: indianred;
+
+        .titre {
+            text-align: center;
+            padding: 10px;
+            h1 {
+                margin: 0;
+            }
+        }
+    }
+
+    #navbar {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-content: center;
+
+        .menu {
+            flex: 0 1 auto;
+            text-align: center;
+            margin: auto auto 0 auto;
+            padding: 10px;
+            width: 200px;
+            box-sizing: border-box;
+            height: 40px;
+            
+            &:hover {
+                background-color: bisque;
+                border-bottom: 3px solid blue;
+            }
+        }
     }
 
     @import 'game/game.less';
+    
 }
