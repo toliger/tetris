@@ -23,8 +23,7 @@ export function rgbaToHex(c) {
 }
 
 export function generateRandomRgba() {
-  const r, g, b;
-  [r, g, b] = [Random(0, 255), Random(0, 255), Random(0, 255)];
+  const [r, g, b] = [Random(0, 255), Random(0, 255), Random(0, 255)];
   return `rgba(${r}, ${g}, ${b}, 255)`;
 }
 
