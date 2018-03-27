@@ -126,7 +126,7 @@ export default class GameBoard extends Canvas {
     const CaseX = this.size.real.width / this.size.abstract.width;
     const CaseY = this.size.real.height / this.size.abstract.height;
 
-    for (const i in p.shape[f]) {
+    for (let i = 0; i < p.shape[f].length; i += 1) {
       const marginLeft = (p.shape[f][i][0] + this.piece.x) * CaseX;
       const marginTop = (p.shape[f][i][1] + this.piece.y) * CaseY;
       this.ctx.fillRect(marginLeft, marginTop, CaseX, CaseY);
@@ -167,7 +167,7 @@ export default class GameBoard extends Canvas {
 
   // Add the piece to the Wall Array
   addPieceToMap(blocks) {
-    for (const i in blocks) {
+    for (let i = 0; i < blocks.length; i += 1) {
       this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
     }
   }
@@ -179,7 +179,7 @@ export default class GameBoard extends Canvas {
   // Check if the piece can move to the left
   checkLeftSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('L'));
-    for (const i in blocks) {
+    for (let i = 0; i < blocks.length; i += 1) {
       if (this.map[blocks[i][1] + 1][blocks[i][0]] !== 0) {
         return false;
       }
@@ -191,7 +191,7 @@ export default class GameBoard extends Canvas {
   // Check if the piece can move to the right
   checkRightSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('R'));
-    for (const i in blocks) {
+    for (let i = 0; i < blocks.length; i += 1) {
       if (this.map[blocks[i][1] + 1][blocks[i][0] + 2] !== 0) {
         return false;
       }
@@ -204,7 +204,7 @@ export default class GameBoard extends Canvas {
   checkRotate() {
     const next = this.getPos(this.piece.getRotated());
 
-    for (const i in next) {
+    for (let i = 0; i < next.length; i += 1) {
       if (this.map[next[i][1] + 1][next[i][0] + 1] !== 0) {
         return false;
       }
@@ -224,7 +224,7 @@ export default class GameBoard extends Canvas {
 
   // Check if the line is full
   checkLines(i) {
-    for (const j in this.map[i]) {
+    for (let j = 0; j < this.map[i].length; j += 1) {
       if (this.map[i][j] === 0) {
         return;
       }
@@ -239,7 +239,7 @@ export default class GameBoard extends Canvas {
   checkBottomSide() {
     const blocks = this.getPos(this.piece.getCollisionBlocks('D'));
 
-    for (const i in blocks) {
+    for (let i = 0; i < blocks.length; i += 1) {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
         this.checkLines(blocks[i][1] + 1);
