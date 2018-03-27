@@ -39,6 +39,93 @@ class Piece {
   decreaseAlpha(blindmode) {
     this.alpha = (blindmode && this.alpha - 0.07 >= 0) ? this.alpha - 0.07 : 0;
   }
+  // Return the maximal value of x from an array of coordinates
+  static getMaxXFromArray(a) {
+    let m = 0;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][0] > m) { m = a[i][0]; }
+    }
+    return m;
+  }
+
+  // Return the minimal value of x from an array of coordinates
+  static getMinXFromArray(a) {
+    let m = a[0][0];
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][0] < m) { m = a[i][0]; }
+    }
+    return m;
+  }
+
+  // Return the maximal value of y from an array of coordinates
+  static getMaxYFromArray(a) {
+    let m = 0;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][1] > m) { m = a[i][1]; }
+    }
+    return m;
+  }
+
+  // Return the minimal value of y from an array of coordinates
+  static getMinYFromArray(a) {
+    let m = a[0][1];
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][1] < m) { m = a[i][1]; }
+    }
+    return m;
+  }
+
+  // Return the couple of coordinates where x is maximal
+  static getMaxXPos(a) {
+    let m = 0;
+    let ind = 0;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][0] > m) {
+        m = a[i][0];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+
+  // Return the couple of coordinates where x is minimal
+  static getMinXPos(a) {
+    let m = a[0][0];
+    let ind = 0;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][0] < m) {
+        m = a[i][0];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+
+  // Return the couple of coordinates where y is maximal
+  static getMaxYPos(a) {
+    let m = 0;
+    let ind = 0;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][1] > m) {
+        m = a[i][1];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
+
+  // Return the couple of coordinates where y is minimal
+  static getMinYPos(a) {
+    let m = a[0][1];
+    let ind = 0;
+    for (let i = 0; i < a.length; i += 1) {
+      if (a[i][1] < m) {
+        m = a[i][1];
+        ind = i;
+      }
+    }
+    return a[ind];
+  }
 
   /*
    * Set the arrays lcol, rcol and dcol with the coordinates
@@ -115,7 +202,7 @@ class L extends Piece {
 
   initShapes() {
     this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]);
-    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 0]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 2]]);
     this.shape.push([[0, 1], [1, 1], [2, 1], [0, 2]]);
     this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]);
   }

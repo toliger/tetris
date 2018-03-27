@@ -28,7 +28,7 @@ export default class GameBoard extends Canvas {
       new T(8, 0),
       new I(8, 0),
       new O(8, 0),
-      new J(8, 0)
+      new J(8, 0),
     ];
     this.map = this.generateMapArrayDebug();
 
@@ -43,7 +43,6 @@ export default class GameBoard extends Canvas {
     this.bmode = false; // B mode
     this.level = 0; // difficulty
   }
-
 
 
   //= ========= Initialisation ==========
@@ -66,7 +65,7 @@ export default class GameBoard extends Canvas {
     // width + 2 -> Border of GameBoard
     const res = [];
     res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-    for (let i = 0; i < this.size.abstract.height-1 ; i += 1) {
+    for (let i = 0; i < this.size.abstract.height - 1; i += 1) {
       res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
     }
     res.push([1, [1, '#000000'], 0, 0, 0, [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], 1]);
@@ -91,12 +90,12 @@ export default class GameBoard extends Canvas {
   // Draw Wallgrind
   drawWallGrind() {
     this.ctx.fillStyle = '#f4c842';
-    this.ctx.fillRect(0,0, this.size.real.width, this.size.real.height);
+    this.ctx.fillRect(0, 0, this.size.real.width, this.size.real.height);
 
     this.ctx.fillStyle = '#8c701c';
-    this.ctx.font = "80px Arial";
-    this.ctx.textAlign = "center";
-    this.ctx.fillText("Wall Grind",this.size.real.width / 2, this.size.real.height / 2);
+    this.ctx.font = '80px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('Wall Grind', this.size.real.width / 2, this.size.real.height / 2);
   }
 
 
@@ -203,7 +202,7 @@ export default class GameBoard extends Canvas {
   checkRotate() {
     const next = this.getPos(this.piece.getRotated());
 
-    for (let i in next) {
+    for (const i in next) {
       if (this.map[next[i][1] + 1][next[i][0] + 1] !== 0) {
         return false;
       }

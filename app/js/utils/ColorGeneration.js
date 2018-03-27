@@ -9,14 +9,14 @@ export function generateRandomHex() {
   }
 
   return color;
-};
+}
 
 export function rgbaToHex(c) {
   let res = '#';
   const re = /^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i;
   c = c.match(re);
-  for (let i = 1; i <= 3; i += 1) {
-    res += ('0' + parseInt(c[i], 10).toString(16)).slice(-2);
+  for (let i = 1; i <= 3; i++) {
+    res += (`0${parseInt(c[i], 10).toString(16)}`).slice(-2);
   }
 
   return res;

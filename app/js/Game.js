@@ -42,7 +42,7 @@ export default class Game {
     const vthis = this;
     (function t() {
       vthis.pieceController();
-      setTimeout(t, 1000 / (1 + (vthis.difficulty*2)));
+      setTimeout(t, 1000 / (1 + (vthis.difficulty * 2)));
     }());
   }
 }
