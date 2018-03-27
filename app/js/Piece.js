@@ -1,3 +1,5 @@
+import * as aTools from './utils/ArrayUtils.js';
+
 class Piece {
   constructor(x, y, color = '#d4f442') {
     this.shape = [];
@@ -136,16 +138,16 @@ class Piece {
       const rarr = [];
       const larr = [];
       const darr = [];
-      const mX = this.getMaxXFromArray(this.shape[i]);
-      const mY = this.getMaxYFromArray(this.shape[i]);
-      const minX = this.getMinXFromArray(this.shape[i]);
-      const minY = this.getMinYFromArray(this.shape[i]);
+      const mX = aTools.getMaxXFromArray(this.shape[i]);
+      const mY = aTools.getMaxYFromArray(this.shape[i]);
+      const minX = aTools.getMinXFromArray(this.shape[i]);
+      const minY = aTools.getMinYFromArray(this.shape[i]);
 
       // Left - Right
       for (let j = minY; j <= mY; j += 1) {
         const tmp = this.shape[i].filter(elt => elt[1] === j);
-        larr.push(this.getMinXPos(tmp));
-        rarr.push(this.getMaxXPos(tmp));
+        larr.push(aTools.getMinXPos(tmp));
+        rarr.push(aTools.getMaxXPos(tmp));
       }
       this.lcol.push(larr);
       this.rcol.push(rarr);
@@ -154,7 +156,7 @@ class Piece {
       for (let j = minX; j <= mX; j += 1) {
         const tmp = this.shape[i].filter(elt => elt[0] === j);
 
-        darr.push(this.getMaxYPos(tmp));
+        darr.push(aTools.getMaxYPos(tmp));
       }
       this.dcol.push(darr);
     }
