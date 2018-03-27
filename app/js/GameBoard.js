@@ -169,6 +169,7 @@ export default class GameBoard extends Canvas {
   addPieceToMap(blocks) {
     for (let i = 0; i < blocks.length; i += 1) {
       this.map[blocks[i][1] + 1][blocks[i][0] + 1] = [1, this.piece.color];
+      this.checkLines(blocks[i][1] + 1);
     }
   }
 
@@ -219,6 +220,7 @@ export default class GameBoard extends Canvas {
     this.map.splice(l, 1);
     // add a new "empty" line to the array
     this.map.splice(1, 0, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    this.checkLines(l);
   }
 
 
@@ -242,7 +244,6 @@ export default class GameBoard extends Canvas {
     for (let i = 0; i < blocks.length; i += 1) {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
-        this.checkLines(blocks[i][1] + 1);
         this.score.score = (this.blindmode) ? 2 : 1;
         this.newPiece();
         return false;
