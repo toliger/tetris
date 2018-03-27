@@ -200,7 +200,7 @@ class L extends Piece {
 
   initShapes() {
     this.shape.push([[0, 1], [1, 1], [2, 1], [2, 0]]);
-    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 0]]);
+    this.shape.push([[1, 0], [1, 1], [1, 2], [2, 2]]);
     this.shape.push([[0, 1], [1, 1], [2, 1], [0, 2]]);
     this.shape.push([[0, 0], [1, 0], [1, 1], [1, 2]]);
   }
