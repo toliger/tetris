@@ -24,14 +24,9 @@ export default class Game {
     // ========== Display updating
     this.gameBoard.update();
     this.tick();
-    this.startMusic();
+    this.musique = new Musique();
+    this.musique.play();
   }
-
-  startMusic() {
-    const music = new Music();
-    music.play();
-  }
-
 
   pieceController() {
     this.gameBoard.mvDown();
