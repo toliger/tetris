@@ -1,6 +1,6 @@
 import { T, L, J, Z, S, I, O } from './Piece.js';
 import Random from './utils/Random.js';
-import { generateRandomHex, generateRandomRgba, rgbaToHex, decreaseOpacity } from './utils/ColorGeneration.js';
+import { generateRandomHex } from './utils/ColorGeneration.js';
 import Canvas from './Canvas.js';
 import Score from './Score.js';
 
@@ -126,7 +126,7 @@ export default class GameBoard extends Canvas {
     const CaseX = this.size.real.width / this.size.abstract.width;
     const CaseY = this.size.real.height / this.size.abstract.height;
 
-    for (const i in p.shape[f]) {
+    for (let i in p.shape[f]) {
       this.ctx.fillRect((p.shape[f][i][0] + this.piece.x) * CaseX, (p.shape[f][i][1] + this.piece.y) * CaseY, CaseX, CaseY);
     }
   }
