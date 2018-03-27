@@ -1,6 +1,6 @@
 import { T, L, J, Z, S, I, O } from './Piece.js';
 import Random from './utils/Random.js';
-import { generateRandomHex, generateRandomRgba, rgbaToHex, decreaseOpacity } from './utils/ColorGeneration.js';
+import { generateRandomHex } from './utils/ColorGeneration.js';
 import Canvas from './Canvas.js';
 import Score from './Score.js';
 

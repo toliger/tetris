@@ -1,3 +1,5 @@
+import * as aTools from './utils/ArrayUtils.js';
+
 class Piece {
   constructor(x, y, color = '#d4f442') {
     this.shape = [];
@@ -37,93 +39,6 @@ class Piece {
   decreaseAlpha(blindmode) {
     this.alpha = (blindmode && this.alpha - 0.07 >= 0) ? this.alpha - 0.07 : 0;
   }
-  // Return the maximal value of x from an array of coordinates
-  getMaxXFromArray(a) {
-    let m = 0;
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][0] > m) { m = a[i][0]; }
-    }
-    return m;
-  }
-
-  // Return the minimal value of x from an array of coordinates
-  getMinXFromArray(a) {
-    let m = a[0][0];
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][0] < m) { m = a[i][0]; }
-    }
-    return m;
-  }
-
-  // Return the maximal value of y from an array of coordinates
-  getMaxYFromArray(a) {
-    let m = 0;
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][1] > m) { m = a[i][1]; }
-    }
-    return m;
-  }
-
-  // Return the minimal value of y from an array of coordinates
-  getMinYFromArray(a) {
-    let m = a[0][1];
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][1] < m) { m = a[i][1]; }
-    }
-    return m;
-  }
-
-  // Return the couple of coordinates where x is maximal
-  getMaxXPos(a) {
-    let m = 0;
-    let ind = 0;
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][0] > m) {
-        m = a[i][0];
-        ind = i;
-      }
-    }
-    return a[ind];
-  }
-
-  // Return the couple of coordinates where x is minimal
-  getMinXPos(a) {
-    let m = a[0][0];
-    let ind = 0;
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][0] < m) {
-        m = a[i][0];
-        ind = i;
-      }
-    }
-    return a[ind];
-  }
-
-  // Return the couple of coordinates where y is maximal
-  getMaxYPos(a) {
-    let m = 0;
-    let ind = 0;
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][1] > m) {
-        m = a[i][1];
-        ind = i;
-      }
-    }
-    return a[ind];
-  }
-
-  // Return the couple of coordinates where y is minimal
-  getMinYPos(a) {
-    let m = a[0][1];
-    let ind = 0;
-    for (let i = 0; i < a.length; i += 1) {
-      if (a[i][1] < m) {
-        m = a[i][1];
-        ind = i;
-      }
-    }
-    return a[ind];
-  }
 
   /*
    * Set the arrays lcol, rcol and dcol with the coordinates
@@ -136,16 +51,16 @@ class Piece {
       const rarr = [];
       const larr = [];
       const darr = [];
-      const mX = this.getMaxXFromArray(this.shape[i]);
-      const mY = this.getMaxYFromArray(this.shape[i]);
-      const minX = this.getMinXFromArray(this.shape[i]);
-      const minY = this.getMinYFromArray(this.shape[i]);
+      const mX = aTools.getMaxXFromArray(this.shape[i]);
+      const mY = aTools.getMaxYFromArray(this.shape[i]);
+      const minX = aTools.getMinXFromArray(this.shape[i]);
+      const minY = aTools.getMinYFromArray(this.shape[i]);
 
       // Left - Right
       for (let j = minY; j <= mY; j += 1) {
         const tmp = this.shape[i].filter(elt => elt[1] === j);
-        larr.push(this.getMinXPos(tmp));
-        rarr.push(this.getMaxXPos(tmp));
+        larr.push(aTools.getMinXPos(tmp));
+        rarr.push(aTools.getMaxXPos(tmp));
       }
       this.lcol.push(larr);
       this.rcol.push(rarr);
@@ -154,7 +69,7 @@ class Piece {
       for (let j = minX; j <= mX; j += 1) {
         const tmp = this.shape[i].filter(elt => elt[0] === j);
 
-        darr.push(this.getMaxYPos(tmp));
+        darr.push(aTools.getMaxYPos(tmp));
       }
       this.dcol.push(darr);
     }
