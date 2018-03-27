@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Game from './Game.js';
 
 $(document).ready(() => {

@@ -8,7 +8,6 @@ export default class Score {
 
   updateDisplay() {
     $('#score').html(this.pscore);
-    console.log(this.lscore, this.pscore);
     $('#lines').html(this.lscore);
   }
 

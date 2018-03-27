@@ -24,8 +24,8 @@ export default class Game {
     // ========== Display updating
     this.gameBoard.update();
     this.tick();
-    this.musique = new Musique();
-    this.musique.play();
+    this.music = new Music();
+    this.music.play();
   }
 
   pieceController() {
