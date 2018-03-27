@@ -38,14 +38,12 @@ class Piece {
 
   decreaseAlpha(blindmode) {
     if (blindmode) {
-      this.alpha = this.alpha - 0.07 >= 0 ? this.alpha - 0.07 : 0
-    }
-    else {
+      this.alpha = this.alpha - 0.07 >= 0 ? this.alpha - 0.07 : 0;
+    } else {
       this.alpha = 1;
     }
-    
   }
- 
+
   /*
    * Set the arrays lcol, rcol and dcol with the coordinates
    * of the blocks that need to be checked when moving
