@@ -10,6 +10,18 @@
   },
   "extends": "airbnb-base",
   "rules" : {
-    "import/extensions": 0
+    "import/extensions": 0,
+    "prefer-destructuring": ["error", {
+      "VariableDeclarator": {
+        "array": false,
+        "object": false
+      },
+      "AssignmentExpression": {
+        "array": false,
+        "object": false
+      }
+    }, {
+      "enforceForRenamedProperties": false
+    }]
   }
 }
