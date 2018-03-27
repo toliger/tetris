@@ -277,6 +277,13 @@ export default class GameBoard extends Canvas {
     }
   }
 
+  bigMoveDown() {
+    while(this.checkBottomSide()) {
+      this.piece.moveDown();
+      this.piece.decreaseAlpha(this.blindmode);
+    }
+  }
+
   // Rotate the piece
   rotate() {
     if (this.checkRotate()) {

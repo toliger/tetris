@@ -42,6 +42,10 @@ $(document).ready(() => {
         break;
       }
 
+      case ' ': {
+        board.bigMoveDown();
+        break;
+      }
 
       case 'h':
         console.log(board.map);
