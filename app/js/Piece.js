@@ -35,7 +35,7 @@ class Piece {
   }
 
   decreaseAlpha(blindmode) {
-    this.alpha = (this.alpha - 0.1 >= 0 && blindmode) ? this.alpha - 0.1 : this.alpha;
+    this.alpha = (blindmode && this.alpha - 0.07 >= 0) ? this.alpha - 0.07 : 0;
   }
   // Return the maximal value of x from an array of coordinates
   getMaxXFromArray(a) {

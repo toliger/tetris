@@ -120,7 +120,6 @@ export default class GameBoard extends Canvas {
   // Draw the Piece
   drawPiece() {
     const p = this.piece;
-    this.piece.decreaseAlpha(this.blindmode);
     this.ctx.fillStyle = this.piece.color;
     this.ctx.globalAlpha = this.piece.alpha;
 
@@ -272,6 +271,8 @@ export default class GameBoard extends Canvas {
   mvDown() {
     if (this.checkBottomSide()) {
       this.piece.moveDown();
+      this.piece.decreaseAlpha(this.blindmode);
+
     }
   }
 
