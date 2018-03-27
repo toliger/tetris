@@ -16,12 +16,12 @@ export default class Game {
   }
 
   startgame() {
-    if ($("#checkBlind").is(":checked")) { this.gameBoard.blindmode = true; }
-    if ($("#checkBmode").is(":checked")) { this.gameBoard.bmode = true; }
+    if ($('#checkBlind').is(':checked')) { this.gameBoard.blindmode = true; }
+    if ($('#checkBmode').is(':checked')) { this.gameBoard.bmode = true; }
     this.gameBoard.clearBoard();
     this.gameBoard.newPiece();
 
-    //========== Display updating
+    // ========== Display updating
     this.gameBoard.update();
     this.tick();
     this.startMusic();
@@ -42,7 +42,7 @@ export default class Game {
     const vthis = this;
     (function t() {
       vthis.pieceController();
-      setTimeout(t, 1000 / (1 + vthis.difficulty * 2));
+      setTimeout(t, 1000 / (1 + (vthis.difficulty*2)));
     }());
   }
 }
