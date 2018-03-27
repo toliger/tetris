@@ -220,7 +220,6 @@ export default class GameBoard extends Canvas {
     this.map.splice(l, 1);
     // add a new "empty" line to the array
     this.map.splice(1, 0, [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
-    this.checkLines(l);
   }
 
 
