@@ -38,7 +38,7 @@ class Piece {
     this.alpha = (this.alpha - 0.1 >= 0 && blindmode) ? this.alpha - 0.1 : this.alpha;
   }
   // Return the maximal value of x from an array of coordinates
-  getMaxXFromArray(a) {
+  static getMaxXFromArray(a) {
     let m = 0;
     for (let i = 0; i < a.length; i += 1) {
       if (a[i][0] > m) { m = a[i][0]; }
@@ -47,7 +47,7 @@ class Piece {
   }
 
   // Return the minimal value of x from an array of coordinates
-  getMinXFromArray(a) {
+  static getMinXFromArray(a) {
     let m = a[0][0];
     for (let i = 0; i < a.length; i += 1) {
       if (a[i][0] < m) { m = a[i][0]; }
@@ -56,7 +56,7 @@ class Piece {
   }
 
   // Return the maximal value of y from an array of coordinates
-  getMaxYFromArray(a) {
+  static getMaxYFromArray(a) {
     let m = 0;
     for (let i = 0; i < a.length; i += 1) {
       if (a[i][1] > m) { m = a[i][1]; }
@@ -65,7 +65,7 @@ class Piece {
   }
 
   // Return the minimal value of y from an array of coordinates
-  getMinYFromArray(a) {
+  static getMinYFromArray(a) {
     let m = a[0][1];
     for (let i = 0; i < a.length; i += 1) {
       if (a[i][1] < m) { m = a[i][1]; }
@@ -74,7 +74,7 @@ class Piece {
   }
 
   // Return the couple of coordinates where x is maximal
-  getMaxXPos(a) {
+  static getMaxXPos(a) {
     let m = 0;
     let ind = 0;
     for (let i = 0; i < a.length; i += 1) {
@@ -87,7 +87,7 @@ class Piece {
   }
 
   // Return the couple of coordinates where x is minimal
-  getMinXPos(a) {
+  static getMinXPos(a) {
     let m = a[0][0];
     let ind = 0;
     for (let i = 0; i < a.length; i += 1) {
@@ -100,7 +100,7 @@ class Piece {
   }
 
   // Return the couple of coordinates where y is maximal
-  getMaxYPos(a) {
+  static getMaxYPos(a) {
     let m = 0;
     let ind = 0;
     for (let i = 0; i < a.length; i += 1) {
@@ -113,7 +113,7 @@ class Piece {
   }
 
   // Return the couple of coordinates where y is minimal
-  getMinYPos(a) {
+  static getMinYPos(a) {
     let m = a[0][1];
     let ind = 0;
     for (let i = 0; i < a.length; i += 1) {

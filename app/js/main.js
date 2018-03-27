@@ -66,5 +66,4 @@ $(document).ready(() => {
   $('#start').on('click', () => {
     game.startgame();
   });
-
 });
