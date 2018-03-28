@@ -135,7 +135,9 @@ export default class GameBoard extends Canvas {
     this.piece.x = 8;
     this.piece.y = 0;
     this.piece = this.pieces[Random(0, 6)];
-    console.log(this.rules.randomColor);
+    if(!this.checkBehind()) {
+      console.log('Game Over');
+    }
 
     if (this.rules.randomColor) {
       this.piece.color = generateRandomHex();
@@ -166,6 +168,16 @@ export default class GameBoard extends Canvas {
 
   //= ========= Moves ==========
 
+
+  checkBehind() {
+    const blocks = this.piece.shape[this.piece.offset];
+    for (let i = 0; i < blocks.length; i += 1) {
+      if (this.map[blocks[i][1] + 1][blocks[i][0] + 2] !== 0) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   // Check if the piece can move to the left
   checkLeftSide() {

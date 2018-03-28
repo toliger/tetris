@@ -8,6 +8,7 @@ export default class Game {
     this.drawLogo();
     this.socket = new SocketIO();
     this.difficulty = 0;
+    this.current = false;
   }
 
   drawLogo() {
@@ -16,16 +17,26 @@ export default class Game {
   }
 
   startgame() {
-    if ($('#checkBlind').is(':checked')) { this.gameBoard.blindmode = true; }
-    if ($('#checkBmode').is(':checked')) { this.gameBoard.bmode = true; }
-    this.gameBoard.clearBoard();
-    this.gameBoard.newPiece();
+    if (!this.current) {
+      this.current = true;
+      if ($('#checkBlind').is(':checked')) {
+        this.gameBoard.blindmode = true;
+      }
 
-    // ========== Display updating
-    this.gameBoard.update();
-    this.tick();
-    this.music = new Music();
-    this.music.play();
+      if ($('#checkBmode').is(':checked')) {
+        this.gameBoard.bmode = true;
+      }
+
+      this.gameBoard.clearBoard();
+      this.gameBoard.newPiece();
+
+      // ========== Display updating
+      this.gameBoard.update();
+      this.tick();
+      this.music = new Music();
+      this.music.play();
+    }
+
   }
 
   pieceController() {
