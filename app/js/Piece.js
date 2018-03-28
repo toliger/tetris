@@ -92,7 +92,7 @@ class Piece {
 
 class T extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#A000F0');
     this.initShapes();
     this.getCollideElements();
   }
@@ -112,7 +112,7 @@ class T extends Piece {
 
 class L extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#F0A000');
     this.initShapes();
     this.getCollideElements();
   }
@@ -127,7 +127,7 @@ class L extends Piece {
 
 class J extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#0000F0');
     this.initShapes();
     this.getCollideElements();
   }
@@ -142,7 +142,7 @@ class J extends Piece {
 
 class Z extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#F00000');
     this.initShapes();
     this.getCollideElements();
   }
@@ -157,7 +157,7 @@ class Z extends Piece {
 
 class S extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#00F000');
     this.initShapes();
     this.getCollideElements();
   }
@@ -172,7 +172,7 @@ class S extends Piece {
 
 class I extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#00F0F0');
     this.initShapes();
     this.getCollideElements();
   }
@@ -187,7 +187,7 @@ class I extends Piece {
 
 class O extends Piece {
   constructor(x, y) {
-    super(x, y);
+    super(x, y, '#F0F000');
     this.initShapes();
     this.getCollideElements();
   }

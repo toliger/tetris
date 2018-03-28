@@ -3,6 +3,7 @@ import Random from './utils/Random.js';
 import { generateRandomHex } from './utils/ColorGeneration.js';
 import Canvas from './Canvas.js';
 import Score from './Score.js';
+import Rules from './Rules.js';
 
 
 export default class GameBoard extends Canvas {
@@ -30,7 +31,7 @@ export default class GameBoard extends Canvas {
       new O(8, 0),
       new J(8, 0),
     ];
-    this.map = this.generateMapArrayDebug();
+    this.map = this.generateMapArray();
 
     //= ========= Canvas creation
     this.position = {
@@ -38,10 +39,7 @@ export default class GameBoard extends Canvas {
       y: $('#map').position().left,
     };
 
-    //= ========= Game options
-    this.blindmode = false; // blind mode
-    this.bmode = false; // B mode
-    this.level = 0; // difficulty
+    this.rules = new Rules();
   }
 
 
@@ -56,19 +54,6 @@ export default class GameBoard extends Canvas {
     for (let i = 0; i < this.size.abstract.height; i += 1) {
       res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
     }
-    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-    return res;
-  }
-
-  // Debug function : create an almost completed line
-  generateMapArrayDebug() {
-    // width + 2 -> Border of GameBoard
-    const res = [];
-    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-    for (let i = 0; i < this.size.abstract.height - 1; i += 1) {
-      res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
-    }
-    res.push([1, [1, '#000000'], 0, 0, 0, [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], [1, '#000000'], 1]);
     res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
     return res;
   }
@@ -150,7 +135,12 @@ export default class GameBoard extends Canvas {
     this.piece.x = 8;
     this.piece.y = 0;
     this.piece = this.pieces[Random(0, 6)];
-    this.piece.color = generateRandomHex();
+    console.log(this.rules.randomColor);
+
+    if (this.rules.randomColor) {
+      this.piece.color = generateRandomHex();
+    }
+
     this.piece.alpha = 1;
   }
 
@@ -243,7 +233,7 @@ export default class GameBoard extends Canvas {
     for (let i = 0; i < blocks.length; i += 1) {
       if (this.map[blocks[i][1] + 2][blocks[i][0] + 1] !== 0) {
         this.addPieceToMap(this.getPos(this.piece.shape[this.piece.offset]));
-        this.score.score = (this.blindmode) ? 2 : 1;
+        this.score.score = (this.rules.blindmode) ? 2 : 1;
         this.newPiece();
         return false;
       }
@@ -272,14 +262,14 @@ export default class GameBoard extends Canvas {
   mvDown() {
     if (this.checkBottomSide()) {
       this.piece.moveDown();
-      this.piece.decreaseAlpha(this.blindmode);
+      this.piece.decreaseAlpha(this.rules.blindmode);
     }
   }
 
   bigMoveDown() {
     while(this.checkBottomSide()) {
       this.piece.moveDown();
-      this.piece.decreaseAlpha(this.blindmode);
+      this.piece.decreaseAlpha(this.rules.blindmode);
     }
   }
 

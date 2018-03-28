@@ -52,6 +52,10 @@ $(document).ready(() => {
         e.preventDefault();
         break;
 
+        case 'Enter':
+          game.startgame();
+          break;
+
       default:
     }
   });
@@ -68,7 +72,12 @@ $(document).ready(() => {
   });
 
 
-  $('#start').on('click', () => {
-    game.startgame();
+  $('#checkBlind').change(() => {
+    board.rules.blindmode = $('#checkBlind').is(":checked");checkBmode
   });
+
+  $('#checkBmode').change(() => {
+    board.rules.bmode = $('#checkBmode').is(":checked");
+  });
+
 });
