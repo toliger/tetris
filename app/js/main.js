@@ -82,6 +82,10 @@ $(document).ready(() => {
 
   $('#start').click(() => {
     game.startgame();
+    $('.settings').slideToggle();
+    $('#settings i')
+      .toggleClass('fa-angle-down')
+      .toggleClass('fa-angle-up');
   });
 
 });

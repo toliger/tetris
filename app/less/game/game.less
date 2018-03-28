@@ -18,8 +18,10 @@
 
     #sideBoard {
         flex: 1 0 auto;
-        width: 10%;
+        position: relative;
+        //width: 10%;
         box-shadow: 5px 5px 10px black;
+        overflow: scroll;
 
         .settings {
             text-align: left;
@@ -32,6 +34,16 @@
 
         table {
             margin: 10% auto auto auto;
+        }
+
+        #nextPiece {
+            width: 80%;
+            height: 30%;
+            margin: auto;
+
+            canvas {
+                border: 2px solid black;
+            }
         }
     }
 
