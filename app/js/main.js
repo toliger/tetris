@@ -80,4 +80,8 @@ $(document).ready(() => {
     board.rules.bmode = $('#checkBmode').is(":checked");
   });
 
+  $('#start').click(() => {
+    game.startgame();
+  });
+
 });
