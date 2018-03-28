@@ -1,4 +1,4 @@
-@backgroundcolor : lightgrey;
+@backgroundcolor : white;
 
 body {
     background-color: @backgroundcolor;
@@ -8,15 +8,7 @@ body {
 
     header {
         margin: 0 0 10px 0;
-        background-color: indianred;
-
-        .titre {
-            text-align: center;
-            padding: 10px;
-            h1 {
-                margin: 0;
-            }
-        }
+        background-color: white;
     }
 
     #navbar {
@@ -24,21 +16,43 @@ body {
         flex-flow: row nowrap;
         justify-content: space-around;
         align-content: center;
+        border-bottom: 2px solid black;
 
+
+        .titre, .menu {
+
+            margin: 0 10px 0 10px;
+            padding: 0 10px 0 10px;
+        }
+        .titre {
+            flex: 1 1 auto;
+        }
         .menu {
-            flex: 0 1 auto;
-            text-align: center;
-            margin: auto auto 0 auto;
-            padding: 10px;
-            width: 200px;
-            box-sizing: border-box;
-            height: 40px;
+            flex: 1 1 auto;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+            align-content: center;
             
-            &:hover {
-                background-color: bisque;
-                border-bottom: 3px solid blue;
+            section {
+                text-align: center;
+                padding: 10px;
+                flex: 1 1 auto;
+                font-size: 1.3em;
+                font-weight: 600;
+                color: darkgray;
+                &:hover {
+                    text-decoration: underline;
+                }
+                
+            }
+            .active {
+                color: black;
+                text-decoration: underline;
             }
         }
+            
+
     }
 
     @import 'game/game.less';

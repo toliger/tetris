@@ -8,25 +8,24 @@
 </head>
 <body>
     <header>
-        <div class="titre">
-            <h1>W A L L G R I N D</h1>
-        </div>
         <div id="navbar">
-            <div class="menu">
-                Accueil
+            <div class="titre">
+                <h1>W A L L G R I N D</h1>
             </div>
             <div class="menu">
-                Solo
-            </div>
-            <div class="menu">
-                Multiplayer
-            </div>
-            <div class="menu">
-                A propos
+                <section>
+                    Accueil
+                </section>
+                <section class="active">
+                    Solo
+                </section>
+                <section>
+                    Multiplayer
+                </section>
             </div>
         </div>
     </header>
-    <section id="game">
+    <section id="game" class="solo">
         <div id="sideBoard" class="game-item">
             <h3>Tableau de bord</h3>
             <h4 id="settings">Paramètres <i class="fa fa-angle-down"></i></h4>
@@ -69,23 +68,6 @@
             </table>
         </div>
         <div id="mainBoard" class="game-item">
-        </div>
-        <div id="chat" class="game-item">
-            <h3>Chatroom</h3>
-            <div id="textBox">
-            </div>
-            <div id="messageBox">
-                <table>
-                    <tr>
-                        <td>
-                            <textarea id="chatinput" rows="3" cols="32"></textarea>
-                        </td>
-                        <td>
-                            <input id="chatbutton" type="button" value="Send">
-                        </td>
-                    </tr>
-                </table>
-            </div>
         </div>
     </section>
     <script

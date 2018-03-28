@@ -10,7 +10,6 @@ export default class Canvas {
     }).css({
       width: `${width}px`,
       height: `${height}px`,
-      border: '1px gray double',
     }).appendTo('#mainBoard');
 
     const c = document.getElementById('map');
