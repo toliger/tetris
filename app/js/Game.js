@@ -47,8 +47,10 @@ export default class Game {
   tick() {
     const vthis = this;
     (function t() {
-      vthis.pieceController();
-      setTimeout(t, 1000 / (1 + (vthis.difficulty * 2)));
+      if (vthis.gameBoard.current){
+        vthis.pieceController();
+        setTimeout(t, 1000 / (1 + (vthis.difficulty * 2)));
+      }
     }());
   }
 }

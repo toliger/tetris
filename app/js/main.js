@@ -44,6 +44,7 @@ $(document).ready(() => {
 
       case ' ': {
         board.bigMoveDown();
+        board.update();
         break;
       }
 

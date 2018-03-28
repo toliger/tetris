@@ -40,6 +40,7 @@ export default class GameBoard extends Canvas {
     };
 
     this.rules = new Rules();
+    this.current = true;
   }
 
 
@@ -81,6 +82,17 @@ export default class GameBoard extends Canvas {
     this.ctx.font = '80px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Wall Grind', this.size.real.width / 2, this.size.real.height / 2);
+  }
+
+  drawGameOver() {
+    this.clearBoard();
+    this.ctx.fillStyle = '#f4c842';
+    this.ctx.fillRect(0, 0, this.size.real.width, this.size.real.height);
+
+    this.ctx.fillStyle = '#8c701c';
+    this.ctx.font = '80px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('Game Over', this.size.real.width / 2, this.size.real.height / 2);
   }
 
 
@@ -136,7 +148,8 @@ export default class GameBoard extends Canvas {
     this.piece.y = 0;
     this.piece = this.pieces[Random(0, 6)];
     if(!this.checkBehind()) {
-      console.log('Game Over');
+      this.current = false;
+      this.drawGameOver();
     }
 
     if (this.rules.randomColor) {
@@ -170,7 +183,8 @@ export default class GameBoard extends Canvas {
 
 
   checkBehind() {
-    const blocks = this.piece.shape[this.piece.offset];
+    const blocks = this.getPos(this.piece.shape[this.piece.offset]);
+    console.log(blocks);
     for (let i = 0; i < blocks.length; i += 1) {
       if (this.map[blocks[i][1] + 1][blocks[i][0] + 2] !== 0) {
         return false;
