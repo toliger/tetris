@@ -73,7 +73,7 @@ $(document).ready(() => {
 
 
   $('#checkBlind').change(() => {
-    board.rules.blindmode = $('#checkBlind').is(":checked");checkBmode
+    board.rules.blindmode = $('#checkBlind').is(":checked");
   });
 
   $('#checkBmode').change(() => {
