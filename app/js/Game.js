@@ -36,7 +36,6 @@ export default class Game {
       this.music = new Music();
       this.music.play();
     }
-
   }
 
   pieceController() {
@@ -47,7 +46,7 @@ export default class Game {
   tick() {
     const vthis = this;
     (function t() {
-      if (vthis.gameBoard.current){
+      if (vthis.gameBoard.current) {
         vthis.pieceController();
         setTimeout(t, 1000 / (1 + (vthis.difficulty * 2)));
       }

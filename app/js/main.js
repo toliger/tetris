@@ -53,9 +53,9 @@ $(document).ready(() => {
         e.preventDefault();
         break;
 
-        case 'Enter':
-          game.startgame();
-          break;
+      case 'Enter':
+        game.startgame();
+        break;
 
       default:
     }
@@ -74,11 +74,11 @@ $(document).ready(() => {
 
 
   $('#checkBlind').change(() => {
-    board.rules.blindmode = $('#checkBlind').is(":checked");
+    board.rules.blindmode = $('#checkBlind').is(':checked');
   });
 
   $('#checkBmode').change(() => {
-    board.rules.bmode = $('#checkBmode').is(":checked");
+    board.rules.bmode = $('#checkBmode').is(':checked');
   });
 
   $('#start').click(() => {
@@ -88,5 +88,4 @@ $(document).ready(() => {
       .toggleClass('fa-angle-down')
       .toggleClass('fa-angle-up');
   });
-
 });
