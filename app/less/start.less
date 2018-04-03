@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Title';
+  src: url('../ressources/fonts/title.ttf');
+}
+
 a {
   text-decoration: none;
   color: white;
@@ -33,22 +38,22 @@ body {
     overflow: hidden;
     
     #t1, #t2 {
-      background-color: orange;
       color: white;
-      font-size: 3em;
+      font-size: 5em;
       margin: 0;
       position: absolute;
       width: 10vw;
       top: 40vh;
       text-align: center;
+      font-family: 'title', serif;
     }
 
     #t1 {
-      left: -10vw;
+      left: -30vw;
     }
 
     .anim1 {
-      transform: translate(50vw);
+      transform: translate(62vw);
       transition-duration: 5s;
     }
 
@@ -65,8 +70,9 @@ body {
       color: white;
       position: absolute;
       bottom: -10vh;
-      font-size: 1.4em;
+      font-size: 2em;
       font-weight: bold;
+      font-family: sans-serif;
     }
   
     .anim3 {
