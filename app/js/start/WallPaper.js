@@ -10,7 +10,7 @@ function calculate(value) {
     res[1] += 0.1;
     return res;
   }
-  if (res[1] - 0.2 < 0) {
+  if (res[1] - 0.2 < 0.2) {
     res[0] = 1;
     return res;
   }
