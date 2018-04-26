@@ -11,7 +11,7 @@
     }
 
     .game-item h3 {
-        background-color: lightblue;
+        background-color: black;
         margin: 0;
         padding: 10px;
     }
@@ -20,7 +20,9 @@
         flex: 1 0 auto;
         position: relative;
         //width: 10%;
-        box-shadow: 5px 5px 10px black;
+        box-shadow: 5px 5px 10px white;
+        border: 2px solid yellow;
+        border-radius: 5px 5px 5px 5px;
         overflow: scroll;
 
         .settings {
@@ -42,7 +44,21 @@
             margin: auto;
 
             canvas {
-                border: 2px solid black;
+                border: 2px solid lightblue;
+            }
+        }
+        #start {
+            margin: auto;
+            padding: 10px;
+            background-color: lightgreen;
+            border-radius: 15px;
+            border: 2px solid yellow;
+            font-size: 1.3em;
+            font-weight: bold;
+            width: 150px;
+            
+            &:hover {
+                background-color: burlywood;
             }
         }
     }
@@ -50,9 +66,10 @@
     #mainBoard {
         flex: 1 1 auto;
         padding: 10px;
-
+        
         canvas {
-            border: 3px solid black;
+            box-shadow: 5px 5px 10px white;
+            border: 3px solid lightblue;
         }
     }
 

@@ -1,14 +1,20 @@
-@backgroundcolor : white;
+@font-face {
+    font-family: 'Title';
+    src: url('../ressources/fonts/title.ttf');
+  }
+
+@backgroundcolor : rgb(20,20,20);
+@textcolor: white;
 
 body {
     background-color: @backgroundcolor;
+    color: @textcolor;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
 
     header {
         margin: 0 0 10px 0;
-        background-color: white;
     }
 
     #navbar {
@@ -26,6 +32,8 @@ body {
         }
         .titre {
             flex: 1 1 auto;
+            
+            font-family: 'title', sans-serif;
         }
         .menu {
             flex: 1 1 auto;
@@ -47,8 +55,8 @@ body {
                 
             }
             .active {
-                color: black;
-                text-decoration: underline;
+                color: bisque;
+                text-transform: uppercase;
             }
         }
             

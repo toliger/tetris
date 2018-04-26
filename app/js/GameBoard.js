@@ -149,8 +149,8 @@ export default class GameBoard extends Canvas {
     const CaseY = this.size.real.height / this.size.abstract.height;
 
     for (let i = 0; i < p.shape[f].length; i += 1) {
-      const marginLeft = (p.shape[f][i][0] + 1) * CaseX;
-      const marginTop = (p.shape[f][i][1] + 1) * CaseY;
+      const marginLeft = (p.shape[f][i][0] + 6) * CaseX;
+      const marginTop = (p.shape[f][i][1] + 3) * CaseY;
       this.np_ctx.fillRect(marginLeft, marginTop, CaseX, CaseY);
     }
   }
