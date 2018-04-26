@@ -32,6 +32,9 @@ export default class GameBoard extends Canvas {
       new J(8, 0),
     ];
     this.map = this.generateMapArray();
+    this.next_piece = {};
+    this.next_piece = this.pieces[Random(0, 6)];
+    this.next_piece.color = generateRandomHex();
 
     //= ========= Canvas creation
     this.position = {
@@ -41,6 +44,12 @@ export default class GameBoard extends Canvas {
 
     this.rules = new Rules();
     this.current = true;
+    this.np_ctx = document.getElementById('nextPieceCnv').getContext('2d');
+    this.np_size = {
+      width: $('#nextPieceCnv').width(),
+      height: $('#nextPieceCnv').height()
+    }
+
   }
 
 
@@ -130,6 +139,24 @@ export default class GameBoard extends Canvas {
     }
   }
 
+  drawNextPiece() {
+    const p = this.next_piece;
+    this.np_ctx.fillStyle = this.next_piece.color;
+    this.np_ctx.globalAlpha = 1;
+
+    const f = 0;
+    const CaseX = this.size.real.width / this.size.abstract.width;
+    const CaseY = this.size.real.height / this.size.abstract.height;
+
+    for (let i = 0; i < p.shape[f].length; i += 1) {
+      const marginLeft = (p.shape[f][i][0] + 1) * CaseX;
+      const marginTop = (p.shape[f][i][1] + 1) * CaseY;
+      this.np_ctx.fillRect(marginLeft, marginTop, CaseX, CaseY);
+    }
+  }
+
+
+
 
   // Update display
   update() {
@@ -146,17 +173,21 @@ export default class GameBoard extends Canvas {
   newPiece() {
     this.piece.x = 8;
     this.piece.y = 0;
-    this.piece = this.pieces[Random(0, 6)];
+    this.piece = this.next_piece;
+    this.next_piece = this.pieces[Random(0, 6)];
     if (!this.checkBehind()) {
       this.current = false;
       this.drawGameOver();
     }
 
     if (this.rules.randomColor) {
-      this.piece.color = generateRandomHex();
+      this.piece.color = this.next_piece.color;
+      this.next_piece.color = generateRandomHex();
     }
 
     this.piece.alpha = 1;
+    this.np_ctx.clearRect(0, 0, this.np_size.width, this.np_size.height);
+    this.drawNextPiece();
   }
 
 
