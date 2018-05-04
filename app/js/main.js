@@ -43,8 +43,10 @@ $(document).ready(() => {
       }
 
       case ' ': {
-        board.bigMoveDown();
-        board.update();
+        if(board.current) {
+          board.bigMoveDown();
+          board.update();
+        }
         e.preventDefault();
         break;
       }
