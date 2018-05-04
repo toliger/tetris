@@ -1,5 +1,6 @@
 export default class Score {
-  constructor() {
+  constructor(username = 'Jean') {
+    this.username = username;
     // lines
     this.lscore = 0;
     // points

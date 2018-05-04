@@ -12,9 +12,10 @@ export default class GameBoard extends Canvas {
   constructor(height = 700, width = 400) {
     super(height, width);
 
+    this.score = new Score('Paul');
+
     this.scoreboard = new ScoreBoard();
 
-    this.score = new Score();
     //= ========= Current piece
     this.piece = {};
     this.size = {
@@ -106,7 +107,7 @@ export default class GameBoard extends Canvas {
     this.ctx.font = '80px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Game Over', this.size.real.width / 2, this.size.real.height / 2);
-    this.scoreboard.display();
+    this.scoreboard.add(this.score);
   }
 
 
