@@ -106,7 +106,11 @@ export default class GameBoard extends Canvas {
     this.ctx.font = '80px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Game Over', this.size.real.width / 2, this.size.real.height / 2);
+<<<<<<< HEAD
     this.scoreboard.display();
+=======
+
+>>>>>>> 90e733c204fcc240226b82fae0bf7c7b693d6bbd
   }
 
 
@@ -165,9 +169,11 @@ export default class GameBoard extends Canvas {
 
   // Update display
   update() {
-    this.clearBoard();
-    this.drawWall();
-    this.drawPiece();
+    if(this.current) {
+      this.clearBoard();
+      this.drawWall();
+      this.drawPiece();
+    }
   }
 
 
@@ -183,16 +189,17 @@ export default class GameBoard extends Canvas {
     if (!this.checkBehind()) {
       this.current = false;
       this.drawGameOver();
+    } else {
+      if (this.rules.randomColor) {
+        this.piece.color = this.next_piece.color;
+        this.next_piece.color = generateRandomHex();
+      }
+  
+      this.piece.alpha = 1;
+      this.np_ctx.clearRect(0, 0, this.np_size.width, this.np_size.height);
+      this.drawNextPiece();
     }
 
-    if (this.rules.randomColor) {
-      this.piece.color = this.next_piece.color;
-      this.next_piece.color = generateRandomHex();
-    }
-
-    this.piece.alpha = 1;
-    this.np_ctx.clearRect(0, 0, this.np_size.width, this.np_size.height);
-    this.drawNextPiece();
   }
 
 
@@ -340,4 +347,5 @@ export default class GameBoard extends Canvas {
       this.piece.rotate();
     }
   }
+
 }
