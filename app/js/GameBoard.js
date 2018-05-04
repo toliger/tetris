@@ -1,14 +1,18 @@
 import { T, L, J, Z, S, I, O } from './Piece.js';
 import Random from './utils/Random.js';
 import { generateRandomHex } from './utils/ColorGeneration.js';
+import ScoreBoard from './ScoreBoard.js';
 import Canvas from './Canvas.js';
 import Score from './Score.js';
 import Rules from './Rules.js';
 
 
+
 export default class GameBoard extends Canvas {
   constructor(height = 700, width = 400) {
     super(height, width);
+
+    this.scoreboard = new ScoreBoard();
 
     this.score = new Score();
     //= ========= Current piece
@@ -102,6 +106,7 @@ export default class GameBoard extends Canvas {
     this.ctx.font = '80px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Game Over', this.size.real.width / 2, this.size.real.height / 2);
+    this.scoreboard.display();
   }
 
 

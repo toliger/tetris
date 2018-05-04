@@ -17,6 +17,23 @@ body {
         margin: 0 0 10px 0;
     }
 
+    #scoreboard {
+      width: 100vw;
+      height: 100vh;
+      background-color: yellow;
+      position: absolute;
+      z-index: 2;
+      margin-top: -100vh;
+      transition: margin-top 2s;
+    }
+
+    .scoreboardActive {
+      margin-top: 0 !important;
+      transition: margin-top 2s;
+    }
+
+
+
     #navbar {
         display: flex;
         flex-flow: row nowrap;
@@ -32,7 +49,7 @@ body {
         }
         .titre {
             flex: 1 1 auto;
-            
+
             font-family: 'title', sans-serif;
         }
         .menu {
@@ -41,7 +58,7 @@ body {
             flex-flow: row wrap;
             justify-content: flex-end;
             align-content: center;
-            
+
             section {
                 text-align: center;
                 padding: 10px;
@@ -52,17 +69,17 @@ body {
                 &:hover {
                     text-decoration: underline;
                 }
-                
+
             }
             .active {
                 color: bisque;
                 text-transform: uppercase;
             }
         }
-            
+
 
     }
 
     @import 'game/game.less';
-    
+
 }
