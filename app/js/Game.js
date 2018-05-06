@@ -38,6 +38,13 @@ export default class Game {
     }
   }
 
+  restartGame() {
+    this.gameBoard.restartGame();
+    this.gameBoard.current = true;
+    this.startgame();
+    this.tick();
+  }
+
   pieceController() {
     this.gameBoard.mvDown();
     this.gameBoard.update();
@@ -52,4 +59,5 @@ export default class Game {
       }
     }());
   }
+
 }

@@ -55,6 +55,8 @@ export default class GameBoard extends Canvas {
       height: $('#nextPieceCnv').height()
     }
 
+    this.scoreboard.init();
+
   }
 
 
@@ -343,6 +345,12 @@ export default class GameBoard extends Canvas {
     if (this.checkRotate()) {
       this.piece.rotate();
     }
+  }
+
+  restartGame() {
+    this.score.resetScore();
+    this.map = this.generateMapArray();
+    this.scoreboard.removeBoard();
   }
 
 }

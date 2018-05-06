@@ -91,4 +91,8 @@ $(document).ready(() => {
       .toggleClass('fa-angle-down')
       .toggleClass('fa-angle-up');
   });
+
+  $('#restart').click(() => {
+    game.restartGame();
+  });
 });

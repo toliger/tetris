@@ -30,4 +30,9 @@ export default class Score {
   get lines() {
     return this.lscore;
   }
+
+  resetScore() {
+    this.pscore = 0;
+    this.lscore = 0;
+  }
 }
