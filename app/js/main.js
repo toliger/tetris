@@ -95,4 +95,8 @@ $(document).ready(() => {
   $('#restart').click(() => {
     game.restartGame();
   });
+
+  $('#resetScoreBoard').click(() => {
+    game.gameBoard.scoreboard.removeStorage();
+  });
 });
