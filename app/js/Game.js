@@ -6,7 +6,7 @@ export default class Game {
   constructor() {
     this.gameBoard = new GameBoard();
 
-    this.multijoueur = JSON.parse(sessionStorage.settings.multiplayer);
+    this.multijoueur = JSON.parse(sessionStorage.getItem('settings')).multiplayer;
 
     if (this.multijoueur) {
       this.gameBoard1 = new GameBoard('#mainBoard2');

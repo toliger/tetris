@@ -23,7 +23,8 @@ $(document).ready(() => {
       user: $('#userinput').val(),
       difficulty: $('#diffselector').val(),
       blind: $('#checkBlind').is(':checked') ? true : false,
-      bmode: $('#checkBmode').is(':checked') ? true : false
+      bmode: $('#checkBmode').is(':checked') ? true : false,
+      multiplayer: $('#checkMulti').is(':checked') ? true : false
     })
   });
 });
