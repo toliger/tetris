@@ -78,24 +78,22 @@ $(document).ready(() => {
         break;
       }
 
-
-      case ' ': {
-        if(board.current) {
-          board.bigMoveDown();
-          board.update();
+      case 'Enter': {
+        if (game.multijoueur) {
+          game.gameBoard1.bigMoveDown();
+          game.gameBoard1.update();
         }
         e.preventDefault();
         break;
       }
 
-      case 'h':
-        console.log(board.map);
+
+      case ' ': {
+        board.bigMoveDown();
+        board.update();
         e.preventDefault();
         break;
-
-      case 'Enter':
-        game.startgame();
-        break;
+      }
 
       default:
     }
