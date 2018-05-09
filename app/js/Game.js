@@ -15,6 +15,7 @@ export default class Game {
     this.socket = new SocketIO();
     this.difficulty = 0;
     this.current = false;
+    this.parseSettings();
   }
 
   drawLogo() {
@@ -25,13 +26,6 @@ export default class Game {
   startgame() {
     if (!this.current) {
       this.current = true;
-      if ($('#checkBlind').is(':checked')) {
-        this.gameBoard.blindmode = true;
-      }
-
-      if ($('#checkBmode').is(':checked')) {
-        this.gameBoard.bmode = true;
-      }
 
       this.gameBoard.clearBoard();
       this.gameBoard.newPiece();
@@ -61,9 +55,27 @@ export default class Game {
     (function t() {
       if (vthis.gameBoard.current) {
         vthis.pieceController();
-        setTimeout(t, 1000 / (1 + (vthis.difficulty * 2)));
+        console.log(vthis.gameBoard.rules.difficulty);
+        setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2)));
       }
     }());
+  }
+
+  parseSettings() {
+    let settings = JSON.parse(sessionStorage.settings);
+    this.gameBoard.rules.user = settings.user;
+    this.gameBoard.rules.blindmode = settings.blind;
+    this.gameBoard.rules.bmode = settings.blind;
+    this.gameBoard.rules.difficulty = settings.difficulty;
+    this.gameBoard.score.username = settings.user;
+    $("#namespan").html(settings.user);
+    $("#diffspan").html(settings.difficulty);
+    $("#blindspan").html(() => {
+      return settings.blind ? 'Activé' : 'Désactivé';
+    });
+    $("#bmodespan").html(() => {
+      return settings.bmode ? 'Activé' : 'Désactivé';
+    });
   }
 
 }

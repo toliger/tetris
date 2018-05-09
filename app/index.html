@@ -6,10 +6,37 @@
   </head>
   <body>
     <div id="title">
-      <span id="t1">WALL</span>
-      <span id="t2">GRIND</span>
-      <a href="game.html">Start game</a>
+      WALLGRIND
     </div>
+    <div id="settings">
+      <label for="user">Nom</label>
+      <input type="text" id="userinput" name="user">
+      <label for="difficulty">Difficulté</label>
+      <select name="difficulty" id="diffselector">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+      </select>
+      <br>
+      <div id="options">
+        Options supplémentaires<br><br>
+        <div class="stfield">
+            <input id="checkBlind" type="checkbox" name="bonus" value="true">
+            <label for="bonus">Mode Aveugle</label> <br>
+        </div>
+        <div class="stfield">
+            <input id="checkBmode" type="checkbox" name="bonus" value="true">
+            <label for="bonus">Mode B</label>
+        </div>
+    </div>
+    </div>
+    <a id="linkstart" href="game.html">Start game</a>
     <canvas id="wall">
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"

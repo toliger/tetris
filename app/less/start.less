@@ -24,60 +24,52 @@ body {
   }
 
   #title {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
     z-index: 1000;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    left: 25vw;
     overflow: hidden;
+    font-family: 'title', serif;
+    text-align: center;
+    top: -40vh;
+    width: 50vw;
+    color: white;
+    font-size: 1em;
+
+
     
-    #t1, #t2 {
-      color: white;
-      font-size: 5em;
-      margin: 0;
-      position: absolute;
-      width: 10vw;
-      top: 40vh;
-      text-align: center;
-      font-family: 'title', serif;
+  }
+  #linkstart {
+    color: white;
+    position: absolute;
+    display: block;
+    bottom: -20vh;
+    width: 50vw;
+    left: 25vw;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    font-family: sans-serif;
+  }
+
+  #settings {
+    position: absolute;
+    width: 50vw;
+    text-align: center;
+    left: 25vw;
+    top: 40vh;
+    display: none;
+    background-color: black;
+    border: 2px solid yellow;
+    color: white;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    input, label {
+      margin: 5px;
     }
 
-    #t1 {
-      left: -30vw;
-    }
-
-    .anim1 {
-      transform: translate(62vw);
-      transition-duration: 5s;
-    }
-
-    #t2 {
-      right: -10vw;
-    }
-
-    .anim2 {
-      transform: translate(-50vw);
-      transition-duration: 5s;
-    }
-
-    a {
-      color: white;
-      position: absolute;
-      bottom: -10vh;
-      font-size: 2em;
-      font-weight: bold;
-      font-family: sans-serif;
-    }
-  
-    .anim3 {
-      transform: translate(0, -50vh);
-      transition-duration: 5s;
+    label {
+      display: block;
     }
   }
 
