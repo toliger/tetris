@@ -9,8 +9,10 @@ import Rules from './Rules.js';
 
 
 export default class GameBoard extends Canvas {
-  constructor(height = 700, width = 400, gameBoardName = '#mainBoard') {
+  constructor(gameBoardName = 'mainBoard', height = 700, width = 400) {
     super(height, width, gameBoardName);
+
+    this.gameBoardName = gameBoardName;
 
     this.score = new Score();
 
@@ -42,9 +44,10 @@ export default class GameBoard extends Canvas {
     this.next_piece.color = generateRandomHex();
 
     //= ========= Canvas creation
+    console.log(`#map${ this.gameBoardName }`);
     this.position = {
-      x: $('#map').position().top,
-      y: $('#map').position().left,
+      x: $(`#map${ this.gameBoardName }`).position().top,
+      y: $(`#map${ this.gameBoardName }`).position().left,
     };
 
     this.rules = new Rules();

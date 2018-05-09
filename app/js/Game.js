@@ -9,7 +9,8 @@ export default class Game {
     this.multijoueur = JSON.parse(sessionStorage.getItem('settings')).multiplayer;
 
     if (this.multijoueur) {
-      this.gameBoard1 = new GameBoard('#mainBoard2');
+      console.log("multi");
+      this.gameBoard1 = new GameBoard('mainBoard2');
     }
     this.drawLogo();
     this.socket = new SocketIO();
@@ -21,6 +22,11 @@ export default class Game {
   drawLogo() {
     this.gameBoard.clearBoard();
     this.gameBoard.drawWallGrind();
+
+    if (this.multijoueur) {
+      this.gameBoard1.clearBoard();
+      this.gameBoard1.drawWallGrind();
+    }
   }
 
   startgame() {
