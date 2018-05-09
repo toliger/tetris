@@ -9,8 +9,8 @@ import Rules from './Rules.js';
 
 
 export default class GameBoard extends Canvas {
-  constructor(height = 700, width = 400) {
-    super(height, width);
+  constructor(height = 700, width = 400, gameBoardName = '#mainBoard') {
+    super(height, width, gameBoardName);
 
     this.score = new Score('Paul');
 

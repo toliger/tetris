@@ -5,6 +5,12 @@ import SocketIO from './SocketIO.js';
 export default class Game {
   constructor() {
     this.gameBoard = new GameBoard();
+
+    this.multijoueur = JSON.parse(sessionStorage.settings.multiplayer);
+
+    if (this.multijoueur) {
+      this.gameBoard1 = new GameBoard('#mainBoard2');
+    }
     this.drawLogo();
     this.socket = new SocketIO();
     this.difficulty = 0;

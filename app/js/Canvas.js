@@ -1,6 +1,6 @@
 export default class Canvas {
-  constructor(height, width) {
-    $('#mainBoard').css({
+  constructor(height, width, canvasid) {
+    $(canvasid).css({
       width: `${width}px`,
       height: `${height}px`,
     });
@@ -10,7 +10,7 @@ export default class Canvas {
     }).css({
       width: `${width}px`,
       height: `${height}px`,
-    }).appendTo('#mainBoard');
+    }).appendTo(canvasid);
 
     const c = document.getElementById('map');
     c.width = width;
