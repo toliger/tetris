@@ -56,7 +56,7 @@ export default class Game {
       if (vthis.gameBoard.current) {
         vthis.pieceController();
         console.log(vthis.gameBoard.rules.difficulty);
-        setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2)));
+        setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       }
     }());
   }
