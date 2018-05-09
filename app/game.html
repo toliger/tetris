@@ -47,31 +47,12 @@
     <section id="game" class="solo">
         <div id="sideBoard" class="game-item">
             <h3>Tableau de bord</h3>
-            <h4 id="settings">Paramètres <i class="fa fa-angle-down"></i></h4>
+            <h4 id="settings">Paramètres</h4>
             <div class="settings">
-                <div class="stfield">
-                    <label for="user">Pseudo : </label>
-                    <input id="usrinput" type="text" name="user"> <br>
-                </div>
-                <div class="stfield">
-                    <label for="difficulty">Difficulté : </label>
-                    <select name="difficulty" id="diffSelect">
-                        <option value="0">Facile</option>
-                        <option value="1">Normal</option>
-                        <option value="2">Difficile</option>
-                    </select>
-                </div>
-                <div id="options">
-                    Options supplémentaires : <br>
-                    <div class="stfield">
-                        <input id="checkBlind" type="checkbox" name="bonus" value="true">
-                        <label for="bonus">Mode Aveugle</label> <br>
-                    </div>
-                    <div class="stfield">
-                        <input id="checkBmode" type="checkbox" name="bonus" value="true">
-                        <label for="bonus">Mode B</label>
-                    </div>
-                </div>
+                <p>Nom : <span id="namespan"></span></p>
+                <p>Difficulté : <span id="diffspan"></span></p>
+                <p>Mode aveugle : <span id="blindspan"></span></p>
+                <p>Mode B : <span id="bmodespan"></span></p>
             </div>
             <input id="start" type="button" value="Start">
 

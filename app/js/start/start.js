@@ -7,9 +7,23 @@ setInterval(() => {
 }, 50);
 
 $(document).ready(() => {
-  window.setTimeout(() => {
-    $('#t1').addClass('anim1');
-    $('#t2').addClass('anim2');
-    $('a').addClass('anim3');
-  }, 3000);
+  $("#title").animate({
+    top: "30vh",
+    fontSize:"4em"
+  }, 1000, () => {
+    $("#settings").fadeIn("slow", () => {
+      $("#linkstart").animate({
+        bottom: "20vh"
+      });
+    });
+  });
+
+  $("#linkstart").click(() => {
+    sessionStorage.settings = JSON.stringify({
+      user: $('#userinput').val(),
+      difficulty: $('#diffselector').val(),
+      blind: $('#checkBlind').is(':checked') ? true : false,
+      bmode: $('#checkBmode').is(':checked') ? true : false
+    })
+  });
 });

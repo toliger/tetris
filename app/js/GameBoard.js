@@ -12,7 +12,7 @@ export default class GameBoard extends Canvas {
   constructor(height = 700, width = 400) {
     super(height, width);
 
-    this.score = new Score('Paul');
+    this.score = new Score();
 
     this.scoreboard = new ScoreBoard();
 
@@ -290,6 +290,11 @@ export default class GameBoard extends Canvas {
 
     this.removeLine(i);
     this.score.lines += 1;
+
+    if(this.score.lines%2 == 0) {
+      this.rules.difficulty += 1;
+      $("#diffspan").html(this.rules.difficulty);
+    }
   }
 
 
