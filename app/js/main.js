@@ -42,6 +42,43 @@ $(document).ready(() => {
         break;
       }
 
+      case 'i': {
+        if (game.multijoueur) {
+          game.gameBoard1.rotate();
+          game.gameBoard1.update();
+        }
+        e.preventDefault();
+        break;
+      }
+
+      case 'j': {
+        if (game.multijoueur) {
+          game.gameBoard1.mvLeft();
+          game.gameBoard1.update();
+        }
+        e.preventDefault();
+        break;
+      }
+
+      case 'k': {
+        if (game.multijoueur) {
+          game.gameBoard1.mvDown();
+          game.gameBoard1.update();
+        }
+        e.preventDefault();
+        break;
+      }
+
+      case 'l': {
+        if (game.multijoueur) {
+          game.gameBoard1.mvRight();
+          game.gameBoard1.update();
+        }
+        e.preventDefault();
+        break;
+      }
+
+
       case ' ': {
         if(board.current) {
           board.bigMoveDown();

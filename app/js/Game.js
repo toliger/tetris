@@ -35,9 +35,13 @@ export default class Game {
 
       this.gameBoard.clearBoard();
       this.gameBoard.newPiece();
-
-      // ========== Display updating
       this.gameBoard.update();
+
+      if (this.multijoueur) {
+        this.gameBoard1.clearBoard();
+        this.gameBoard1.newPiece();
+        this.gameBoard1.update();
+      }
       this.tick();
       this.music = new Music();
       this.music.play();
@@ -54,6 +58,11 @@ export default class Game {
   pieceController() {
     this.gameBoard.mvDown();
     this.gameBoard.update();
+
+    if (this.multijoueur) {
+      this.gameBoard1.mvDown();
+      this.gameBoard1.update();
+    }
   }
 
   tick() {
@@ -61,7 +70,6 @@ export default class Game {
     (function t() {
       if (vthis.gameBoard.current) {
         vthis.pieceController();
-        console.log(vthis.gameBoard.rules.difficulty);
         setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       }
     }());
