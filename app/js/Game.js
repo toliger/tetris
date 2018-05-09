@@ -16,6 +16,7 @@ export default class Game {
     this.socket = new SocketIO();
     this.difficulty = 0;
     this.current = false;
+    this.pause = false;
     this.parseSettings();
   }
 
@@ -46,6 +47,11 @@ export default class Game {
       this.music = new Music();
       this.music.play();
     }
+
+    if(this.pause) {
+      this.tick();
+      this.pause = false;
+    }
   }
 
   restartGame() {
@@ -70,9 +76,14 @@ export default class Game {
     (function t() {
       if (vthis.gameBoard.current) {
         vthis.pieceController();
-        setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
+        vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       }
     }());
+  }
+
+  pausehandler() {
+    clearTimeout(this.timeout);
+    this.pause = true;
   }
 
   parseSettings() {

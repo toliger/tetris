@@ -123,6 +123,10 @@ $(document).ready(() => {
     game.startgame();
   });
 
+  $('#pause').click(() => {
+    game.pausehandler();
+  });
+
   $('#restart').click(() => {
     game.restartGame();
   });
