@@ -51,7 +51,6 @@ export default class GameBoard extends Canvas {
     };
 
     this.rules = new Rules();
-    this.current = true;
     this.np_ctx = document.getElementById('nextPieceCnv').getContext('2d');
     this.np_size = {
       width: $('#nextPieceCnv').width(),
@@ -174,7 +173,7 @@ export default class GameBoard extends Canvas {
 
   // Update display
   update() {
-    if(this.current) {
+    if(sessionStorage.getItem('ingame')) {
       this.clearBoard();
       this.drawWall();
       this.drawPiece();
@@ -192,9 +191,8 @@ export default class GameBoard extends Canvas {
     this.piece = this.next_piece;
     this.next_piece = this.pieces[Random(0, 6)];
     if (!this.checkBehind()) {
-      this.current = false;
+      sessionStorage.setItem('ingame', false);
       this.drawGameOver();
-      super.gameOver
     } else {
       if (this.rules.randomColor) {
         this.piece.color = this.next_piece.color;

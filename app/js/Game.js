@@ -13,11 +13,10 @@ export default class Game {
       this.gameBoard1.rules = this.gameBoard.rules;
     }
     this.drawLogo();
-    this.socket = new SocketIO();
     this.difficulty = 0;
-    this.current = false;
+    sessionStorage.setItem('ingame', false);
     this.pause = false;
-    
+
   }
 
   drawLogo() {
@@ -31,8 +30,9 @@ export default class Game {
   }
 
   startgame() {
-    if (!this.current) {
-      this.current = true;
+    console.log(sessionStorage.getItem('ingame'), 'plop');
+    if (!JSON.parse(sessionStorage.getItem('ingame'))) {
+      sessionStorage.setItem('ingame', true);
 
       this.gameBoard.clearBoard();
       this.gameBoard.newPiece();
@@ -74,9 +74,12 @@ export default class Game {
   tick() {
     const vthis = this;
     (function t() {
-      if (vthis.gameBoard.current) {
+      if (JSON.parse(sessionStorage.getItem('ingame'))) {
         vthis.pieceController();
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
+      } else {
+        vthis.gameBoard.drawGameOver();
+        vthis.gameBoard1.drawGameOver();
       }
     }());
   }
