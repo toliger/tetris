@@ -57,6 +57,11 @@ export default class Game {
   restartGame() {
     this.gameBoard.restartGame();
     this.gameBoard.current = true;
+
+    if (this.gameBoard.rules.multiplayer) {
+      this.gameBoard1.restartGame();
+      this.gameBoard1.current = true;
+    }
     this.startgame();
     this.tick();
   }
