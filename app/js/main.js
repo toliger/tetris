@@ -43,7 +43,7 @@ $(document).ready(() => {
       }
 
       case 'i': {
-        if (game.multijoueur) {
+        if (game.gameBoard.rules.multiplayer) {
           game.gameBoard1.rotate();
           game.gameBoard1.update();
         }
@@ -52,7 +52,7 @@ $(document).ready(() => {
       }
 
       case 'j': {
-        if (game.multijoueur) {
+        if (game.gameBoard.rules.multiplayer) {
           game.gameBoard1.mvLeft();
           game.gameBoard1.update();
         }
@@ -61,7 +61,7 @@ $(document).ready(() => {
       }
 
       case 'k': {
-        if (game.multijoueur) {
+        if (game.gameBoard.rules.multiplayer) {
           game.gameBoard1.mvDown();
           game.gameBoard1.update();
         }
@@ -70,7 +70,7 @@ $(document).ready(() => {
       }
 
       case 'l': {
-        if (game.multijoueur) {
+        if (game.gameBoard.rules.multiplayer) {
           game.gameBoard1.mvRight();
           game.gameBoard1.update();
         }
@@ -79,7 +79,7 @@ $(document).ready(() => {
       }
 
       case 'Enter': {
-        if (game.multijoueur) {
+        if (game.gameBoard.rules.multiplayer) {
           game.gameBoard1.bigMoveDown();
           game.gameBoard1.update();
         }

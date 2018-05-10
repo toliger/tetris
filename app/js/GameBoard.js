@@ -9,12 +9,12 @@ import Rules from './Rules.js';
 
 
 export default class GameBoard extends Canvas {
-  constructor(gameBoardName = 'mainBoard', height = 700, width = 400) {
+  constructor(gameBoardName = 'mainBoard', boardNumber = 1, height = 700, width = 400) {
     super(height, width, gameBoardName);
 
     this.gameBoardName = gameBoardName;
 
-    this.score = new Score();
+    this.score = new Score('mouloud',boardNumber);
 
     this.scoreboard = new ScoreBoard();
 
@@ -112,7 +112,10 @@ export default class GameBoard extends Canvas {
     this.ctx.font = '80px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Game Over', this.size.real.width / 2, this.size.real.height / 2);
-    this.scoreboard.add(this.score);
+    if(!this.rules.multiplayer) {
+      this.scoreboard.add(this.score);
+    }
+
   }
 
 
@@ -191,6 +194,7 @@ export default class GameBoard extends Canvas {
     if (!this.checkBehind()) {
       this.current = false;
       this.drawGameOver();
+      super.gameOver
     } else {
       if (this.rules.randomColor) {
         this.piece.color = this.next_piece.color;
@@ -294,7 +298,7 @@ export default class GameBoard extends Canvas {
     this.removeLine(i);
     this.score.lines += 1;
 
-    if(this.score.lines%2 == 0) {
+    if(this.score.lines%10 == 0) {
       this.rules.difficulty += 1;
       $("#diffspan").html(this.rules.difficulty);
     }

@@ -5,5 +5,6 @@ export default class Rules {
     this.randomColor = false;
     this.blindmode = false; // blind mode
     this.bmode = false; // B mode
+    this.multiplayer = false;
   }
 }

@@ -1,15 +1,22 @@
 export default class Score {
-  constructor(username = 'Jean') {
+  constructor(username = 'Anonymous', player = 1) {
     this.username = username;
     // lines
     this.lscore = 0;
     // points
     this.pscore = 0;
+
+    this.player = player;
   }
 
   updateDisplay() {
-    $('#score').html(this.pscore);
-    $('#lines').html(this.lscore);
+    if(this.player == 1) {
+      $('#score').html(this.pscore);
+      $('#lines').html(this.lscore);
+    } else {
+      $('#score2').html(this.pscore);
+      $('#lines2').html(this.lscore);
+    }
   }
 
   set score(value) {

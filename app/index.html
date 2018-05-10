@@ -9,8 +9,10 @@
       WALLGRIND
     </div>
     <div id="settings">
-      <label for="user">Nom</label>
-      <input type="text" id="userinput" name="user">
+      <label for="user">Nom du joueur 1</label>
+      <input type="text" id="userinput" name="user" placeholder="Entrez votre pseudo"><br>
+      <label for="user2">Nom du joueur 2</label>
+      <input type="text" id="userinput2" name="user2" placeholder="Entrez votre pseudo" disabled><br>
       <label for="difficulty">Difficulté</label>
       <select name="difficulty" id="diffselector">
         <option value="1">1</option>
@@ -25,7 +27,7 @@
       </select>
       <br>
       <div id="options">
-        Options supplémentaires<br><br>
+        Options supplémentaires
         <div class="stfield">
             <input id="checkBlind" type="checkbox" name="bonus" value="true">
             <label for="bonus">Mode Aveugle</label> <br>

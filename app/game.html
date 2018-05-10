@@ -54,8 +54,10 @@
                 <p>Mode aveugle : <span id="blindspan"></span></p>
                 <p>Mode B : <span id="bmodespan"></span></p>
             </div>
-            <input id="start" type="button" value="Start">
-            <input type="button" id="pause" value="Pause">
+            <div id="buttonsArea">
+                <input id="start" type="button" value="Start">
+                <input type="button" id="pause" value="Pause">
+            </div>
 
             <table id="#gameInfo">
                 <tr>
@@ -77,6 +79,26 @@
         <div id="mainBoard" class="game-item">
         </div>
         <div id="mainBoard2" class="game-item">
+        </div>
+        <div id="sideBoard2" class="game-item">
+            <h3>Tableau de bord</h3>
+
+            <table id="#gameInfo2">
+                <tr>
+                    <th>Score : </th>
+                    <td><span id="score2">0</span></td>
+                </tr>
+                <tr>
+                    <th>Lignes : </th>
+                    <td><span id="lines2">0</span></td>
+                </tr>
+            </table>
+            <div id="nextPiece2">
+                <h4>Prochain Tetromino</h4>
+                <canvas id="nextPieceCnv2">
+
+                </canvas>
+            </div>
         </div>
     </section>
     <script

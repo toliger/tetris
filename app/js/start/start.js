@@ -1,14 +1,14 @@
 import WallPaper from './WallPaper.js';
 
 const wp = new WallPaper();
-
+let p2input = false;
 setInterval(() => {
   wp.refresh();
 }, 50);
 
 $(document).ready(() => {
   $("#title").animate({
-    top: "30vh",
+    top: "20vh",
     fontSize:"4em"
   }, 1000, () => {
     $("#settings").fadeIn("slow", () => {
@@ -27,4 +27,9 @@ $(document).ready(() => {
       multiplayer: $('#checkMulti').is(':checked') ? true : false
     })
   });
+
+  $("#checkMulti").click(() => {
+    $("#userinput2").prop('disabled', p2input);
+    p2input = !p2input;
+  })
 });

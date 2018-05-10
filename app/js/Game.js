@@ -6,25 +6,25 @@ export default class Game {
   constructor() {
     this.gameBoard = new GameBoard();
 
-    this.multijoueur = JSON.parse(sessionStorage.getItem('settings')).multiplayer;
-
-    if (this.multijoueur) {
+    this.parseSettings();
+    if (this.gameBoard.rules.multiplayer) {
       console.log("multi");
-      this.gameBoard1 = new GameBoard('mainBoard2');
+      this.gameBoard1 = new GameBoard('mainBoard2', 2);
+      this.gameBoard1.rules = this.gameBoard.rules;
     }
     this.drawLogo();
     this.socket = new SocketIO();
     this.difficulty = 0;
     this.current = false;
     this.pause = false;
-    this.parseSettings();
+    
   }
 
   drawLogo() {
     this.gameBoard.clearBoard();
     this.gameBoard.drawWallGrind();
 
-    if (this.multijoueur) {
+    if (this.gameBoard.rules.multiplayer) {
       this.gameBoard1.clearBoard();
       this.gameBoard1.drawWallGrind();
     }
@@ -38,7 +38,7 @@ export default class Game {
       this.gameBoard.newPiece();
       this.gameBoard.update();
 
-      if (this.multijoueur) {
+      if (this.gameBoard.rules.multiplayer) {
         this.gameBoard1.clearBoard();
         this.gameBoard1.newPiece();
         this.gameBoard1.update();
@@ -65,7 +65,7 @@ export default class Game {
     this.gameBoard.mvDown();
     this.gameBoard.update();
 
-    if (this.multijoueur) {
+    if (this.gameBoard.rules.multiplayer) {
       this.gameBoard1.mvDown();
       this.gameBoard1.update();
     }
@@ -93,6 +93,7 @@ export default class Game {
     this.gameBoard.rules.bmode = settings.blind;
     this.gameBoard.rules.difficulty = settings.difficulty;
     this.gameBoard.score.username = settings.user;
+    this.gameBoard.rules.multiplayer = settings.multiplayer;
     $("#namespan").html(settings.user);
     $("#diffspan").html(settings.difficulty);
     $("#blindspan").html(() => {
