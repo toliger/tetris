@@ -47,7 +47,7 @@ export default class Game {
         this.gameBoard1.update();
       }
       this.tick();
-      this.music = new Music();
+      this.AudioController.mplay('flamingo_8-bit');
       this.music.play();
     }
 

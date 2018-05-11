@@ -282,6 +282,7 @@ export default class GameBoard extends Canvas {
 
   // Remove a line
   removeLine(l) {
+    this.AudioController.mplay('ptzzz');
     // remove the line l
     this.map.splice(l, 1);
     // add a new "empty" line to the array
