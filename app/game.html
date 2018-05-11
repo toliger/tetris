@@ -31,22 +31,23 @@
             <div class="titre">
                 <h1><a href="index.html">W A L L G R I N D</a></h1>
             </div>
+            <div id="setArea">
+                <div class="settings">
+                    <p>Nom : <span id="namespan"></span></p>
+                    <p>Difficulté : <span id="diffspan"></span></p>
+                    <p>Mode aveugle : <span id="blindspan"></span></p>
+                    <p>Mode B : <span id="bmodespan"></span></p>
+                </div>
+            </div> 
+            <div id="buttonsArea">
+                    <input id="start" type="button" value="Start">
+                    <input type="button" id="pause" value="Pause">
+                </div>
         </div>
     </header>
     <section id="game" class="solo">
         <div id="sideBoard" class="game-item">
-            <h3>Tableau de bord</h3>
-            <h4 id="settings">Paramètres</h4>
-            <div class="settings">
-                <p>Nom : <span id="namespan"></span></p>
-                <p>Difficulté : <span id="diffspan"></span></p>
-                <p>Mode aveugle : <span id="blindspan"></span></p>
-                <p>Mode B : <span id="bmodespan"></span></p>
-            </div>
-            <div id="buttonsArea">
-                <input id="start" type="button" value="Start">
-                <input type="button" id="pause" value="Pause">
-            </div>
+            <h3>Tableau de bord</h3>            
 
             <table id="#gameInfo">
                 <tr>
@@ -67,7 +68,7 @@
         </div>
         <div id="mainBoard" class="game-item">
         </div>
-        <div id="mainBoard2" class="game-item">
+          <div id="mainBoard2" class="game-item">
         </div>
         <div id="sideBoard2" class="game-item">
             <h3>Tableau de bord</h3>
@@ -87,6 +88,7 @@
                 <canvas id="nextPieceCnv2">
 
                 </canvas>
+                
             </div>
         </div>
     </section>

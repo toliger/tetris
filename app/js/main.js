@@ -105,13 +105,6 @@ $(document).ready(() => {
     game.difficulty = $('#diffSelect').val();
   });
 
-  $('#settings').on('click', () => {
-    $('.settings').slideToggle();
-    $('#settings i')
-      .toggleClass('fa-angle-down')
-      .toggleClass('fa-angle-up');
-  });
-
 
   $('#checkBlind').change(() => {
     board.rules.blindmode = $('#checkBlind').is(':checked');

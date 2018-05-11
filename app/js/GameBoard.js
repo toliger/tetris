@@ -16,6 +16,7 @@ export default class GameBoard extends Canvas {
     this.AudioController = new AudioController();
 
     this.gameBoardName = gameBoardName;
+    this.number = boardNumber;
 
     this.score = new Score('mouloud', boardNumber);
 
@@ -57,8 +58,11 @@ export default class GameBoard extends Canvas {
 
     this.rules = new Rules();
     this.rules.ingame = true;
-
-    this.np_ctx = document.getElementById('nextPieceCnv').getContext('2d');
+    if(boardNumber == 1) {
+      this.np_ctx = document.getElementById('nextPieceCnv').getContext('2d');
+    } else {
+      this.np_ctx = document.getElementById('nextPieceCnv2').getContext('2d');
+    }
     this.np_size = {
       width: $('#nextPieceCnv').width(),
       height: $('#nextPieceCnv').height()

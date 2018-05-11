@@ -118,6 +118,40 @@ body {
             }
         }
 
+        #start, #pause {
+            margin: 5px auto 5px auto;
+            padding: 10px;
+            background-color: lightgreen;
+            border-radius: 10px;
+            border: 2px solid yellow;
+            font-size: 1.3em;
+            font-weight: bold;
+            width: 150px;
+            flex: 1;
+    
+            &:hover {
+                background-color: burlywood;
+            }
+        }
+
+        #buttonArea {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        .settings {
+            text-align: left;
+            padding-left: 10%;
+            position: relative;
+            width: 50vw;
+            text-transform: uppercase;
+            margin-top: 20px;
+
+            p {
+                display: inline;
+            } 
+        }
+
 
     }
 
