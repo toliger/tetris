@@ -68,6 +68,7 @@ export default class Game {
       this.gameBoard1.restartGame();
     }
     this.startgame();
+    clearTimeout(this.timeout);
     this.tick();
   }
 
@@ -86,6 +87,7 @@ export default class Game {
     (function t() {
       if (vthis.gameBoard.rules.ingame) {
         vthis.pieceController();
+        console.log(vthis.gameBoard.rules.difficulty);
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty) * 2))));
       } else {
         vthis.AudioController.mplay('loose');

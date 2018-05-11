@@ -26,20 +26,21 @@ export default class GameBoard extends Canvas {
     this.size = {
       real: { height, width },
       abstract: {
-        height: 22,
+        height:22,
         width: 10,
       },
     };
 
     //= ========= Shapes Array
+    let initpos = this.size.abstract.width / 2;
     this.pieces = [
-      new L(8, 0),
-      new S(8, 0),
-      new Z(8, 0),
-      new T(8, 0),
-      new I(8, 0),
-      new O(8, 0),
-      new J(8, 0),
+      new L(initpos, 0),
+      new S(initpos, 0),
+      new Z(initpos, 0),
+      new T(initpos, 0),
+      new I(initpos, 0),
+      new O(initpos, 0),
+      new J(initpos, 0),
     ];
     this.map = this.generateMapArray();
 
@@ -79,15 +80,16 @@ export default class GameBoard extends Canvas {
     for(let i = 0; i < this.size.abstract.width + 2; i += 1) {
       auxTab.push(1);
     }
-    let auxTab2 = [];
-    for(let i = 0; i < this.size.abstract.width + 2; i += 1) {
-      auxTab2.push((i == 0 || i == this.size.abstract.width - 1) ? 1 : 0);
-    }
     res.push(auxTab);
     for (let i = 0; i < this.size.abstract.height; i += 1) {
+      let auxTab2 = [];
+      for(let i = 0; i < this.size.abstract.width + 2; i += 1) {
+        auxTab2.push((i == 0 || i == this.size.abstract.width + 1) ? 1 : 0);
+      }
       res.push(auxTab2);
     }
     res.push(auxTab);
+    console.log(res);
     return res;
   }
 
@@ -186,8 +188,8 @@ export default class GameBoard extends Canvas {
     const CaseY = this.size.real.height / this.size.abstract.height;
 
     for (let i = 0; i < p.shape[f].length; i += 1) {
-      const marginLeft = (p.shape[f][i][0] + 6) * CaseX;
-      const marginTop = (p.shape[f][i][1] + 3) * CaseY;
+      const marginLeft = (p.shape[f][i][0] + 2) * CaseX;
+      const marginTop = (p.shape[f][i][1] + 1) * CaseY;
       this.np_ctx.fillRect(marginLeft, marginTop, CaseX, CaseY);
     }
   }
