@@ -15,9 +15,12 @@ export default class Game {
       this.gameBoard1.rules = this.gameBoard.rules;
     }
 
-    console.log(this.gameBoard.rules.bmode);
     if (this.gameBoard.rules.bmode) {
       this.gameBoard.modeb();
+
+      if (this.gameBoard.rules.multiplayer) {
+        this.gameBoard1.modeb();
+      }
     }
     this.drawLogo();
     this.difficulty = 0;
