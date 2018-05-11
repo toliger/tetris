@@ -75,11 +75,19 @@ export default class GameBoard extends Canvas {
   generateMapArray() {
     // width + 2 -> Border of GameBoard
     const res = [];
-    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
-    for (let i = 0; i < this.size.abstract.height; i += 1) {
-      res.push([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]);
+    let auxTab = [];
+    for(let i = 0; i < this.size.abstract.width + 2; i += 1) {
+      auxTab.push(1);
     }
-    res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    let auxTab2 = [];
+    for(let i = 0; i < this.size.abstract.width + 2; i += 1) {
+      auxTab2.push((i == 0 || i == this.size.abstract.width - 1) ? 1 : 0);
+    }
+    res.push(auxTab);
+    for (let i = 0; i < this.size.abstract.height; i += 1) {
+      res.push(auxTab2);
+    }
+    res.push(auxTab);
     return res;
   }
 
