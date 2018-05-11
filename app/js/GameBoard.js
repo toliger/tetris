@@ -232,6 +232,8 @@ export default class GameBoard extends Canvas {
     if (!this.checkBehind()) {
       this.rules.ingame = false;
       this.drawGameOver();
+      $('#start').toggleClass('active');
+      $('#restartMulti').toggleClass('active');
       sessionStorage.whowin = this.number;
     } else {
       if (this.rules.randomColor) {

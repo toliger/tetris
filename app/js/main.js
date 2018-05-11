@@ -79,7 +79,7 @@ $(document).ready(() => {
       }
 
       case 'Enter': {
-        if (game.gameBoard.rules.multiplayer) {
+        if (game.gameBoard.rules.multiplayer && game.gameBoard.rules.ingame) {
           game.gameBoard1.bigMoveDown();
           game.gameBoard1.update();
         }
@@ -125,6 +125,10 @@ $(document).ready(() => {
   $('#restart').click(() => {
     game.restartGame();
   });
+
+  $('#restartMulti').click(() => {
+    game.restartMulti();
+  })
 
   $('#resetScoreBoard').click(() => {
     game.gameBoard.scoreboard.removeStorage();
