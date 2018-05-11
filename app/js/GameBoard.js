@@ -5,12 +5,15 @@ import ScoreBoard from './ScoreBoard.js';
 import Canvas from './Canvas.js';
 import Score from './Score.js';
 import Rules from './Rules.js';
+import AudioController from './AudioController.js';
 
 
 
 export default class GameBoard extends Canvas {
   constructor(gameBoardName = 'mainBoard', boardNumber = 1, game, height = 700, width = 400) {
     super(height, width, gameBoardName);
+
+    this.AudioController = new AudioController();
 
     this.gameBoardName = gameBoardName;
 
@@ -189,6 +192,7 @@ export default class GameBoard extends Canvas {
 
   // Generate new Piece
   newPiece() {
+    this.AudioController.mplay('frou');
     this.piece.x = 8;
     this.piece.y = 0;
     this.piece = this.next_piece;
@@ -281,6 +285,7 @@ export default class GameBoard extends Canvas {
 
   // Remove a line
   removeLine(l) {
+    this.AudioController.mplay('ptzzz');
     // remove the line l
     this.map.splice(l, 1);
     // add a new "empty" line to the array
