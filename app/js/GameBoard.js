@@ -26,8 +26,8 @@ export default class GameBoard extends Canvas {
     this.size = {
       real: { height, width },
       abstract: {
-        height: 33,
-        width: 20,
+        height: 22,
+        width: 10,
       },
     };
 
@@ -211,7 +211,7 @@ export default class GameBoard extends Canvas {
   // Generate new Piece
   newPiece() {
     this.AudioController.mplay('frou');
-    this.piece.x = 8;
+    this.piece.x = this.size.abstract.width / 2;
     this.piece.y = 0;
     this.piece = this.next_piece;
     this.next_piece = this.pieces[Random(0, 6)];
