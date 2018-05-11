@@ -111,6 +111,8 @@ export default class Game {
   }
 
   restartMulti() {
+    $('#start').toggleClass('active');
+    $('#restartMulti').toggleClass('active');
     this.gameBoard.restartGame();
     this.gameBoard.rules.ingame = true;
     if (this.gameBoard.rules.multiplayer) {
