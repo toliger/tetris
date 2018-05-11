@@ -4,18 +4,17 @@ import SocketIO from './SocketIO.js';
 
 export default class Game {
   constructor() {
-    this.gameBoard = new GameBoard();
+    this.gameBoard = new GameBoard('mainBoard', 1, this);
 
     this.parseSettings();
     if (this.gameBoard.rules.multiplayer) {
-      console.log("multi");
-      this.gameBoard1 = new GameBoard('mainBoard2', 2);
+      this.gameBoard1 = new GameBoard('mainBoard2', 2, this);
       this.gameBoard1.rules = this.gameBoard.rules;
     }
     this.drawLogo();
     this.difficulty = 0;
-    sessionStorage.setItem('ingame', false);
     this.pause = false;
+    this.ingame = false;
 
   }
 
@@ -30,9 +29,8 @@ export default class Game {
   }
 
   startgame() {
-    console.log(sessionStorage.getItem('ingame'), 'plop');
-    if (!JSON.parse(sessionStorage.getItem('ingame'))) {
-      sessionStorage.setItem('ingame', true);
+    if (!this.ingame) {
+      this.ingame = true;
 
       this.gameBoard.clearBoard();
       this.gameBoard.newPiece();
@@ -79,12 +77,14 @@ export default class Game {
   tick() {
     const vthis = this;
     (function t() {
-      if (JSON.parse(sessionStorage.getItem('ingame'))) {
+      if (vthis.ingame) {
         vthis.pieceController();
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       } else {
         vthis.gameBoard.drawGameOver();
-        vthis.gameBoard1.drawGameOver();
+        if(vthis.gameBoard.rules.multiplayer) {
+          vthis.gameBoard1.drawGameOver();
+        }
       }
     }());
   }
@@ -111,5 +111,10 @@ export default class Game {
       return settings.bmode ? 'Activé' : 'Désactivé';
     });
   }
+
+  setIngame(state) {
+    this.ingame = state;
+  }
+
 
 }

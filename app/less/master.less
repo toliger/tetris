@@ -18,15 +18,18 @@ body {
     }
 
     #scoreboard {
-      width: 100vw;
-      height: 100vh;
-      background-color: white;
-      opacity: 0.7;
+      width: 70vw;
+      height: 50vh;
+      background-color: black;
+      opacity: 1;
       position: absolute;
       z-index: 2;
-      margin-top: -100vh;
+      left: 15vw;
+      margin-top: -600vh;
       transition: margin-top 2s;
-      color: black;
+      color: white;
+      border: 5px solid yellow;
+      overflow: scroll;
       
       h1 {
           text-align: center;
@@ -36,25 +39,33 @@ body {
           margin: auto;
           table {
               width: 50%;
-              border: 2px solid black;
+              border: 2px solid yellow;
               margin: 30px auto 30px auto;
-              color: black;
+              color: white;
+              text-align: center;
+              border-collapse: collapse;
+            
+              th {
+                  border-bottom: 2px solid white;
+              }
           }
+
       }
-      #restart {
-          display: block;
-          margin: auto;
-          padding: 5px;
-      }
-      #resetScoreBoard {
-        display: block;
-        margin: auto;
+
+      input {
         padding: 5px;
-      }
+        border-radius: 5px;
+        border: 2px solid lightblue;
+        background-color: aqua;
+        margin: auto;
+        display: block;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        }
     }
 
     .scoreboardActive {
-      margin-top: 0 !important;
+      margin-top: 25vh !important;
       transition: margin-top 2s;
     }
 
