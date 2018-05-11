@@ -90,32 +90,9 @@ body {
         }
         .titre {
             flex: 1 1 auto;
-
+            color: white;
+            text-decoration: none;
             font-family: 'title', sans-serif;
-        }
-        .menu {
-            flex: 1 1 auto;
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: flex-end;
-            align-content: center;
-
-            section {
-                text-align: center;
-                padding: 10px;
-                flex: 1 1 auto;
-                font-size: 1.3em;
-                font-weight: 600;
-                color: darkgray;
-                &:hover {
-                    text-decoration: underline;
-                }
-
-            }
-            .active {
-                color: bisque;
-                text-transform: uppercase;
-            }
         }
 
         #start, #pause {
@@ -137,6 +114,7 @@ body {
         #buttonArea {
             display: flex;
             flex-flow: row wrap;
+            width: 30vw;
         }
 
         .settings {

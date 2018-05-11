@@ -13,6 +13,8 @@ export default class Game {
     if (this.gameBoard.rules.multiplayer) {
       this.gameBoard1 = new GameBoard('mainBoard2', 2);
       this.gameBoard1.rules = this.gameBoard.rules;
+    } else {
+      $("#sideBoard2").hide();
     }
 
     if (this.gameBoard.rules.bmode) {
