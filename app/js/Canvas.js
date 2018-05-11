@@ -1,6 +1,5 @@
 export default class Canvas {
   constructor(height, width, canvasid) {
-    console.log(canvasid, 'le bon id');
     $(`#${ canvasid }`).css({
       width: `${width}px`,
       height: `${height}px`,

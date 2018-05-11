@@ -141,7 +141,6 @@ export default class Game {
     $("#bmodespan").html(() => {
       return settings.bmode ? 'Activé' : 'Désactivé';
     });
-    console.log(settings.user, settings.user2);
   }
 
 }

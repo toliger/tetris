@@ -50,7 +50,6 @@ export default class GameBoard extends Canvas {
     this.next_piece.color = generateRandomHex();
 
     //= ========= Canvas creation
-    console.log(`#map${ this.gameBoardName }`);
     this.position = {
       x: $(`#map${ this.gameBoardName }`).position().top,
       y: $(`#map${ this.gameBoardName }`).position().left,
@@ -93,7 +92,6 @@ export default class GameBoard extends Canvas {
       res.push(auxTab2);
     }
     res.push(auxTab);
-    console.log(res);
     return res;
   }
 
@@ -234,7 +232,6 @@ export default class GameBoard extends Canvas {
     if (!this.checkBehind()) {
       this.rules.ingame = false;
       this.drawGameOver();
-      console.log(this.number);
       sessionStorage.whowin = this.number;
     } else {
       if (this.rules.randomColor) {
@@ -341,7 +338,6 @@ export default class GameBoard extends Canvas {
     this.score.lines += 1;
     if(this.score.lines%2 == 0 && this.rules.difficulty < 9) {
       this.rules.difficulty += 1;
-      console.log(this.rules.difficulty);
       $("#diffspan").html(this.rules.difficulty);
     }
   }
