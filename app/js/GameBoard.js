@@ -42,6 +42,7 @@ export default class GameBoard extends Canvas {
       new J(8, 0),
     ];
     this.map = this.generateMapArray();
+
     this.next_piece = {};
     this.next_piece = this.pieces[Random(0, 6)];
     this.next_piece.color = generateRandomHex();
@@ -54,6 +55,11 @@ export default class GameBoard extends Canvas {
     };
 
     this.rules = new Rules();
+
+    if (this.rules.bmode) {
+    this.modeb();
+    }
+
     this.np_ctx = document.getElementById('nextPieceCnv').getContext('2d');
     this.np_size = {
       width: $('#nextPieceCnv').width(),
@@ -78,6 +84,16 @@ export default class GameBoard extends Canvas {
     }
     res.push([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
     return res;
+  }
+
+  modeb() {
+    for (let i = Math.floor(this.size.abstract.height * 0.95); i < this.size.abstract.height + 1; i += 1) {
+      for (let j = 1; j < this.size.abstract.width + 1; j += 1) {
+        if(Random(1, 3) == 2) {
+          this.map[i][j] = 'yellow';
+        }
+      }
+    }
   }
 
 
