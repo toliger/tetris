@@ -23,10 +23,8 @@ export default class Game {
       }
     }
     this.drawLogo();
-    this.difficulty = 0;
     this.gameBoard.rules.ingame = false;
     this.pause = false;
-    this.ingame = false;
 
   }
 
@@ -88,7 +86,7 @@ export default class Game {
     (function t() {
       if (vthis.gameBoard.rules.ingame) {
         vthis.pieceController();
-        vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
+        vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty) * 2))));
       } else {
         vthis.AudioController.mplay('loose');
       }
@@ -117,10 +115,4 @@ export default class Game {
       return settings.bmode ? 'Activé' : 'Désactivé';
     });
   }
-
-  setIngame(state) {
-    this.ingame = state;
-  }
-
-
 }
