@@ -57,10 +57,6 @@ export default class GameBoard extends Canvas {
     this.rules = new Rules();
     this.rules.ingame = true;
 
-    if (this.rules.bmode) {
-    this.modeb();
-    }
-
     this.np_ctx = document.getElementById('nextPieceCnv').getContext('2d');
     this.np_size = {
       width: $('#nextPieceCnv').width(),
