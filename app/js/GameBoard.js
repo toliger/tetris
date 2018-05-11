@@ -10,14 +10,12 @@ import AudioController from './AudioController.js';
 
 
 export default class GameBoard extends Canvas {
-  constructor(gameBoardName = 'mainBoard', boardNumber = 1, game, height = 700, width = 400) {
+  constructor(gameBoardName = 'mainBoard', boardNumber = 1, height = 700, width = 400) {
     super(height, width, gameBoardName);
 
     this.AudioController = new AudioController();
 
     this.gameBoardName = gameBoardName;
-
-    this.gameInstance = game;
 
     this.score = new Score('mouloud', boardNumber);
 
