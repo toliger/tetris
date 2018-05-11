@@ -69,6 +69,7 @@ export default class Game {
     if(this.gameBoard.rules.multiplayer) {
       this.gameBoard1.restartGame();
     }
+    this.music.aud.currentTime = 0;
     this.startgame();
     clearTimeout(this.timeout);
     this.tick();
@@ -91,6 +92,7 @@ export default class Game {
         vthis.pieceController();
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty)))));
       } else {
+        vthis.music.aud.pause();
         vthis.AudioController.mplay('loose');
       }
     }());
