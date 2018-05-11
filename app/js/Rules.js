@@ -6,5 +6,6 @@ export default class Rules {
     this.blindmode = false; // blind mode
     this.bmode = false; // B mode
     this.multiplayer = false;
+    this.ingame = false;
   }
 }

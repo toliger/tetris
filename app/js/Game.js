@@ -13,6 +13,7 @@ export default class Game {
     }
     this.drawLogo();
     this.difficulty = 0;
+    this.gameBoard.rules.ingame = false;
     this.pause = false;
     this.ingame = false;
 
@@ -29,8 +30,8 @@ export default class Game {
   }
 
   startgame() {
-    if (!this.ingame) {
-      this.ingame = true;
+    if (!this.gameBoard.rules.ingame) {
+      this.gameBoard.rules.ingame = true;
 
       this.gameBoard.clearBoard();
       this.gameBoard.newPiece();
@@ -55,10 +56,8 @@ export default class Game {
   restartGame() {
     this.gameBoard.restartGame();
     this.gameBoard.current = true;
-
-    if (this.gameBoard.rules.multiplayer) {
+    if(this.gameBoard.rules.multiplayer) {
       this.gameBoard1.restartGame();
-      this.gameBoard1.current = true;
     }
     this.startgame();
     this.tick();
@@ -77,7 +76,7 @@ export default class Game {
   tick() {
     const vthis = this;
     (function t() {
-      if (vthis.ingame) {
+      if (vthis.gameBoard.rules.ingame) {
         vthis.pieceController();
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       } else {
