@@ -31,5 +31,13 @@ $(document).ready(() => {
   $("#checkMulti").click(() => {
     $("#userinput2").prop('disabled', p2input);
     p2input = !p2input;
+
+    if (!p2input) {
+      $('#userinput2').hide();
+      $('#userinput2label').hide();
+    } else {
+      $('#userinput2').show();
+      $('#userinput2label').show();
+    }
   })
 });
