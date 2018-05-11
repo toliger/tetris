@@ -99,7 +99,7 @@ export default class GameBoard extends Canvas {
     for (let i = Math.floor(this.size.abstract.height * 0.95); i < this.size.abstract.height + 1; i += 1) {
       for (let j = 1; j < this.size.abstract.width + 1; j += 1) {
         if(Random(1, 3) == 2) {
-          this.map[i][j] = 'yellow';
+          this.map[i][j] = '#d4f442';
         }
       }
     }
