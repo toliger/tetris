@@ -94,6 +94,13 @@ export default class Game {
       } else {
         vthis.music.aud.pause();
         vthis.AudioController.mplay('loose');
+        if(vthis.gameBoard.rules.multiplayer) {
+          if (JSON.parse(sessionStorage.whowin) == 2) {
+            vthis.gameBoard.drawGameWin();
+          } else {
+            vthis.gameBoard1.drawGameWin();
+          }
+        }
       }
     }());
   }
@@ -106,7 +113,7 @@ export default class Game {
   restartMulti() {
     this.gameBoard.restartGame();
     this.gameBoard.rules.ingame = true;
-    if(this.gameBoard.rules.multiplayer) {
+    if (this.gameBoard.rules.multiplayer) {
       this.gameBoard1.restartGame();
     }
     this.startgame();

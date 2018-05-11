@@ -141,10 +141,20 @@ export default class GameBoard extends Canvas {
     this.ctx.font = '80px Arial';
     this.ctx.textAlign = 'center';
     this.ctx.fillText('Game Over', this.size.real.width / 2, this.size.real.height / 2);
-    if(!this.rules.multiplayer) {
+    if (!this.rules.multiplayer) {
       this.scoreboard.add(this.score);
     }
+  }
 
+  drawGameWin() {
+    this.clearBoard();
+    this.ctx.fillStyle = '#42bf20';
+    this.ctx.fillRect(0, 0, this.size.real.width, this.size.real.height);
+
+    this.ctx.fillStyle = '#0fffe3';
+    this.ctx.font = '80px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('Game Win', this.size.real.width / 2, this.size.real.height / 2);
   }
 
 
@@ -224,6 +234,8 @@ export default class GameBoard extends Canvas {
     if (!this.checkBehind()) {
       this.rules.ingame = false;
       this.drawGameOver();
+      console.log(this.number);
+      sessionStorage.whowin = this.number;
     } else {
       if (this.rules.randomColor) {
         this.piece.color = this.next_piece.color;
