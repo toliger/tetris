@@ -362,7 +362,7 @@ export default class GameBoard extends Canvas {
   }
 
   bigMoveDown() {
-    while (this.checkBottomSide() && this.rules.ingame) {
+    while (this.checkBottomSide()) {
       this.piece.moveDown();
       this.piece.decreaseAlpha(this.rules.blindmode);
     }

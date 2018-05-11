@@ -89,8 +89,10 @@ $(document).ready(() => {
 
 
       case ' ': {
-        board.bigMoveDown();
-        board.update();
+        if(game.gameBoard.rules.ingame) {
+          board.bigMoveDown();
+          board.update();
+        }
         e.preventDefault();
         break;
       }
