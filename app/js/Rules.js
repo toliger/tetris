@@ -1,6 +1,7 @@
 export default class Rules {
   constructor() {
     this.user = "";
+    this.user2 = "";
     this.difficulty = 1;
     this.randomColor = false;
     this.blindmode = false; // blind mode

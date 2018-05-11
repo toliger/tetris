@@ -18,7 +18,7 @@ export default class GameBoard extends Canvas {
     this.gameBoardName = gameBoardName;
     this.number = boardNumber;
 
-    this.score = new Score('mouloud', boardNumber);
+    this.score = new Score('Anonymous', boardNumber);
 
     this.scoreboard = new ScoreBoard();
 

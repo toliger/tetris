@@ -110,6 +110,9 @@ export default class Game {
     this.gameBoard.rules.difficulty = settings.difficulty;
     this.gameBoard.score.username = settings.user;
     this.gameBoard.rules.multiplayer = settings.multiplayer;
+    if(settings.multiplayer) {
+      $("namespan2").html(settings.user2);
+    }
     $("#namespan").html(settings.user);
     $("#diffspan").html(settings.difficulty);
     $("#blindspan").html(() => {
