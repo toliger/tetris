@@ -10,14 +10,16 @@ import AudioController from './AudioController.js';
 
 
 export default class GameBoard extends Canvas {
-  constructor(gameBoardName = 'mainBoard', boardNumber = 1, height = 700, width = 400) {
+  constructor(gameBoardName = 'mainBoard', boardNumber = 1, game, height = 700, width = 400) {
     super(height, width, gameBoardName);
 
     this.AudioController = new AudioController();
 
     this.gameBoardName = gameBoardName;
 
-    this.score = new Score('mouloud',boardNumber);
+    this.gameInstance = game;
+
+    this.score = new Score('mouloud', boardNumber);
 
     this.scoreboard = new ScoreBoard();
 
@@ -55,6 +57,7 @@ export default class GameBoard extends Canvas {
     };
 
     this.rules = new Rules();
+    this.rules.ingame = true;
 
     if (this.rules.bmode) {
     this.modeb();
@@ -192,7 +195,7 @@ export default class GameBoard extends Canvas {
 
   // Update display
   update() {
-    if(sessionStorage.getItem('ingame')) {
+    if(this.rules.ingame) {
       this.clearBoard();
       this.drawWall();
       this.drawPiece();
@@ -211,7 +214,7 @@ export default class GameBoard extends Canvas {
     this.piece = this.next_piece;
     this.next_piece = this.pieces[Random(0, 6)];
     if (!this.checkBehind()) {
-      sessionStorage.setItem('ingame', false);
+      this.rules.ingame = false;
       this.drawGameOver();
     } else {
       if (this.rules.randomColor) {
