@@ -82,25 +82,25 @@ body {
         align-content: center;
         border-bottom: 2px solid black;
 
-
-        .titre, .menu {
-
-            margin: 0 10px 0 10px;
-            padding: 0 10px 0 10px;
-        }
-        .titre {
+        .navitem {
             flex: 1 1 auto;
+            width: 33%;
+        }
+
+
+        .titre {
             font-family: 'title', sans-serif;
 
            h1 a {
                 color: white;
                 color: white;
                 text-decoration: none;
+                display: block;
+                padding-left: 20px;
            }
         }
 
         #start, #pause {
-            margin: 5px auto 5px auto;
             padding: 10px;
             background-color: lightgreen;
             border-radius: 10px;
@@ -108,29 +108,53 @@ body {
             font-size: 1.3em;
             font-weight: bold;
             width: 150px;
-            flex: 1;
+            flex: 0 1 auto;;
+            margin: 0 10px 0 10px;
     
             &:hover {
                 background-color: burlywood;
             }
         }
 
-        #buttonArea {
+        #buttonsArea {
             display: flex;
             flex-flow: row wrap;
-            width: 30vw;
+            text-align: center;
+            align-content: space-around;
+            justify-content: center;
+
+            img {
+                width: 64px;
+                height: 64px;
+                display: none;
+                margin: 0 10px 0 10px;
+            }
+
+            .active {
+                display: inline;
+            }
+            
         }
 
         .settings {
-            text-align: left;
+            text-align: center;
             padding-left: 10%;
             position: relative;
-            width: 50vw;
             text-transform: uppercase;
-            margin-top: 20px;
+            margin-top: 10px;
+            display: flex;
+            flex-flow: row wrap;
 
             p {
                 display: inline;
+                flex: 1;
+                font-weight: bold;
+
+                span {
+                    display: block;
+                    text-align: center;
+                    font-weight: 400;
+                }
             } 
         }
 

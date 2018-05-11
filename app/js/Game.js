@@ -1,5 +1,4 @@
 import GameBoard from './GameBoard.js';
-import Music from './Music.js';
 import SocketIO from './SocketIO.js';
 import AudioController from './AudioController.js';
 
@@ -27,6 +26,8 @@ export default class Game {
     this.drawLogo();
     this.gameBoard.rules.ingame = false;
     this.pause = false;
+    this.music = new AudioController('flamingo_8-bit');
+    this.music.loop();
 
   }
 
@@ -54,7 +55,7 @@ export default class Game {
         this.gameBoard1.update();
       }
       this.tick();
-      this.AudioController.mplay('flamingo_8-bit');
+      this.music.aud.play();
     }
 
     if(this.pause) {
@@ -65,7 +66,6 @@ export default class Game {
 
   restartGame() {
     this.gameBoard.restartGame();
-    this.gameBoard.current = true;
     if(this.gameBoard.rules.multiplayer) {
       this.gameBoard1.restartGame();
     }
@@ -89,8 +89,7 @@ export default class Game {
     (function t() {
       if (vthis.gameBoard.rules.ingame) {
         vthis.pieceController();
-        console.log(vthis.gameBoard.rules.difficulty);
-        vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty) * 2))));
+        vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty)))));
       } else {
         vthis.AudioController.mplay('loose');
       }
@@ -102,16 +101,28 @@ export default class Game {
     this.pause = true;
   }
 
+  restartMulti() {
+    this.gameBoard.restartGame();
+    this.gameBoard.rules.ingame = true;
+    if(this.gameBoard.rules.multiplayer) {
+      this.gameBoard1.restartGame();
+    }
+    this.startgame();
+    clearTimeout(this.timeout);
+    this.tick();
+  }
+
   parseSettings() {
     let settings = JSON.parse(sessionStorage.settings);
     this.gameBoard.rules.user = settings.user;
+    this.gameBoard.rules.user2 = settings.user2;
     this.gameBoard.rules.blindmode = settings.blind;
     this.gameBoard.rules.bmode = settings.bmode;
-    this.gameBoard.rules.difficulty = settings.difficulty;
+    this.gameBoard.rules.difficulty = parseInt(settings.difficulty, 10);
     this.gameBoard.score.username = settings.user;
     this.gameBoard.rules.multiplayer = settings.multiplayer;
     if(settings.multiplayer) {
-      $("namespan2").html(settings.user2);
+      $("#namespan2").html(settings.user2);
     }
     $("#namespan").html(settings.user);
     $("#diffspan").html(settings.difficulty);
@@ -121,5 +132,7 @@ export default class Game {
     $("#bmodespan").html(() => {
       return settings.bmode ? 'Activé' : 'Désactivé';
     });
+    console.log(settings.user, settings.user2);
   }
+
 }

@@ -28,21 +28,22 @@
     </section>
     <header>
         <div id="navbar">
-            <div class="titre">
+            <div class="titre navitem">
                 <h1><a href="index.html">W A L L G R I N D</a></h1>
             </div>
-            <div id="setArea">
+            <div id="setArea" class="navitem">
                 <div class="settings">
-                    <p>Nom : <span id="namespan"></span></p>
                     <p>Difficulté : <span id="diffspan"></span></p>
                     <p>Mode aveugle : <span id="blindspan"></span></p>
                     <p>Mode B : <span id="bmodespan"></span></p>
                 </div>
             </div> 
-            <div id="buttonsArea">
+            <div id="buttonsArea" class="navitem">
                     <input id="start" type="button" value="Start">
                     <input type="button" id="pause" value="Pause">
-                </div>
+                    <img src="ressources/Speaker_Icon.svg" alt="speaker" id="audioButton" class="active">
+                    <img src="ressources/Mute_Icon.svg" alt="mute" id="muteButton">
+            </div>
         </div>
     </header>
     <section id="game" class="solo">

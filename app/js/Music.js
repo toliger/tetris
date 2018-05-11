@@ -6,4 +6,8 @@ export default class Music {
   play() {
     this.music.play();
   }
+
+  pause() {
+    this.music.pause();
+  }
 }

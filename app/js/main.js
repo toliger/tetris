@@ -129,4 +129,17 @@ $(document).ready(() => {
   $('#resetScoreBoard').click(() => {
     game.gameBoard.scoreboard.removeStorage();
   });
+
+  $("#buttonsArea img").click(() => {
+    $("#audioButton").toggleClass('active');
+    $("#muteButton").toggleClass('active');
+  });
+
+  $("#audioButton").click(() => {
+    game.music.aud.pause();
+  });
+
+  $("#muteButton").click(() => {
+    game.music.aud.play();
+  });
 });

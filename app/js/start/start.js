@@ -24,7 +24,8 @@ $(document).ready(() => {
       difficulty: $('#diffselector').val(),
       blind: $('#checkBlind').is(':checked') ? true : false,
       bmode: $('#checkBmode').is(':checked') ? true : false,
-      multiplayer: $('#checkMulti').is(':checked') ? true : false
+      multiplayer: $('#checkMulti').is(':checked') ? true : false,
+      user2: $("#userinput2").val()
     })
   });
 
@@ -38,6 +39,8 @@ $(document).ready(() => {
     } else {
       $('#userinput2').show();
       $('#userinput2label').show();
+      $('#userinput2').css('display', 'inline-block');
+      $('#userinput2label').css('display', 'inline-block');
     }
   })
 });

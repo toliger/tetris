@@ -327,9 +327,9 @@ export default class GameBoard extends Canvas {
 
     this.removeLine(i);
     this.score.lines += 1;
-
-    if(this.score.lines%10 == 0) {
+    if(this.score.lines%2 == 0 && this.rules.difficulty < 9) {
       this.rules.difficulty += 1;
+      console.log(this.rules.difficulty);
       $("#diffspan").html(this.rules.difficulty);
     }
   }
@@ -394,5 +394,6 @@ export default class GameBoard extends Canvas {
     this.map = this.generateMapArray();
     this.scoreboard.removeBoard();
   }
+
 
 }
