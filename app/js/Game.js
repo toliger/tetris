@@ -1,10 +1,13 @@
 import GameBoard from './GameBoard.js';
 import Music from './Music.js';
 import SocketIO from './SocketIO.js';
+import AudioController from './AudioController.js';
 
 export default class Game {
   constructor() {
     this.gameBoard = new GameBoard();
+
+    this.AudioController = new AudioController();
 
     this.parseSettings();
     if (this.gameBoard.rules.multiplayer) {
@@ -83,6 +86,7 @@ export default class Game {
         vthis.pieceController();
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       } else {
+        vthis.AudioController.mplay('loose');
         vthis.gameBoard.drawGameOver();
         vthis.gameBoard1.drawGameOver();
       }
