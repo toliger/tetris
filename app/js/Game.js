@@ -5,13 +5,13 @@ import AudioController from './AudioController.js';
 
 export default class Game {
   constructor() {
-    this.gameBoard = new GameBoard('mainBoard', 1, this);
+    this.gameBoard = new GameBoard('mainBoard', 1);
 
     this.AudioController = new AudioController();
 
     this.parseSettings();
     if (this.gameBoard.rules.multiplayer) {
-      this.gameBoard1 = new GameBoard('mainBoard2', 2, this);
+      this.gameBoard1 = new GameBoard('mainBoard2', 2);
       this.gameBoard1.rules = this.gameBoard.rules;
     }
 
@@ -88,10 +88,6 @@ export default class Game {
         vthis.timeout = setTimeout(t, 1000 / (1 + (((vthis.gameBoard.rules.difficulty - 1) * 2))));
       } else {
         vthis.AudioController.mplay('loose');
-        vthis.gameBoard.drawGameOver();
-        if(vthis.gameBoard.rules.multiplayer) {
-          vthis.gameBoard1.drawGameOver();
-        }
       }
     }());
   }
