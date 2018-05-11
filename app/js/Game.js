@@ -14,6 +14,11 @@ export default class Game {
       this.gameBoard1 = new GameBoard('mainBoard2', 2, this);
       this.gameBoard1.rules = this.gameBoard.rules;
     }
+
+    console.log(this.gameBoard.rules.bmode);
+    if (this.gameBoard.rules.bmode) {
+      this.gameBoard.modeb();
+    }
     this.drawLogo();
     this.difficulty = 0;
     this.gameBoard.rules.ingame = false;
@@ -47,7 +52,6 @@ export default class Game {
       }
       this.tick();
       this.AudioController.mplay('flamingo_8-bit');
-      this.music.play();
     }
 
     if(this.pause) {
@@ -101,7 +105,7 @@ export default class Game {
     let settings = JSON.parse(sessionStorage.settings);
     this.gameBoard.rules.user = settings.user;
     this.gameBoard.rules.blindmode = settings.blind;
-    this.gameBoard.rules.bmode = settings.blind;
+    this.gameBoard.rules.bmode = settings.bmode;
     this.gameBoard.rules.difficulty = settings.difficulty;
     this.gameBoard.score.username = settings.user;
     this.gameBoard.rules.multiplayer = settings.multiplayer;
