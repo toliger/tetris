@@ -1,5 +1,4 @@
 import GameBoard from './GameBoard.js';
-import SocketIO from './SocketIO.js';
 import AudioController from './AudioController.js';
 
 export default class Game {
