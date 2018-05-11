@@ -94,7 +94,7 @@ export default class Game {
       } else {
         vthis.music.aud.pause();
         vthis.AudioController.mplay('loose');
-        if(vthis.gameBoard.rules.multiplayer) {
+        if (vthis.gameBoard.rules.multiplayer) {
           if (JSON.parse(sessionStorage.whowin) == 2) {
             vthis.gameBoard.drawGameWin();
           } else {
