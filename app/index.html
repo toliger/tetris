@@ -2,36 +2,54 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet/less" href="less/start.less">
-  </head>
-  <body>
-    <div id="title">
-      WALLGRIND
-    </div>
-    <div id="settings">
-      <label for="user">Nom du joueur 1</label>
-      <input type="text" id="userinput" name="user" placeholder="Entrez votre pseudo"><br>
-      <label for="user2" id="userinput2label">Nom du joueur 2</label>
-      <input type="text" id="userinput2" name="user2" placeholder="Entrez votre pseudo" disabled><br>
-      <label for="difficulty">Difficulté</label>
-      <select name="difficulty" id="diffselector">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-      </select>
-      <br>
-      <div id="options">
-        Options supplémentaires
-        <div class="stfield">
-            <input id="checkBlind" type="checkbox" name="bonus" value="true">
-            <label for="bonus">Mode Aveugle</label> <br>
+    <link rel="stylesheet/less" href="master.less">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Le bon Tetris</title>
+</head>
+<body>
+    <header>
+        <h1>W A L L G R I N D</h1>
+    </header>
+    <section id="game">
+        <div id="sideBoard" class="game-item">
+            <h3>Tableau de bord</h3>
+            <h4 id="settings">Paramètres <i class="fa fa-angle-down"></i></h4>
+            <div class="settings">
+                <label for="user">Pseudo : </label>
+                <input type="text" name="user"> <br>
+                <label for="difficulty">Difficulté : </label>
+                <select name="difficulty" id="diffSelect">
+                    <option value="easy">Facile</option>
+                    <option value="medium">Normal</option>
+                    <option value="hard">Difficile</option>
+                </select>
+                <div id="options">
+                    Options supplémentaires : <br>
+                    <input type="checkbox" name="bonus" value="blind">
+                    <label for="bonus">Mode Aveugle</label> <br>
+                    <input type="checkbox" name="bonus" value="bmode">
+                    <label for="bonus">Mode B</label>
+                </div>
+
+                <input type="button" value="Start">
+            </div>
+            <div id="nextPiece">
+                placeholder
+            </div>
+            <table id="scoringTable">
+                <tr>
+                    <th>Pièces : </th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>Lignes : </th>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>Score : </th>
+                    <td>0</td>
+                </tr>
+            </table>
         </div>
         <div class="stfield">
             <input id="checkBmode" type="checkbox" name="bonus" value="true">
