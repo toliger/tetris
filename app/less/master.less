@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'Title';
+    src: url('../ressources/fonts/title.ttf');
+  }
+
+@backgroundcolor : rgb(20,20,20);
+@textcolor: white;
+
+body {
+    background-color: @backgroundcolor;
+    color: @textcolor;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+
+    header {
+        margin: 0 0 10px 0;
+    }
+
+    #scoreboard {
+      width: 70vw;
+      height: 50vh;
+      background-color: black;
+      opacity: 1;
+      position: absolute;
+      z-index: 2;
+      left: 15vw;
+      margin-top: -600vh;
+      transition: margin-top 0.7s;
+      color: white;
+      border: 5px solid yellow;
+      overflow: scroll;
+
+      h1 {
+          text-align: center;
+          a {
+            text-decoration: none;
+            color: white;
+          }
+      }
+
+      .scoretable {
+          margin: auto;
+          table {
+              width: 50%;
+              border: 2px solid yellow;
+              margin: 30px auto 30px auto;
+              color: white;
+              text-align: center;
+              border-collapse: collapse;
+
+              th {
+                  border-bottom: 2px solid white;
+              }
+          }
+
+      }
+
+      input {
+        padding: 5px;
+        border-radius: 5px;
+        border: 2px solid lightblue;
+        background-color: aqua;
+        margin: auto;
+        display: block;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        }
+    }
+
+    .scoreboardActive {
+      margin-top: 25vh !important;
+      transition: margin-top 2s;
+    }
+
+
+
+    #navbar {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+        align-content: center;
+        border-bottom: 2px solid black;
+
+        .navitem {
+            flex: 1 1 auto;
+            width: 33%;
+        }
+
+
+        .titre {
+            font-family: 'title', sans-serif;
+
+           h1 a {
+                color: white;
+                color: white;
+                text-decoration: none;
+                display: block;
+                padding-left: 20px;
+           }
+        }
+
+        #start, #pause, #restartMulti {
+            padding: 10px;
+            background-color: lightgreen;
+            border-radius: 10px;
+            border: 2px solid yellow;
+            font-size: 1.3em;
+            font-weight: bold;
+            width: 150px;
+            flex: 0 1 auto;;
+            margin: 0 10px 0 10px;
+    
+            &:hover {
+                background-color: burlywood;
+            }
+        }
+
+        #buttonsArea {
+            display: flex;
+            flex-flow: row wrap;
+            text-align: center;
+            align-content: space-around;
+            justify-content: center;
+
+            img {
+                width: 64px;
+                height: 64px;
+                display: none;
+                margin: 0 10px 0 10px;
+            }
+
+            input {
+                display: none;
+            }
+
+            #pause {
+                display: inline;
+            }
+
+            .active {
+                display: inline;
+            }
+            
+        }
+
+        .settings {
+            text-align: center;
+            padding-left: 10%;
+            position: relative;
+            text-transform: uppercase;
+            margin-top: 10px;
+            display: flex;
+            flex-flow: row wrap;
+
+            p {
+                display: inline;
+                flex: 1;
+                font-weight: bold;
+
+                span {
+                    display: block;
+                    text-align: center;
+                    font-weight: 400;
+                }
+            } 
+        }
+
+
+    }
+
+    @import 'game/game.less';
+
+}

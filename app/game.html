@@ -1,0 +1,117 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet/less" href="less/master.less">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Wall Grind</title>
+</head>
+<body>
+    <section id="scoreboard">
+    <h1>Tableau des scores</h1>
+    <div class="scoretable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Nom</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <input type="button" value="Recommencer" id="restart">
+    <input type="button" value="Réinitialiser" id="resetScoreBoard">
+    </section>
+    <header>
+        <div id="navbar">
+            <div class="titre navitem">
+                <h1><a href="index.html">W A L L G R I N D</a></h1>
+            </div>
+            <div id="setArea" class="navitem">
+                <div class="settings">
+                    <p>Difficulté : <span id="diffspan"></span></p>
+                    <p>Mode aveugle : <span id="blindspan"></span></p>
+                    <p>Mode B : <span id="bmodespan"></span></p>
+                </div>
+            </div>
+            <div id="buttonsArea" class="navitem">
+                    <input id="start" type="button" value="Start" class="active">
+                    <input id="restartMulti" type="button" value="Restart">
+                    <input type="button" id="pause" value="Pause">
+                    <img src="ressources/Speaker_Icon.svg" alt="speaker" id="audioButton" class="active">
+                    <img src="ressources/Mute_Icon.svg" alt="mute" id="muteButton">
+            </div>
+        </div>
+    </header>
+    <section id="game" class="solo">
+        <div id="sideBoard" class="game-item">
+            <h3><span id="namespan"></span></h3>
+            <h4>Commandes</h4>
+            <b>Z</b> / <b>↑</b> : Rotation <br>
+            <b>S</b> / <b>↓</b> : Descente rapide <br>
+            <b>Q</b> / <b>←</b> : Déplacement gauche <br>
+            <b>D</b> / <b>→</b> : Déplacement droit <br>
+            <b>ESPACE</b> : Descente instantanée <br>
+
+            <table id="#gameInfo">
+                <tr>
+                    <th>Score : </th>
+                    <td><span id="score">0</span></td>
+                </tr>
+                <tr>
+                    <th>Lignes : </th>
+                    <td><span id="lines">0</span></td>
+                </tr>
+            </table>
+            <div id="nextPiece">
+                <h4>Prochain Tetromino</h4>
+                <canvas id="nextPieceCnv">
+
+                </canvas>
+            </div>
+        </div>
+        <div id="mainBoard" class="game-item">
+        </div>
+          <div id="mainBoard2" class="game-item">
+        </div>
+        <div id="sideBoard2" class="game-item">
+            <h3><span id="namespan2"></h3>
+            <h4>Commandes</h4>
+            <b>I</b> : Rotation <br>
+            <b>J</b> : Descente rapide <br>
+            <b>K</b> : Déplacement gauche <br>
+            <b>L</b> : Déplacement droit <br>
+            <b>ENTER</b> : Descente instantanée <br>
+
+            <table id="#gameInfo2">
+                <tr>
+                    <th>Score : </th>
+                    <td><span id="score2">0</span></td>
+                </tr>
+                <tr>
+                    <th>Lignes : </th>
+                    <td><span id="lines2">0</span></td>
+                </tr>
+            </table>
+            <div id="nextPiece2">
+                <h4>Prochain Tetromino</h4>
+                <canvas id="nextPieceCnv2">
+
+                </canvas>
+
+            </div>
+        </div>
+    </section>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <script src="js/main.js" type="module"></script>
+    <script src="https://api.wallgrind.fr/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+</body>
+</html>

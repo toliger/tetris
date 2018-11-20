@@ -1,5 +1,5 @@
-<html lang="fr">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet/less" href="master.less">
@@ -51,38 +51,23 @@
                 </tr>
             </table>
         </div>
-        <div id="mainBoard" class="game-item">
+        <div class="stfield">
+            <input id="checkBmode" type="checkbox" name="bonus" value="true">
+            <label for="bonus">Mode B</label>
         </div>
-        <div id="chat" class="game-item">
-            <h3>Chatroom</h3>
-            <div id="textBox">
-                <p><span class="username">Jean-Brandon : </span>Salut !</p>
-                <p><span class="username">Olivier : </span>HELLOOOOO !</p>
-                <p><span class="username">Jean-Brandon : </span>Salut !</p>
-                <p><span class="username">Olivier : </span>HELLOOOOO !</p>
-                <p><span class="username">Jean-Brandon : </span>Salut !</p>
-                <p><span class="username">Olivier : </span>HELLOOOOO !</p>
-            </div>
-            <div id="messageBox">
-                <table>
-                    <tr>
-                        <td>
-                            <textarea id="chatinput" rows="3" cols="32"></textarea>
-                        </td>
-                        <td>
-                            <input id="chatbutton" type="button" value="Send">
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="stfield">
+            <input id="checkMulti" type="checkbox" name="bonus" value="true">
+            <label for="bonus">Multi</label>
         </div>
-    </section>
+    </div>
+    </div>
+    <a id="linkstart" href="game.html">Start game</a>
+    <canvas id="wall">
     <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
-    <script src="js/main.js" type="module"></script>
-    <script src="https://api.wallgrind.fr/socket.io/socket.io.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
-</body>
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="js/start/start.js" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+  </body>
 </html>

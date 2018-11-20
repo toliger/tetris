@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'Title';
+  src: url('../ressources/fonts/title.ttf');
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  #wall {
+    width: 100vw;
+    height: 100vh;
+    -webkit-filter: blur(1px);
+    filter: none;
+    overflow: hidden;
+  }
+
+  #title {
+    z-index: 1000;
+    position: absolute;
+    left: 25vw;
+    overflow: hidden;
+    font-family: 'title', serif;
+    text-align: center;
+    top: -40vh;
+    width: 50vw;
+    color: white;
+    font-size: 1em;
+
+
+
+  }
+  #linkstart {
+    color: white;
+    position: absolute;
+    display: block;
+    bottom: -20vh;
+    width: 50vw;
+    left: 25vw;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    font-family: sans-serif;
+  }
+
+  #settings {
+    position: absolute;
+    width: 50vw;
+    text-align: center;
+    left: 25vw;
+    top: 30vh;
+    display: none;
+    background-color: black;
+    border: 2px solid yellow;
+    color: white;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+
+    input, label {
+      margin: 5px;
+    }
+
+    label {
+      display: inline-block;
+    }
+
+    #options {
+      margin-top: 10px;
+    }
+
+    #userinput2, #userinput2label {
+      display: none;
+    }
+  }
+
+}
