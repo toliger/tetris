@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:alpine
 
 LABEL maintainer="Oliger Timothee" \
 			version="1.1"
