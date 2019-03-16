@@ -7,30 +7,34 @@ setInterval(() => {
 }, 50);
 
 $(document).ready(() => {
-  $("#title").animate({
-    top: "20vh",
-    fontSize:"4em"
-  }, 1000, () => {
-    $("#settings").fadeIn("slow", () => {
-      $("#linkstart").animate({
-        bottom: "20vh"
+  $('#title').animate(
+    {
+      top: '20vh',
+      fontSize: '4em',
+    },
+    1000,
+    () => {
+      $('#settings').fadeIn('slow', () => {
+        $('#linkstart').animate({
+          bottom: '20vh',
+        });
       });
-    });
-  });
+    },
+  );
 
-  $("#linkstart").click(() => {
+  $('#linkstart').click(() => {
     sessionStorage.settings = JSON.stringify({
       user: $('#userinput').val(),
-      difficulty: $('#diffselector').val(),
+      difficulty: $('#diffSelect').val(),
       blind: $('#checkBlind').is(':checked') ? true : false,
       bmode: $('#checkBmode').is(':checked') ? true : false,
       multiplayer: $('#checkMulti').is(':checked') ? true : false,
-      user2: $("#userinput2").val()
-    })
+      user2: $('#userinput2').val(),
+    });
   });
 
-  $("#checkMulti").click(() => {
-    $("#userinput2").prop('disabled', p2input);
+  $('#checkMulti').click(() => {
+    $('#userinput2').prop('disabled', p2input);
     p2input = !p2input;
 
     if (!p2input) {
@@ -42,5 +46,5 @@ $(document).ready(() => {
       $('#userinput2').css('display', 'inline-block');
       $('#userinput2label').css('display', 'inline-block');
     }
-  })
+  });
 });
